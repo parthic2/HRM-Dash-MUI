@@ -19,8 +19,6 @@ const resolveNavItemComponent = item => {
 }
 
 const filterNavigationByRole = (navigation, role) => {
-  console.log(role)
-
   return navigation.filter(item => {
     return !item.roles || item.roles.includes(role);
   });

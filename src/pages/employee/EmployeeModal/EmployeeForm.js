@@ -16,7 +16,7 @@ import Select from '@mui/material/Select'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 import { DropFiles } from 'src/@core/DropFile/DropFiles';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { EmployeeModalLogic } from './EmployeeFormLogic';
 import useEmployeeData from 'src/hooks/useEmployeeData';
 
@@ -24,8 +24,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
   const { formData, handleInputChange, handleImageChange, errors, validateForm, setFormData, initialFormValue } = EmployeeModalLogic(employeeData, editEmployeeId);
 
   const { addEmployee, editEmployee } = useEmployeeData();
-
-  // const [open, setOpenState] = useState(false);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -54,11 +52,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
     }
   }, []);
 
-  // Update the dialog open state when the prop changes
-  // useEffect(() => {
-  //   setOpenState(true);
-  // }, [editEmployeeId]);
-
   return (
     <>
       <DialogContentText
@@ -77,39 +70,42 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="user_name"
                   value={formData.user_name}
                   onChange={handleInputChange}
+                  disabled={isInEditMode}
                 />
                 {errors.user_name && <Typography sx={{ color: "red", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.user_name}</Typography>}
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth>
-                  <InputLabel htmlFor='form-layouts-separator-password'>Password</InputLabel>
-                  <OutlinedInput
-                    label='Password'
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    type={formData.showPassword ? 'text' : 'password'}
-                    endAdornment={
-                      <InputAdornment position='end'>
-                        <IconButton
-                          edge='end'
-                          onClick={() =>
-                            setFormData({
-                              ...formData,
-                              showPassword: !formData.showPassword
-                            })
-                          }
-                          aria-label='toggle password visibility'
-                        >
-                          {formData.showPassword ? <EyeOutline /> : <EyeOffOutline />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                  {errors.password && <Typography sx={{ color: "red", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.password}</Typography>}
-                </FormControl>
-              </Grid>
+              {!isInEditMode ?
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel htmlFor='form-layouts-separator-password'>Password</InputLabel>
+                    <OutlinedInput
+                      label='Password'
+                      id="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      type={formData.showPassword ? 'text' : 'password'}
+                      endAdornment={
+                        <InputAdornment position='end'>
+                          <IconButton
+                            edge='end'
+                            onClick={() =>
+                              setFormData({
+                                ...formData,
+                                showPassword: !formData.showPassword
+                              })
+                            }
+                            aria-label='toggle password visibility'
+                          >
+                            {formData.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                    {errors.password && <Typography sx={{ color: "red", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.password}</Typography>}
+                  </FormControl>
+                </Grid>
+                : ""}
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
@@ -175,6 +171,7 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="birth_date"
                   value={formData.birth_date}
                   onChange={handleInputChange}
+                  disabled={isInEditMode}
                 />
                 {errors.birth_date && <Typography sx={{ color: "red", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.birth_date}</Typography>}
               </Grid>
@@ -186,6 +183,7 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="joining_date"
                   value={formData.joining_date}
                   onChange={handleInputChange}
+                  disabled={isInEditMode}
                 />
                 {errors.joining_date && <Typography sx={{ color: "red", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.joining_date}</Typography>}
               </Grid>
@@ -200,6 +198,7 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                     name="gender"
                     value={formData.gender}
                     onChange={handleInputChange}
+                    disabled={isInEditMode}
                   >
                     <MenuItem value='Male'>Male</MenuItem>
                     <MenuItem value='Female'>Female</MenuItem>
@@ -218,6 +217,7 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                     name="blood_group"
                     value={formData.blood_group}
                     onChange={handleInputChange}
+                    disabled={isInEditMode}
                   >
                     <MenuItem value='A+'>A+</MenuItem>
                     <MenuItem value='A-'>A-</MenuItem>

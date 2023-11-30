@@ -36,6 +36,7 @@ const navigation = () => {
       title: 'Attendance',
       icon: Attendance,
       path: '/',
+      roles: ["Admin", "HR"],
       children: [
         { name: "Today Attendance", link: "/pages/todayAttendance" },
         { name: "Employees Attendance", link: "/pages/employeeAttendance" }

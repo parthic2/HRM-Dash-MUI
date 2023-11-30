@@ -47,7 +47,7 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
 
 const TabAccount = () => {
   // ** State
-  const [openAlert, setOpenAlert] = useState(true)
+  // const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
   const [editMode, setEditMode] = useState(false); // Add editMode state
 

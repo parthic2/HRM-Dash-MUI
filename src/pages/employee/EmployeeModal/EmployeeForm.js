@@ -17,8 +17,8 @@ import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 import { DropFiles } from 'src/@core/DropFile/DropFiles';
 import { useEffect, useRef } from 'react';
-import { EmployeeModalLogic } from './EmployeeFormLogic';
 import useEmployeeData from 'src/hooks/useEmployeeData';
+import EmployeeModalLogic from './EmployeeFormLogic';
 
 const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) => {
   const { formData, handleInputChange, handleImageChange, errors, validateForm, setFormData, initialFormValue } = EmployeeModalLogic(employeeData, editEmployeeId);

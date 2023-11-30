@@ -15,7 +15,7 @@ import DeleteOutline from 'mdi-material-ui/DeleteOutline';
 import PencilOutline from 'mdi-material-ui/PencilOutline';
 import Chip from '@mui/material/Chip'
 import { visuallyHidden } from '@mui/utils';
-import EmployeeModal from 'src/EmployeeModal/EmployeeModal';
+import EmployeeModal from 'src/components/EmployeeModal/EmployeeModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

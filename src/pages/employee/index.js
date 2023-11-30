@@ -148,16 +148,10 @@ const Employee = () => {
       <EmployeeModal editEmployeeId={editEmployeeId} employeeData={employeeData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
 
       <Card sx={{ mt: 3 }}>
-        {/* <TableStickyHeader
-          employeeData={employeeData}
-          deleteEmployee={deleteEmployee}
-          editEmployee={editEmployee}
-        /> */}
-
         <Box sx={{ width: '100%' }}>
           <TableContainer>
             <Table
-              sx={{ minWidth: 750 }}
+              sx={{ minWidth: 1900 }}
               aria-labelledby="tableTitle"
             >
               <EnhancedTableHead
@@ -200,7 +194,7 @@ const Employee = () => {
                       <TableCell align="left">
                         <img src={row.gov_doc} alt="Government Document" width={40} height={40} />
                       </TableCell>
-                      <TableCell align="left">
+                      <TableCell align="center">
                         <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
                         <DeleteOutline onClick={() => deleteEmployee(row.id)} />
                       </TableCell>

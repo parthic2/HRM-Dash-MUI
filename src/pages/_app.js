@@ -1,33 +1,14 @@
-// ** Next Imports
+import { useState,useEffect } from 'react'
 import Head from 'next/head'
 import { Router, useRouter } from 'next/router'
-
-// ** Loader Import
 import NProgress from 'nprogress'
-
-// ** Emotion Imports
-import { CacheProvider } from '@emotion/react'
-
-// ** Config Imports
 import themeConfig from 'src/configs/themeConfig'
-
-// ** Component Imports
 import UserLayout from 'src/layouts/UserLayout'
 import ThemeComponent from 'src/@core/theme/ThemeComponent'
-
-// ** Contexts
 import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsContext'
-
-// ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
-
-// ** React Perfect Scrollbar Style
 import 'react-perfect-scrollbar/dist/css/styles.css'
-
-// ** Global css styles
 import '../../styles/globals.css'
-import { useState } from 'react'
-import { useEffect } from 'react'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -53,8 +34,8 @@ const App = props => {
 
   //
   const router = useRouter();
-  const [authorized, setAuthorized] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [, setAuthorized] = useState(false);
+  const [, setLoading] = useState(true);
 
   useEffect(() => {
     // Check for the presence of a token after the initial render

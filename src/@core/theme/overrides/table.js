@@ -37,7 +37,7 @@ const Table = theme => {
     MuiTableRow: {
       styleOverrides: {
         root: {
-          '& .MuiTableCell-head:first-child, & .MuiTableCell-root:first-child ': {
+          '& .MuiTableCell-head:first-of-child, & .MuiTableCell-root:first-of-child ': {
             paddingLeft: theme.spacing(5)
           },
           '& .MuiTableCell-head:last-child, & .MuiTableCell-root:last-child': {

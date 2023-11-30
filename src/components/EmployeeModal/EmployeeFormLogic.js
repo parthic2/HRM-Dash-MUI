@@ -17,6 +17,12 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
     blood_group: "",
     role: "",
     status: "",
+    salary: "",
+    holder_name: "",
+    account_number: "",
+    bank_name: "",
+    bank_code: "",
+    bank_location: "",
     showPassword: false,
     gov_doc: "" // To store the selected image
   };
@@ -65,14 +71,6 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
     }
   };
 
-  const validateAddress = (value) => {
-    if (value.trim() === "") {
-      return "Address is required";
-    } else {
-      return "";
-    }
-  };
-
   const validateDes = (value) => {
     if (value.trim() === "") {
       return "Designation is required";
@@ -92,16 +90,6 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
   const validateBirDate = (value) => {
     if (value.trim() === "") {
       return "Birth date is required";
-    } else {
-      return "";
-    }
-  };
-
-  const validateBGroup = (value) => {
-    if (value.trim() === "") {
-      return "Blood Group is required";
-    } else if (!bloodGroupMapping[value.trim().toLowerCase()]) {
-      return "Invalid Blood Group";
     } else {
       return "";
     }
@@ -150,12 +138,10 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
       password: validatePassword(formData.password),
       email: validateEmail(formData.email),
       phone_no: validateNumber(formData.phone_no),
-      address: validateAddress(formData.address),
       designation: validateDes(formData.designation),
       joining_date: validateJoinDate(formData.joining_date),
       birth_date: validateBirDate(formData.birth_date),
       gender: validateGender(formData.gender),
-      blood_group: validateBGroup(formData.blood_group),
       role: validateRole(formData.role),
       status: validateStatus(formData.status),
       gov_doc: validateGovDoc(formData.gov_doc),
@@ -184,8 +170,6 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
       error = validateEmail(value);
     } else if (name === "phone_no") {
       error = validateNumber(value);
-    } else if (name === "address") {
-      error = validateAddress(value);
     } else if (name === "designation") {
       error = validateDes(value);
     } else if (name === "joining_date") {
@@ -194,8 +178,6 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
       error = validateBirDate(value);
     } else if (name === "gender") {
       error = validateGender(value);
-    } else if (name === "blood_group") {
-      error = validateBGroup(value);
     } else if (name === "role") {
       error = validateRole(value);
     } else if (name === "status") {

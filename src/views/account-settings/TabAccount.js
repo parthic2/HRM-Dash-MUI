@@ -20,6 +20,7 @@ import Button from '@mui/material/Button'
 
 // ** Icons Imports
 import Close from 'mdi-material-ui/Close'
+import Divider from '@mui/material/Divider'
 
 const ImgStyled = styled('img')(({ theme }) => ({
   width: 120,
@@ -49,7 +50,8 @@ const TabAccount = () => {
   // ** State
   // const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
-  const [editMode, setEditMode] = useState(false); // Add editMode state
+
+  // const [editMode, setEditMode] = useState(false); // Add editMode state
 
   const onChange = file => {
     const reader = new FileReader()
@@ -60,18 +62,18 @@ const TabAccount = () => {
     }
   }
 
-  const handleEditClick = () => {
-    setEditMode(true);
-  };
+  // const handleEditClick = () => {
+  //   setEditMode(true);
+  // };
 
-  const handleSaveChanges = () => {
-    // Handle save logic here
-    setEditMode(false); // Set edit mode to false after saving changes
-  };
+  // const handleSaveChanges = () => {
+  //   // Handle save logic here
+  //   setEditMode(false); // Set edit mode to false after saving changes
+  // };
 
   return (
     <CardContent>
-      <Button variant='contained' onClick={handleEditClick}>Edit</Button>
+      {/* <Button variant='contained' onClick={handleEditClick}>Edit</Button> */}
       <form>
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
@@ -98,7 +100,26 @@ const TabAccount = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item container spacing={2} sx={{ border: "1px solid rgba(58, 53, 65, 0.12)", paddingTop: "0 !important" }} ml={7} mt={7}>
+            <Grid xs={4}>
+              <Typography sx={{ fontWeight: 600, py: 3 }}>ID</Typography>
+              <Typography sx={{ fontWeight: 600, py: 3 }}>Name</Typography>
+              <Typography sx={{ fontWeight: 600, py: 3 }}>Email</Typography>
+              <Typography sx={{ fontWeight: 600, py: 3 }}>Address</Typography>
+              <Typography sx={{ fontWeight: 600, py: 3 }}>Designation</Typography>
+              <Typography sx={{ fontWeight: 600, py: 3 }}>Mobile Number</Typography>
+            </Grid>
+            <Grid xs={6}>
+              <Typography sx={{ py: 3 }}>90</Typography>
+              <Typography sx={{ py: 3 }}>abc</Typography>
+              <Typography sx={{ py: 3 }}>abc@gmail.com</Typography>
+              <Typography sx={{ py: 3 }}>surat</Typography>
+              <Typography sx={{ py: 3 }}>Front-end developer</Typography>
+              <Typography sx={{ py: 3 }}>907868908</Typography>
+            </Grid>
+          </Grid>
+
+          {/* <Grid item xs={12} sm={6}>
             <TextField fullWidth label='ID' disabled={!editMode} />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -124,50 +145,17 @@ const TabAccount = () => {
                 <MenuItem value='employee'>Employee</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
-          {/* <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Status</InputLabel>
-              <Select label='Status' defaultValue='active'>
-                <MenuItem value='active'>Active</MenuItem>
-                <MenuItem value='inactive'>Inactive</MenuItem>
-                <MenuItem value='pending'>Pending</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid> */}
-          {/* <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Company' placeholder='ABC Pvt. Ltd.' defaultValue='ABC Pvt. Ltd.' />
           </Grid> */}
 
-          {/* {openAlert ? (
-            <Grid item xs={12} sx={{ mb: 3 }}>
-              <Alert
-                severity='warning'
-                sx={{ '& a': { fontWeight: 400 } }}
-                action={
-                  <IconButton size='small' color='inherit' aria-label='close' onClick={() => setOpenAlert(false)}>
-                    <Close fontSize='inherit' />
-                  </IconButton>
-                }
-              >
-                <AlertTitle>Your email is not confirmed. Please check your inbox.</AlertTitle>
-                <Link href='/' onClick={e => e.preventDefault()}>
-                  Resend Confirmation
-                </Link>
-              </Alert>
-            </Grid>
-          ) : null} */}
 
-          <Grid item xs={12}>
-            {editMode ? (
-              <Button variant='contained' sx={{ marginRight: 3.5 }} onClick={handleSaveChanges}>
-                Save Changes
-              </Button>
-            ) : null}
+          {/* <Grid item xs={12}>
+            <Button variant='contained' sx={{ marginRight: 3.5 }}>
+              Save Changes
+            </Button>
             <Button type='reset' variant='outlined' color='secondary'>
               Reset
             </Button>
-          </Grid>
+          </Grid> */}
         </Grid>
       </form>
     </CardContent>

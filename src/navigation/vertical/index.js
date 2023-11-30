@@ -29,13 +29,13 @@ const navigation = () => {
     {
       title: 'Projects',
       icon: Project,
-      path: '/',
+      path: '/projects',
       roles: ["Admin", "HR"]
     },
     {
       title: 'Attendance',
       icon: Attendance,
-      path: '/',
+      path: '/attendance',
       roles: ["Admin", "HR"],
       children: [
         { name: "Today Attendance", link: "/pages/todayAttendance" },
@@ -45,13 +45,13 @@ const navigation = () => {
     {
       title: 'Clients',
       icon: AccountPlusOutline,
-      path: '/',
+      path: '/clients',
       roles: ["Admin"]
     },
     {
       title: 'Leave Management',
       icon: Leave,
-      path: '/',
+      path: '/leave-management',
       roles: ["Admin", "HR", "Employee"],
       children: [
         { name: "All Leave Requests", link: "/pages/allLeaveRequest" },
@@ -62,7 +62,7 @@ const navigation = () => {
     {
       title: 'Accounts',
       icon: Book,
-      path: '/',
+      path: '/accounts',
       roles: ["Admin"],
       children: [
         { name: "Income", link: "/pages/income" },
@@ -73,13 +73,13 @@ const navigation = () => {
     {
       title: 'Departments',
       icon: Layers,
-      path: '/',
+      path: '/departments',
       roles: ["Admin", "HR"]
     },
     {
       title: 'Payroll',
       icon: AlertCircleOutline,
-      path: '/',
+      path: '/payroll',
       roles: ["Admin", "HR"],
       children: [
         { name: "Payslip", link: "/pages/payslip" },
@@ -89,7 +89,7 @@ const navigation = () => {
     {
       title: 'Job',
       icon: AlertCircleOutline,
-      path: '/',
+      path: '/jobs',
       roles: ["Admin", "HR"],
       children: [
         { name: "Requirements", link: "/pages/requirements" },
@@ -99,25 +99,25 @@ const navigation = () => {
     {
       title: 'Tracker',
       icon: Clock,
-      path: '/',
+      path: '/tracker',
       roles: ["Employee", "HR"]
     },
     {
       title: 'Options',
       icon: AccountPlusOutline,
-      path: '/',
+      path: '/options',
       roles: ["Admin"]
     },
     {
       title: 'Announcement',
       icon: AccountPlusOutline,
-      path: '/',
+      path: '/announcement',
       roles: ["Employee", "Admin", "HR"]
     },
     {
       title: 'Awards',
       icon: AccountPlusOutline,
-      path: '/',
+      path: '/awards',
       roles: ["Employee", "Admin", "HR"]
     },
   ]

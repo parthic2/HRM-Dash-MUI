@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Card from '@mui/material/Card';
-import EmployeeModal from './EmployeeModal/EmployeeModal';
 import useEmployeeData from 'src/hooks/useEmployeeData';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -16,6 +15,7 @@ import DeleteOutline from 'mdi-material-ui/DeleteOutline';
 import PencilOutline from 'mdi-material-ui/PencilOutline';
 import Chip from '@mui/material/Chip'
 import { visuallyHidden } from '@mui/utils';
+import EmployeeModal from 'src/EmployeeModal/EmployeeModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

@@ -49,6 +49,7 @@ const TabAccount = () => {
   // ** State
   const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
+  const [editMode, setEditMode] = useState(false); // Add editMode state
 
   const onChange = file => {
     const reader = new FileReader()
@@ -59,8 +60,18 @@ const TabAccount = () => {
     }
   }
 
+  const handleEditClick = () => {
+    setEditMode(true);
+  };
+
+  const handleSaveChanges = () => {
+    // Handle save logic here
+    setEditMode(false); // Set edit mode to false after saving changes
+  };
+
   return (
     <CardContent>
+      <Button variant='contained' onClick={handleEditClick}>Edit</Button>
       <form>
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
@@ -88,33 +99,33 @@ const TabAccount = () => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Username' placeholder='johnDoe' defaultValue='johnDoe' />
+            <TextField fullWidth label='ID' disabled={!editMode} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Name' placeholder='John Doe' defaultValue='John Doe' />
+            <TextField fullWidth label='Name' disabled={!editMode} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              type='email'
-              label='Email'
-              placeholder='johnDoe@example.com'
-              defaultValue='johnDoe@example.com'
-            />
+            <TextField fullWidth type='email' label='Email' disabled={!editMode} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
+            <TextField fullWidth label='Designation' disabled={!editMode} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label='Address' disabled={!editMode} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth label='Mobile No.' disabled={!editMode} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth disabled={!editMode}>
               <InputLabel>Role</InputLabel>
               <Select label='Role' defaultValue='admin'>
-                <MenuItem value='admin'>Admin</MenuItem>
-                <MenuItem value='author'>Author</MenuItem>
-                <MenuItem value='editor'>Editor</MenuItem>
-                <MenuItem value='maintainer'>Maintainer</MenuItem>
-                <MenuItem value='subscriber'>Subscriber</MenuItem>
+                <MenuItem value='hr'>HR</MenuItem>
+                <MenuItem value='employee'>Employee</MenuItem>
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          {/* <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
               <InputLabel>Status</InputLabel>
               <Select label='Status' defaultValue='active'>
@@ -123,12 +134,12 @@ const TabAccount = () => {
                 <MenuItem value='pending'>Pending</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Grid> */}
+          {/* <Grid item xs={12} sm={6}>
             <TextField fullWidth label='Company' placeholder='ABC Pvt. Ltd.' defaultValue='ABC Pvt. Ltd.' />
-          </Grid>
+          </Grid> */}
 
-          {openAlert ? (
+          {/* {openAlert ? (
             <Grid item xs={12} sx={{ mb: 3 }}>
               <Alert
                 severity='warning'
@@ -145,12 +156,14 @@ const TabAccount = () => {
                 </Link>
               </Alert>
             </Grid>
-          ) : null}
+          ) : null} */}
 
           <Grid item xs={12}>
-            <Button variant='contained' sx={{ marginRight: 3.5 }}>
-              Save Changes
-            </Button>
+            {editMode ? (
+              <Button variant='contained' sx={{ marginRight: 3.5 }} onClick={handleSaveChanges}>
+                Save Changes
+              </Button>
+            ) : null}
             <Button type='reset' variant='outlined' color='secondary'>
               Reset
             </Button>

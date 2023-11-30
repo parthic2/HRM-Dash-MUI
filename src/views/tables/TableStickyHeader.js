@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import DeleteOutline from 'mdi-material-ui/DeleteOutline';
+import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { visuallyHidden } from '@mui/utils';
 
 function descendingComparator(a, b, orderBy) {
@@ -55,6 +57,7 @@ const headCells = [
   { id: 'role', label: 'Role' },
   { id: 'status', label: 'Status' },
   { id: 'document', label: 'Gov. Document' },
+  { id: '', label: '' },
 ];
 
 function EnhancedTableHead(props) {
@@ -99,7 +102,7 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-export default function EnhancedTable({ employeeList }) {
+export default function EnhancedTable({ employeeData, deleteEmployee, handleEditButtonClick }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [page, setPage] = useState(0);
@@ -121,9 +124,9 @@ export default function EnhancedTable({ employeeList }) {
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - employeeList.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - employeeData.length) : 0;
 
-  const visibleRows = stableSort(employeeList, getComparator(order, orderBy)).slice(
+  const visibleRows = stableSort(employeeData, getComparator(order, orderBy)).slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
@@ -150,7 +153,7 @@ export default function EnhancedTable({ employeeList }) {
                   key={index}
                   sx={{ cursor: 'pointer' }}
                 >
-                  <TableCell>{row.user_name} </TableCell>
+                  <TableCell align="left">{row.user_name}</TableCell>
                   <TableCell align="left">{row.designation}</TableCell>
                   <TableCell align="left">{row.email}</TableCell>
                   <TableCell align="left">{row.address}</TableCell>
@@ -163,6 +166,10 @@ export default function EnhancedTable({ employeeList }) {
                   <TableCell align="left">{row.status}</TableCell>
                   <TableCell align="left">
                     <img src={row.gov_doc} alt="Government Document" width={40} height={40} />
+                  </TableCell>
+                  <TableCell align="left">
+                    <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
+                    <DeleteOutline onClick={() => deleteEmployee(row.id)} />
                   </TableCell>
                 </TableRow>
               );
@@ -178,7 +185,7 @@ export default function EnhancedTable({ employeeList }) {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={employeeList.length}
+        count={employeeData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

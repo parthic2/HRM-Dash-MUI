@@ -1,7 +1,4 @@
 // ** Icon imports
-import Login from 'mdi-material-ui/Login'
-import Table from 'mdi-material-ui/Table'
-import CubeOutline from 'mdi-material-ui/CubeOutline'
 import HomeOutline from 'mdi-material-ui/HomeOutline'
 import Account from 'mdi-material-ui/Account'
 import Project from 'mdi-material-ui/Briefcase'
@@ -9,12 +6,8 @@ import Attendance from 'mdi-material-ui/Calendar'
 import Leave from 'mdi-material-ui/Clipboard'
 import Book from 'mdi-material-ui/Book'
 import Layers from 'mdi-material-ui/Layers'
-import FormatLetterCase from 'mdi-material-ui/FormatLetterCase'
-import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
-import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
 import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
-import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
 import { Clock } from 'mdi-material-ui'
 
 const navigation = () => {
@@ -22,13 +15,8 @@ const navigation = () => {
     {
       title: 'Dashboard',
       icon: HomeOutline,
-      path: '/'
+      path: '/',
     },
-    // {
-    //   title: 'Account Settings',
-    //   icon: AccountCogOutline,
-    //   path: '/account-settings'
-    // },
     {
       sectionTitle: 'Pages'
     },
@@ -36,11 +24,13 @@ const navigation = () => {
       title: 'Employees',
       icon: Account,
       path: '/employee',
+      roles: ["Admin", "HR"]
     },
     {
       title: 'Projects',
       icon: Project,
       path: '/',
+      roles: ["Admin", "HR"]
     },
     {
       title: 'Attendance',
@@ -55,11 +45,13 @@ const navigation = () => {
       title: 'Clients',
       icon: AccountPlusOutline,
       path: '/',
+      roles: ["Admin"]
     },
     {
       title: 'Leave Management',
       icon: Leave,
       path: '/',
+      roles: ["Admin", "HR", "Employee"],
       children: [
         { name: "All Leave Requests", link: "/pages/allLeaveRequest" },
         { name: "Leave Balance", link: "/pages/leaveBalance" },
@@ -70,6 +62,7 @@ const navigation = () => {
       title: 'Accounts',
       icon: Book,
       path: '/',
+      roles: ["Admin"],
       children: [
         { name: "Income", link: "/pages/income" },
         { name: "Expenses", link: "/pages/expenses" },
@@ -80,11 +73,13 @@ const navigation = () => {
       title: 'Departments',
       icon: Layers,
       path: '/',
+      roles: ["Admin", "HR"]
     },
     {
       title: 'Payroll',
       icon: AlertCircleOutline,
       path: '/',
+      roles: ["Admin", "HR"],
       children: [
         { name: "Payslip", link: "/pages/payslip" },
         { name: "Employee Salary", link: "/pages/employeeSalary" },
@@ -94,6 +89,7 @@ const navigation = () => {
       title: 'Job',
       icon: AlertCircleOutline,
       path: '/',
+      roles: ["Admin", "HR"],
       children: [
         { name: "Requirements", link: "/pages/requirements" },
         { name: "Applicant List", link: "/pages/applicantList" },
@@ -103,50 +99,26 @@ const navigation = () => {
       title: 'Tracker',
       icon: Clock,
       path: '/',
+      roles: ["Employee", "HR"]
     },
     {
       title: 'Options',
       icon: AccountPlusOutline,
       path: '/',
+      roles: ["Admin"]
     },
     {
       title: 'Announcement',
       icon: AccountPlusOutline,
       path: '/',
+      roles: ["Employee", "Admin", "HR"]
     },
     {
       title: 'Awards',
       icon: AccountPlusOutline,
       path: '/',
+      roles: ["Employee", "Admin", "HR"]
     },
-    // {
-    //   sectionTitle: 'User Interface'
-    // },
-    // {
-    //   title: 'Typography',
-    //   icon: FormatLetterCase,
-    //   path: '/typography'
-    // },
-    // {
-    //   title: 'Icons',
-    //   path: '/icons',
-    //   icon: GoogleCirclesExtended
-    // },
-    // {
-    //   title: 'Cards',
-    //   icon: CreditCardOutline,
-    //   path: '/cards'
-    // },
-    // {
-    //   title: 'Tables',
-    //   icon: Table,
-    //   path: '/tables'
-    // },
-    // {
-    //   icon: CubeOutline,
-    //   title: 'Form Layouts',
-    //   path: '/form-layouts'
-    // }
   ]
 }
 

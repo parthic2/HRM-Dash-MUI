@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 // ** React Imports
 import { useState, Fragment } from 'react'
 
@@ -20,6 +21,7 @@ import LogoutVariant from 'mdi-material-ui/LogoutVariant'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 import AccountPlus from 'mdi-material-ui/AccountPlus'
 import axios from 'axios'
+import Link from 'next/link'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -119,25 +121,27 @@ const UserDropdown = () => {
           </Box>
         </Box>
         <Divider sx={{ mt: 0, mb: 1 }} />
-        <MenuItem sx={{ p: 0 }} onClick={() => handleDropdownClose()}>
-          <Box sx={styles}>
-            <AccountOutline sx={{ marginRight: 2 }} />
-            View Profile
-          </Box>
-        </MenuItem>
-        <MenuItem sx={{ p: 0 }} onClick={() => handleDropdownClose()}>
+        <Link href={"/account-settings"}>
+          <MenuItem sx={{ p: 0 }} onClick={() => handleDropdownClose()}>
+            <Box sx={styles}>
+              <AccountOutline sx={{ marginRight: 2 }} />
+              View Profile
+            </Box>
+          </MenuItem>
+        </Link>
+        {/* <MenuItem sx={{ p: 0 }} onClick={() => handleDropdownClose()}>
           <Box sx={styles}>
             <AccountPlus sx={{ marginRight: 2 }} />
             Edit Profile
           </Box>
         </MenuItem>
-        {/* <Divider /> */}
+        <Divider />
         <MenuItem sx={{ p: 0 }} onClick={() => handleDropdownClose()}>
           <Box sx={styles}>
             <CogOutline sx={{ marginRight: 2 }} />
             Account Settings
           </Box>
-        </MenuItem>
+        </MenuItem> */}
         {/* <Divider /> */}
         <MenuItem sx={{ py: 2 }} onClick={handleSignOut}>
           <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />

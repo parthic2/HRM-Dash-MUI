@@ -20,7 +20,7 @@ import EyeOffOutline from 'mdi-material-ui/EyeOffOutline';
 import themeConfig from 'src/configs/themeConfig';
 import BlankLayout from 'src/@core/layouts/BlankLayout';
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration';
-import useAuth from './useAuth';
+import useAuth from '../../../hooks/useAuth';
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({

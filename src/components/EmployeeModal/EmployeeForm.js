@@ -1,18 +1,4 @@
-import Button from '@mui/material/Button';
-import DialogContentText from '@mui/material/DialogContentText';
-import Grid from '@mui/material/Grid'
-import Divider from '@mui/material/Divider'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-import InputLabel from '@mui/material/InputLabel'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import FormControl from '@mui/material/FormControl'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import InputAdornment from '@mui/material/InputAdornment'
-import Select from '@mui/material/Select'
+import { Button, DialogContentText, Grid, Divider, MenuItem, TextField, InputLabel, IconButton, Typography, CardContent, CardActions, FormControl, OutlinedInput, InputAdornment, Select } from '@mui/material';
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 import { DropFiles } from 'src/@core/DropFile/DropFiles';
@@ -165,24 +151,38 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
+                  type="date"
                   label='Birth Date'
                   id="birth_date"
                   name="birth_date"
                   value={formData.birth_date}
                   onChange={handleInputChange}
                   disabled={isInEditMode}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    placeholder: '', // Set an empty string as the placeholder
+                  }}
                 />
                 {errors.birth_date && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.birth_date}</Typography>}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
+                  type="date"
                   label='Joining Date'
                   id="joining_date"
                   name="joining_date"
                   value={formData.joining_date}
                   onChange={handleInputChange}
                   disabled={isInEditMode}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    placeholder: '', // Set an empty string as the placeholder
+                  }}
                 />
                 {errors.joining_date && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.joining_date}</Typography>}
               </Grid>

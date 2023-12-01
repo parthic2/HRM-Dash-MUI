@@ -1,19 +1,9 @@
 import React, { useState } from 'react';
-import Card from '@mui/material/Card';
+import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Chip } from '@mui/material';
 import useEmployeeData from 'src/hooks/useEmployeeData';
 import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
 import DeleteOutline from 'mdi-material-ui/DeleteOutline';
 import PencilOutline from 'mdi-material-ui/PencilOutline';
-import Chip from '@mui/material/Chip'
 import { visuallyHidden } from '@mui/utils';
 import EmployeeModal from 'src/components/EmployeeModal/EmployeeModal';
 
@@ -60,6 +50,12 @@ const headCells = [
   { id: 'blood', label: 'Blood Group' },
   { id: 'role', label: 'Role' },
   { id: 'status', label: 'Status' },
+  { id: 'salary', label: 'Salary' },
+  { id: 'holder', label: 'Bank Account Holder Name' },
+  { id: 'account', label: 'Bank Account Number' },
+  { id: 'bankName', label: 'Bank Name' },
+  { id: 'ifsc', label: 'Bank IFSC Code' },
+  { id: 'location', label: 'Bank Branch Location' },
   { id: 'document', label: 'Gov. Document' },
   { id: '', label: '' },
 ];
@@ -151,7 +147,7 @@ const Employee = () => {
         <Box sx={{ width: '100%' }}>
           <TableContainer>
             <Table
-              sx={{ minWidth: 1900 }}
+              sx={{ minWidth: 3000 }}
               aria-labelledby="tableTitle"
             >
               <EnhancedTableHead
@@ -160,13 +156,13 @@ const Employee = () => {
                 onRequestSort={handleRequestSort}
               />
               <TableBody>
-                {visibleRows.map((row, index) => {
+                {visibleRows.map((row) => {
                   return (
                     <TableRow
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={index}
+                      key={row.id}
                       sx={{ cursor: 'pointer' }}
                     >
                       <TableCell align="left">{row.user_name}</TableCell>
@@ -191,6 +187,12 @@ const Employee = () => {
                           }}
                         />
                       </TableCell>
+                      <TableCell align="left">-</TableCell>
+                      <TableCell align="left">-</TableCell>
+                      <TableCell align="left">-</TableCell>
+                      <TableCell align="left">-</TableCell>
+                      <TableCell align="left">-</TableCell>
+                      <TableCell align="left">-</TableCell>
                       <TableCell align="left">
                         <img src={row.gov_doc} alt="Government Document" width={40} height={40} />
                       </TableCell>

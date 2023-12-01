@@ -8,7 +8,11 @@ import Book from 'mdi-material-ui/Book'
 import Layers from 'mdi-material-ui/Layers'
 import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
-import { Clock } from 'mdi-material-ui'
+import AppleKeyboardCommand from 'mdi-material-ui/AppleKeyboardCommand'
+import FormatListBulleted from 'mdi-material-ui/FormatListBulleted'
+import Microphone from 'mdi-material-ui/Microphone'
+import Clock from 'mdi-material-ui/Clock'
+import TrophyAward from 'mdi-material-ui/TrophyAward'
 
 const navigation = () => {
   return [
@@ -88,7 +92,7 @@ const navigation = () => {
     },
     {
       title: 'Job',
-      icon: AlertCircleOutline,
+      icon: AppleKeyboardCommand,
       path: '/jobs',
       roles: ["Admin", "HR"],
       children: [
@@ -104,19 +108,19 @@ const navigation = () => {
     },
     {
       title: 'Options',
-      icon: AccountPlusOutline,
+      icon: FormatListBulleted,
       path: '/options',
       roles: ["Admin"]
     },
     {
       title: 'Announcement',
-      icon: AccountPlusOutline,
+      icon: Microphone,
       path: '/announcement',
       roles: ["Employee", "Admin", "HR"]
     },
     {
       title: 'Awards',
-      icon: AccountPlusOutline,
+      icon: TrophyAward,
       path: '/awards',
       roles: ["Employee", "Admin", "HR"]
     },

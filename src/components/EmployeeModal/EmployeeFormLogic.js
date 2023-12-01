@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { bloodGroupMapping, roleMapping, statusMapping } from "src/data/data";
+import { roleMapping, statusMapping } from "src/data/data";
 
 const EmployeeModalLogic = (employeeData, editEmployeeId) => {
   // form validation
@@ -30,126 +30,131 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
   const [formData, setFormData] = useState(initialFormValue);
   const [errors, setErrors] = useState(initialFormValue);
 
-  // Validation function for each field
-  const validateName = (value) => {
-    if (value.trim() === "") {
-      return "Name is required";
-    } else if (!/^[A-Za-z\s]+$/.test(value)) {
-      return "Name should contain only characters";
-    } else {
-      return "";
-    }
-  };
+  const validateField = (name, value) => {
+    switch (name) {
+      case "user_name":
+        if (value.trim() === "") {
+          return "Name is required";
+        } else if (!/^[A-Za-z\s]+$/.test(value)) {
+          return "Name should contain only characters";
+        }
+        break;
+      case "password":
+        if (value === "") {
+          return "Password is required";
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(value)) {
+          return "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character";
+        }
+        break;
+      case "email":
+        if (value.trim() === "") {
+          return "Email address is required";
+        } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(value)) {
+          return "Invalid email address";
+        }
+        break;
+      case "phone_no":
+        if (value.trim() === "") {
+          return "Mobile number is required";
+        } else if (!/^\d{10}$/.test(value)) {
+          return "Mobile Number must be a 10-digit number";
+        }
+        break;
+      case "designation":
+        if (value.trim() === "") {
+          return "Designation is required";
+        }
+        break;
+      case "joining_date":
+        if (value.trim() === "") {
+          return "Joining date is required";
+        }
+        break;
+      case "birth_date":
+        if (value.trim() === "") {
+          return "Birth date is required";
+        }
+        break;
+      case "gender":
+        if (value === "" || value === "select gender") {
+          return "Gender is required";
+        }
+        break;
+      case "role":
+        if (value.trim() === "") {
+          return "Role is required";
+        } else if (!roleMapping[value.trim().toLowerCase()]) {
+          return "Invalid role";
+        }
+        break;
+      case "status":
+        if (value.trim() === "") {
+          return "Status is required";
+        } else if (!statusMapping[value.trim().toLowerCase()]) {
+          return "Invalid Status";
+        }
+        break;
 
-  const validatePassword = (value) => {
-    if (value === "") {
-      return "Password is required"
-    } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(value)) {
-      return "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
-    } else {
-      return "";
+      // case "salary":
+      //   if (value.trim() === "") {
+      //     return "Salary is required";
+      //   } else if (!/^[0-9]+$/.test(value)) {
+      //     return "Salary should contain only number";
+      //   }
+      //   break;
+      // case "holder_name":
+      //   if (value.trim() === "") {
+      //     return "Bank account holder name is required";
+      //   } else if (!/^[A-Za-z\s]+$/.test(value)) {
+      //     return "Bank account holder name should contain only characters";
+      //   }
+      //   break;
+      // case "account_number":
+      //   if (value.trim() === "") {
+      //     return "Account number is required";
+      //   } else if (!/^[0-9]+$/.test(value)) {
+      //     return "Account number should contain only number";
+      //   }
+      //   break;
+      // case "bank_name":
+      //   if (value.trim() === "") {
+      //     return "Bank name is required";
+      //   }
+      //   break;
+      // case "bank_code":
+      //   if (value.trim() === "") {
+      //     return "IFSC code is required";
+      //   } else if (!/^[0-9]+$/.test(value)) {
+      //     return "IFSC code should contain only number";
+      //   }
+      //   break;
+      // case "bank_location":
+      //   if (value.trim() === "") {
+      //     return "Bank branch location is required";
+      //   }
+      //   break;
+      case "gov_doc":
+        if (value === "") {
+          return "Government Document is required";
+        }
+        break;
+      default:
+        break;
     }
-  }
 
-  const validateEmail = (value) => {
-    if (value.trim() === "") {
-      return "Email Address is required";
-    } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(value)) {
-      return "Invalid email address";
-    } else {
-      return "";
-    }
-  };
-
-  const validateNumber = (value) => {
-    if (value.trim() === "") {
-      return "Mobile number is required";
-    } else if (!/^\d{10}$/.test(value)) {
-      return "Mobile Number must be a 10-digit number";
-    } else {
-      return "";
-    }
-  };
-
-  const validateDes = (value) => {
-    if (value.trim() === "") {
-      return "Designation is required";
-    } else {
-      return "";
-    }
-  };
-
-  const validateJoinDate = (value) => {
-    if (value.trim() === "") {
-      return "Joining date is required";
-    } else {
-      return "";
-    }
-  };
-
-  const validateBirDate = (value) => {
-    if (value.trim() === "") {
-      return "Birth date is required";
-    } else {
-      return "";
-    }
-  };
-
-  const validateGender = (value) => {
-    if (value === "" || value === "select gender") {
-      return "Gender is required";
-    } else {
-      return "";
-    }
-  };
-
-  const validateRole = (value) => {
-    if (value.trim() === "") {
-      return "Role is required";
-    } else if (!roleMapping[value.trim().toLowerCase()]) {
-      return "Invalid role";
-    } else {
-      return "";
-    }
-  };
-
-  const validateStatus = (value) => {
-    if (value.trim() === "") {
-      return "Status is required";
-    } else if (!statusMapping[value.trim().toLowerCase()]) {
-      return "Invalid Status";
-    } else {
-      return "";
-    }
-  };
-
-  const validateGovDoc = (value) => {
-    if (value === "") {
-      return "Government Document is required";
-    } else {
-      return "";
-    }
+    return ""; // If no error
   };
 
   const validateForm = () => {
-    // Validate all form fields and set the error messages
-    const newErrors = {
-      user_name: validateName(formData.user_name),
-      password: validatePassword(formData.password),
-      email: validateEmail(formData.email),
-      phone_no: validateNumber(formData.phone_no),
-      designation: validateDes(formData.designation),
-      joining_date: validateJoinDate(formData.joining_date),
-      birth_date: validateBirDate(formData.birth_date),
-      gender: validateGender(formData.gender),
-      role: validateRole(formData.role),
-      status: validateStatus(formData.status),
-      gov_doc: validateGovDoc(formData.gov_doc),
-    };
+    const newErrors = {};
+    Object.keys(initialFormValue).forEach((name) => {
+      const value = formData[name];
+      const error = validateField(name, value);
+      newErrors[name] = error;
+    });
 
     setErrors(newErrors);
 
-    // Check if the form is valid by checking if there are no error messages
     return !Object.values(newErrors).some((error) => error !== "");
   };
 
@@ -160,33 +165,8 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
       [name]: value,
     });
 
-    // Validate the current field and set the error message
-    let error = "";
-    if (name === "user_name") {
-      error = validateName(value);
-    } else if (name === "password") {
-      error = validatePassword(value);
-    } else if (name === "email") {
-      error = validateEmail(value);
-    } else if (name === "phone_no") {
-      error = validateNumber(value);
-    } else if (name === "designation") {
-      error = validateDes(value);
-    } else if (name === "joining_date") {
-      error = validateJoinDate(value);
-    } else if (name === "birth_date") {
-      error = validateBirDate(value);
-    } else if (name === "gender") {
-      error = validateGender(value);
-    } else if (name === "role") {
-      error = validateRole(value);
-    } else if (name === "status") {
-      error = validateStatus(value);
-    } else if (name === "gov_doc") {
-      error = validateGovDoc(value);
-    }
+    const error = validateField(name, value);
 
-    // Set the error for the current field
     setErrors({
       ...errors,
       [name]: error,
@@ -219,7 +199,7 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
     errors,
     validateForm,
     setFormData,
-    initialFormValue
+    initialFormValue,
   }
 }
 

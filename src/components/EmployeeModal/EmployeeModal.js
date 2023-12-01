@@ -1,8 +1,4 @@
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button';
+import { Dialog, DialogContent, DialogTitle, Typography, Button } from '@mui/material';
 import EmployeeForm from './EmployeeForm';
 
 const EmployeeModal = ({ editEmployeeId, employeeData, open, setOpen, scroll, handleClickOpen, handleClose }) => {

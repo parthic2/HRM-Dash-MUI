@@ -11,6 +11,7 @@ const useEmployeeData = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setEditEmployeeId(null);
   };
 
   // for dialog box
@@ -71,11 +72,11 @@ const useEmployeeData = () => {
       // Check the success status from the API response
       if (response.data.success) {
         // Instead of relying on the previous state, you can use the response data directly
-        const addedEmployee = response.data;
         setEmployeeData((prevData) => [...prevData, response.data]);
         setOpen(false);
 
-        fetchData();
+        // Wait for the fetchData to complete before proceeding
+        await fetchData();
       } else {
         console.error("Error editing employee:", response.data.message);
       }
@@ -90,7 +91,7 @@ const useEmployeeData = () => {
       const genderNumericValue = getMappedValue(editedEmployee.gender, genderMapping);
       const statusNumericValue = getMappedValue(editedEmployee.status, statusMapping);
       const bloodGroupNumericValue = getMappedValue(editedEmployee.blood_group, bloodGroupMapping);
-    
+
       const response = await axios.post(`https://hrm.stackholic.io/api/employee/store`, {
         id,
         ...editedEmployee,
@@ -107,14 +108,11 @@ const useEmployeeData = () => {
 
       // Check the success status from the API response
       if (response.data.success) {
-        // Update the local state to reflect the changes
-        const updatedData = employeeData.map((employee) =>
-          employee.id === editedEmployee.id ? editedEmployee : employee
-        );
         setEmployeeData((prevData) => prevData.map((employee) => employee.id === editedEmployee.id ? editedEmployee : employee));
         setEditEmployeeId(null); // Reset the edit state
 
-        fetchData();
+        // Wait for the fetchData to complete before proceeding
+        await fetchData();
       } else {
         console.error("Error editing employee:", response.data.message);
       }

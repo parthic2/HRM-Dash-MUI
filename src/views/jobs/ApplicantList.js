@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import DeleteOutline from 'mdi-material-ui/DeleteOutline';
 import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { visuallyHidden } from '@mui/utils';
-import ProjectModal from 'src/components/ProjectModal/ProjectModal';
-import useProjectData from 'src/hooks/useProjectData';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -39,14 +37,11 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'project', label: 'Project Name' },
-  { id: 'client', label: 'Client Name' },
-  { id: 'email', label: 'Client Email' },
-  { id: 'start', label: 'Start Date' },
-  { id: 'end', label: 'End Date' },
-  { id: 'status', label: 'Status' },
+  { id: 'name', label: 'Applicant Name' },
+  { id: 'head', label: 'Department Head' },
+  { id: 'email', label: 'Department Email' },
+  { id: 'start', label: 'Starting Date' },
   { id: 'team', label: 'Team Member' },
-  { id: 'document', label: 'Gov. Document' },
   { id: '', label: '' },
 ];
 
@@ -92,19 +87,13 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const statusObj = {
-  Active: 'success',
-  Inactive: 'error',
-}
-
-const Project = () => {
-  const { projectData, editProjectId, open, setOpen, scroll, handleClickOpen, handleClose } = useProjectData();
-
+const ApplicantList = () => {
   // for table 
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [applicant, setApplicant] = useState([]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -122,22 +111,20 @@ const Project = () => {
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - projectData.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - applicant.length) : 0;
 
-  const visibleRows = stableSort(projectData, getComparator(order, orderBy)).slice(
+  const visibleRows = stableSort(applicant, getComparator(order, orderBy)).slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
   return (
     <>
-      <ProjectModal editProjectId={editProjectId} projectData={projectData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
-
       <Card sx={{ mt: 3 }}>
         <Box sx={{ width: '100%' }}>
           <TableContainer>
             <Table
-              sx={{ minWidth: 1500 }}
+              sx={{ minWidth: 1000 }}
               aria-labelledby="tableTitle"
             >
               <EnhancedTableHead
@@ -155,28 +142,11 @@ const Project = () => {
                       key={row.id}
                       sx={{ cursor: 'pointer' }}
                     >
-                      <TableCell align="left">{row.project_name}</TableCell>
-                      <TableCell align="left">{row.client_name}</TableCell>
-                      <TableCell align="left">{row.client_email}</TableCell>
+                      <TableCell align="left">{row.depart_name}</TableCell>
+                      <TableCell align="left">{row.depart_head}</TableCell>
+                      <TableCell align="left">{row.depart_email}</TableCell>
                       <TableCell align="left">{row.start_date}</TableCell>
-                      <TableCell align="left">{row.end_date}</TableCell>
-                      <TableCell align="left">{row.status}</TableCell>
                       <TableCell align="left">{row.team_member}</TableCell>
-                      {/* <TableCell align="left">
-                        <Chip
-                          label={row.status}
-                          color={statusObj[row.status]}
-                          sx={{
-                            height: 24,
-                            fontSize: '0.75rem',
-                            textTransform: 'capitalize',
-                            '& .MuiChip-label': { fontWeight: 500 }
-                          }}
-                        />
-                      </TableCell> */}
-                      <TableCell align="left">
-                        <img src={row.gov_doc} alt="Document" width={40} height={40} />
-                      </TableCell>
                       <TableCell align="center">
                         <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
                         <DeleteOutline onClick={() => deleteEmployee(row.id)} />
@@ -195,7 +165,7 @@ const Project = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={projectData.length}
+            count={applicant.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -207,4 +177,4 @@ const Project = () => {
   )
 }
 
-export default Project;
+export default ApplicantList;

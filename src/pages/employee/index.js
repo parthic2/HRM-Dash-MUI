@@ -3,7 +3,6 @@ import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, Tabl
 import useEmployeeData from 'src/hooks/useEmployeeData';
 import PropTypes from 'prop-types';
 import DeleteOutline from 'mdi-material-ui/DeleteOutline';
-import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { visuallyHidden } from '@mui/utils';
 import EmployeeModal from 'src/components/EmployeeModal/EmployeeModal';
 
@@ -108,7 +107,7 @@ const statusObj = {
 }
 
 const Employee = () => {
-  const { deleteEmployee, handleEditButtonClick, editEmployeeId, employeeData, open, setOpen, scroll, handleClickOpen, handleClose } = useEmployeeData();
+  const { deleteEmployee, editEmployeeId, employeeData, open, setOpen, scroll, handleClickOpen, handleClose } = useEmployeeData();
 
   // for table 
   const [order, setOrder] = useState('asc');
@@ -166,7 +165,7 @@ const Employee = () => {
                       sx={{ cursor: 'pointer' }}
                     >
                       <TableCell align="left">{row.user_name}</TableCell>
-                      <TableCell align="left">{row.designation}</TableCell>
+                      <TableCell align="left">{row.designation} edit</TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="left">{row.address}</TableCell>
                       <TableCell align="left">{row.phone_no}</TableCell>
@@ -197,7 +196,7 @@ const Employee = () => {
                         <img src={row.gov_doc} alt="Government Document" width={40} height={40} />
                       </TableCell>
                       <TableCell align="center">
-                        <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
+                        {/* <PencilOutline onClick={() => handleEditButtonClick(row.id)} /> */}
                         <DeleteOutline onClick={() => deleteEmployee(row.id)} />
                       </TableCell>
                     </TableRow>

@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Router, useRouter } from 'next/router'
 import NProgress from 'nprogress'
@@ -9,6 +9,7 @@ import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsCo
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import '../../styles/globals.css'
+import { TimerProvider } from 'src/@core/context/TimerContext'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -32,7 +33,7 @@ const App = props => {
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
 
-  //
+  // For user in already login or not
   const router = useRouter();
   const [, setAuthorized] = useState(false);
   const [, setLoading] = useState(true);
@@ -66,6 +67,7 @@ const App = props => {
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
 
+      <TimerProvider>
       <SettingsProvider>
         <SettingsConsumer>
           {({ settings }) => {
@@ -73,6 +75,7 @@ const App = props => {
           }}
         </SettingsConsumer>
       </SettingsProvider>
+      </TimerProvider>
     </>
   )
 }

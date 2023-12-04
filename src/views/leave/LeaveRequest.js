@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel } from '@mui/material';
+import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Button } from '@mui/material';
 import PropTypes from 'prop-types';
-import DeleteOutline from 'mdi-material-ui/DeleteOutline';
-import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { visuallyHidden } from '@mui/utils';
-import useClientData from 'src/hooks/useClientData';
-import ClientModal from 'src/components/ClientModal/ClientModal';
+import useLeaveReqData from 'src/hooks/useLeaveReqData';
+import LeaveRequestModal from 'src/components/LeaveModal/LeaveRequest/LeaveRequestModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -39,13 +37,12 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'client', label: 'Client Name' },
-  { id: 'email', label: 'Client Email' },
-  { id: 'organization', label: 'Organization' },
-  { id: 'mobile', label: 'Mobile No.' },
-  { id: 'website', label: 'Website' },
-  { id: 'country', label: 'Country' },
-  { id: 'address', label: 'Address' },
+  { id: 'date', label: 'Applying Date' },
+  { id: 'type', label: 'Leave Type' },
+  { id: 'start', label: 'Start Date' },
+  { id: 'end', label: 'End Date' },
+  { id: 'day', label: 'Days' },
+  { id: 'description', label: 'Description' },
   { id: '', label: '' },
 ];
 
@@ -91,8 +88,8 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const Clients = () => {
-  const { clientData, editClientId, open, setOpen, scroll, handleClickOpen, handleClose } = useClientData();
+const LeaveRequest = () => {
+  const { leaveReqData, open, setOpen, scroll, handleClickOpen, handleClose } = useLeaveReqData();
 
   // for table 
   const [order, setOrder] = useState('asc');
@@ -116,22 +113,22 @@ const Clients = () => {
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - clientData.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - leaveReqData.length) : 0;
 
-  const visibleRows = stableSort(clientData, getComparator(order, orderBy)).slice(
+  const visibleRows = stableSort(leaveReqData, getComparator(order, orderBy)).slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
   return (
     <>
-      <ClientModal editClientId={editClientId} clientData={clientData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
+      <LeaveRequestModal leaveReqData={leaveReqData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
 
       <Card sx={{ mt: 3 }}>
         <Box sx={{ width: '100%' }}>
           <TableContainer>
             <Table
-              sx={{ minWidth: 1000 }}
+              sx={{ minWidth: 1100 }}
               aria-labelledby="tableTitle"
             >
               <EnhancedTableHead
@@ -140,7 +137,29 @@ const Clients = () => {
                 onRequestSort={handleRequestSort}
               />
               <TableBody>
-                {visibleRows.map((row) => {
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  sx={{ cursor: 'pointer' }}
+                >
+                  <TableCell align="left">8-9-2023</TableCell>
+                  <TableCell align="left">family leave</TableCell>
+                  <TableCell align="left">10-9-2023</TableCell>
+                  <TableCell align="left">11-9-2023</TableCell>
+                  <TableCell align="left">full day</TableCell>
+                  <TableCell align="left">family leave</TableCell>
+                  <TableCell align="left">
+                    <Button size='small' variant="contained" color="success" sx={{ color: "#FFF !important" }}>
+                      Approved
+                    </Button>
+                    <Button size='small' variant="contained" color="error" sx={{ ml: 2, color: "#FFF !important" }}>
+                      Reject
+                    </Button>
+                  </TableCell>
+                </TableRow>
+
+                {/* {visibleRows.map((row) => {
                   return (
                     <TableRow
                       hover
@@ -149,20 +168,23 @@ const Clients = () => {
                       key={row.id}
                       sx={{ cursor: 'pointer' }}
                     >
-                      <TableCell align="left">{row.client_name}</TableCell>
-                      <TableCell align="left">{row.client_email}</TableCell>
-                      <TableCell align="left">{row.organization}</TableCell>
-                      <TableCell align="left">{row.phone_no}</TableCell>
-                      <TableCell align="left">{row.website}</TableCell>
-                      <TableCell align="left">{row.address}</TableCell>
-                      <TableCell align="left">{row.country}</TableCell>
-                      <TableCell align="center">
-                        <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
-                        <DeleteOutline onClick={() => deleteEmployee(row.id)} />
+                      <TableCell align="left">{row.apply_date}</TableCell>
+                      <TableCell align="left">{row.leave_type}</TableCell>
+                      <TableCell align="left">{row.start_date}</TableCell>
+                      <TableCell align="left">{row.end_date}</TableCell>
+                      <TableCell align="left">{row.total_days}</TableCell>
+                      <TableCell align="left">{row.description}</TableCell>
+                      <TableCell align="left">
+                        <Button size='small' variant="contained" color="success" sx={{ color: "#FFF !important" }}>
+                          Approved
+                        </Button>
+                        <Button size='small' variant="contained" color="error" sx={{ ml: 2, color: "#FFF !important" }}>
+                          Reject
+                        </Button>
                       </TableCell>
                     </TableRow>
                   );
-                })}
+                })} */}
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 53 * emptyRows }}>
                     <TableCell colSpan={headCells.length} />
@@ -174,7 +196,7 @@ const Clients = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={clientData.length}
+            count={leaveReqData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -186,4 +208,4 @@ const Clients = () => {
   )
 }
 
-export default Clients;
+export default LeaveRequest;

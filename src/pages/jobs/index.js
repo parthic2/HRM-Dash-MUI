@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import Box from '@mui/material/Box'
-import TabList from '@mui/lab/TabList'
-import TabPanel from '@mui/lab/TabPanel'
-import TabContext from '@mui/lab/TabContext'
+import { Box, Card } from '@mui/material'
+import { TabList, TabPanel, TabContext } from '@mui/lab'
 import { styled } from '@mui/material/styles'
 import MuiTab from '@mui/material/Tab'
 import ListStatus from 'mdi-material-ui/ListStatus'
@@ -39,30 +37,32 @@ const Jobs = () => {
   return (
     <>
       <TabContext value={value}>
-        <TabList
-          onChange={handleChange}
-          aria-label='account-settings tabs'
-          sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
-        >
-          <Tab
-            value='requirement'
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <ApplicationEditOutline />
-                <TabName>Requirement</TabName>
-              </Box>
-            }
-          />
-          <Tab
-            value='applicant'
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <ListStatus />
-                <TabName>Applicant List</TabName>
-              </Box>
-            }
-          />
-        </TabList>
+        <Card>
+          <TabList
+            onChange={handleChange}
+            aria-label='account-settings tabs'
+            sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
+          >
+            <Tab
+              value='requirement'
+              label={
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <ApplicationEditOutline />
+                  <TabName>Requirement</TabName>
+                </Box>
+              }
+            />
+            <Tab
+              value='applicant'
+              label={
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <ListStatus />
+                  <TabName>Applicant List</TabName>
+                </Box>
+              }
+            />
+          </TabList>
+        </Card>
 
         <TabPanel sx={{ p: 0 }} value='requirement'>
           <JobRequirement />

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import DeleteOutline from 'mdi-material-ui/DeleteOutline';
 import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { visuallyHidden } from '@mui/utils';
-import useClientData from 'src/hooks/useClientData';
-import ClientModal from 'src/components/ClientModal/ClientModal';
+import useLeaveTypeData from 'src/hooks/useLeaveTypeData';
+import LeaveTypeModal from 'src/components/LeaveModal/LeaveType/LeaveTypeModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -39,13 +39,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'client', label: 'Client Name' },
-  { id: 'email', label: 'Client Email' },
-  { id: 'organization', label: 'Organization' },
-  { id: 'mobile', label: 'Mobile No.' },
-  { id: 'website', label: 'Website' },
-  { id: 'country', label: 'Country' },
-  { id: 'address', label: 'Address' },
+  { id: 'name', label: 'Leave Type Name' },
+  { id: 'balance', label: 'Leave Type Balance' },
+  { id: 'status', label: 'Status' },
+  { id: 'date', label: 'Leave Type Adding Date' },
   { id: '', label: '' },
 ];
 
@@ -91,8 +88,8 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const Clients = () => {
-  const { clientData, editClientId, open, setOpen, scroll, handleClickOpen, handleClose } = useClientData();
+const LeaveType = () => {
+  const { leaveTypeData, editLeaveTypeId, open, setOpen, scroll, handleClickOpen, handleClose } = useLeaveTypeData();
 
   // for table 
   const [order, setOrder] = useState('asc');
@@ -116,22 +113,22 @@ const Clients = () => {
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - clientData.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - leaveTypeData.length) : 0;
 
-  const visibleRows = stableSort(clientData, getComparator(order, orderBy)).slice(
+  const visibleRows = stableSort(leaveTypeData, getComparator(order, orderBy)).slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
   return (
     <>
-      <ClientModal editClientId={editClientId} clientData={clientData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
+      <LeaveTypeModal editLeaveTypeId={editLeaveTypeId} leaveTypeData={leaveTypeData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
 
       <Card sx={{ mt: 3 }}>
         <Box sx={{ width: '100%' }}>
           <TableContainer>
             <Table
-              sx={{ minWidth: 1000 }}
+              sx={{ minWidth: 790 }}
               aria-labelledby="tableTitle"
             >
               <EnhancedTableHead
@@ -149,13 +146,10 @@ const Clients = () => {
                       key={row.id}
                       sx={{ cursor: 'pointer' }}
                     >
-                      <TableCell align="left">{row.client_name}</TableCell>
-                      <TableCell align="left">{row.client_email}</TableCell>
-                      <TableCell align="left">{row.organization}</TableCell>
-                      <TableCell align="left">{row.phone_no}</TableCell>
-                      <TableCell align="left">{row.website}</TableCell>
-                      <TableCell align="left">{row.address}</TableCell>
-                      <TableCell align="left">{row.country}</TableCell>
+                      <TableCell align="left">{row.leave_name}</TableCell>
+                      <TableCell align="left">{row.leave_balance}</TableCell>
+                      <TableCell align="left">{row.status}</TableCell>
+                      <TableCell align="left">{row.adding_date}</TableCell>
                       <TableCell align="center">
                         <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
                         <DeleteOutline onClick={() => deleteEmployee(row.id)} />
@@ -174,7 +168,7 @@ const Clients = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={clientData.length}
+            count={leaveTypeData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -186,4 +180,4 @@ const Clients = () => {
   )
 }
 
-export default Clients;
+export default LeaveType;

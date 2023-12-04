@@ -180,17 +180,17 @@ const EmployeeModalLogic = (employeeData, editEmployeeId) => {
     });
   };
 
-  useEffect(() => {
-    const selectedEmployee = employeeData.find((employee) => employee.id === editEmployeeId);
+  // useEffect(() => {
+  //   const selectedEmployee = employeeData.find((employee) => employee.id === editEmployeeId);
 
-    if (selectedEmployee) {
-      setFormData(selectedEmployee);
-    } else {
-      setFormData({
-        ...initialFormValue
-      });
-    }
-  }, [editEmployeeId, employeeData]);
+  //   if (selectedEmployee) {
+  //     setFormData(selectedEmployee);
+  //   } else {
+  //     setFormData({
+  //       ...initialFormValue
+  //     });
+  //   }
+  // }, [editEmployeeId, employeeData]);
 
   return {
     handleImageChange,

@@ -20,10 +20,10 @@ const useEmployeeData = () => {
     setScroll(scrollType);
   };
 
-  const handleEditButtonClick = (id) => {
-    setEditEmployeeId(id);
-    setOpen(true);
-  };
+  // const handleEditButtonClick = (id) => {
+  //   setEditEmployeeId(id);
+  //   setOpen(true);
+  // };
 
   // Helper function to handle unexpected mappings
   const getMappedValue = (value, mapping) => mapping[value.trim().toLowerCase()] || value;
@@ -160,7 +160,6 @@ const useEmployeeData = () => {
     scroll,
     handleClickOpen,
     handleClose,
-    handleEditButtonClick
   };
 }
 

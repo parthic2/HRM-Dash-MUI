@@ -76,7 +76,7 @@ const useEmployeeData = () => {
         setOpen(false);
 
         // Wait for the fetchData to complete before proceeding
-        await fetchData();
+        fetchData();
       } else {
         console.error("Error editing employee:", response.data.message);
       }
@@ -149,6 +149,55 @@ const useEmployeeData = () => {
     }
   };
 
+  const updateEmployeeDesignation = async (employeeId, newDesignation) => {
+    try {
+      const employeeToUpdate = employeeData.find(employee => employee.id === employeeId);
+      const roleNumericValue = getMappedValue(employeeToUpdate.role, roleMapping);
+      const genderNumericValue = getMappedValue(employeeToUpdate.gender, genderMapping);
+      const statusNumericValue = getMappedValue(employeeToUpdate.status, statusMapping);
+      const bloodGroupNumericValue = getMappedValue(employeeToUpdate.blood_group, bloodGroupMapping);
+
+      if (employeeToUpdate) {
+        // Fetch binary data from the image URL
+        // const responseImage = await axios.get(employeeToUpdate.gov_doc);
+        // const blob = await responseImage.blob();
+
+        const updatedEmployee = {
+          ...employeeToUpdate,
+          role: roleNumericValue,
+          gender: genderNumericValue,
+          status: statusNumericValue,
+          blood_group: bloodGroupNumericValue,
+          designation: newDesignation,
+
+          // gov_doc: blob
+        };
+
+        const response = await axios.post("https://hrm.stackholic.io/api/employee/store", updatedEmployee, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${authToken.token}`
+          },
+        });
+
+        if (response.data.success) {
+          setEmployeeData(prevData =>
+            prevData.map(employee =>
+              employee.id === employeeId ? updatedEmployee : employee
+            )
+          );
+          await fetchData();
+        } else {
+          console.error('Error updating employee designation:', response.data.message);
+        }
+      } else {
+        console.error('Employee not found:', employeeId);
+      }
+    } catch (error) {
+      console.error('Error updating employee designation:', error);
+    }
+  }
+
   return {
     employeeData,
     editEmployeeId,
@@ -160,6 +209,7 @@ const useEmployeeData = () => {
     scroll,
     handleClickOpen,
     handleClose,
+    updateEmployeeDesignation
   };
 }
 

@@ -9,7 +9,7 @@ import EmployeeModalLogic from './EmployeeFormLogic';
 const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) => {
   const { formData, handleInputChange, handleImageChange, errors, validateForm, setFormData, initialFormValue } = EmployeeModalLogic(employeeData, editEmployeeId);
 
-  const { addEmployee, editEmployee } = useEmployeeData();
+  const { addEmployee, editEmployee, updateEmployeeDesignation } = useEmployeeData();
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -19,7 +19,9 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
     }
 
     if (editEmployeeId) {
-      editEmployee({ ...formData, id: editEmployeeId });
+      // editEmployee({ ...formData, id: editEmployeeId });
+
+      updateEmployeeDesignation({ editEmployeeId, ...formData })
     } else {
       addEmployee(formData);
     }
@@ -60,7 +62,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                 />
                 {errors.user_name && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.user_name}</Typography>}
               </Grid>
-              {/* {!isInEditMode ? */}
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
                   <InputLabel htmlFor='form-layouts-separator-password'>Password</InputLabel>
@@ -91,7 +92,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   {errors.password && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.password}</Typography>}
                 </FormControl>
               </Grid>
-              {/* : ""} */}
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
@@ -359,15 +359,9 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
           <CardActions>
-            {isInEditMode ? (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Update
-              </Button>
-            ) : (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Save
-              </Button>
-            )}
+            <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
+              Save
+            </Button>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>

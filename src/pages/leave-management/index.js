@@ -6,9 +6,9 @@ import MuiTab from '@mui/material/Tab'
 import ListStatus from 'mdi-material-ui/ListStatus'
 import WalletOutline from 'mdi-material-ui/WalletOutline'
 import ApplicationEditOutline from 'mdi-material-ui/ApplicationEditOutline'
-import LeaveRequest from 'src/views/leave/LeaveRequest';
-import LeaveBalance from 'src/views/leave/LeaveBalance';
-import LeaveType from 'src/views/leave/LeaveType';
+import LeaveRequest from 'src/components/leave/LeaveRequest';
+import LeaveBalance from 'src/components/leave/LeaveBalance';
+import LeaveType from 'src/components/leave/LeaveType';
 
 const LeaveManagement = () => {
   const Tab = styled(MuiTab)(({ theme }) => ({

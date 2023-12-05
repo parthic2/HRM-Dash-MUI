@@ -15,7 +15,7 @@ const Tracker = () => {
 
   return (
     <>
-      <Card sx={{ width: '100%', p: 5 }}>
+      <Card sx={{ width: '100%', p: 5, mt: 5 }}>
         <Typography variant='h6' sx={{ textAlign: "center", fontWeight: 800 }}>{time}</Typography>
         <Box sx={{ mt: 4, textAlign: "center" }} gap={3}>
           <Button

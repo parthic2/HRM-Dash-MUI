@@ -3,7 +3,7 @@ import { Box, Card } from '@mui/material'
 import { TabList, TabPanel, TabContext } from '@mui/lab'
 import { styled } from '@mui/material/styles'
 import MuiTab from '@mui/material/Tab'
-import ListStatus from 'mdi-material-ui/ListStatus'
+import FormatListBulletedTriangle from 'mdi-material-ui/FormatListBulletedTriangle'
 import ApplicationEditOutline from 'mdi-material-ui/ApplicationEditOutline'
 import JobRequirement from 'src/views/jobs/JobRequirement'
 import ApplicantList from 'src/views/jobs/ApplicantList'
@@ -56,7 +56,7 @@ const Jobs = () => {
               value='applicant'
               label={
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ListStatus />
+                  <FormatListBulletedTriangle />
                   <TabName>Applicant List</TabName>
                 </Box>
               }

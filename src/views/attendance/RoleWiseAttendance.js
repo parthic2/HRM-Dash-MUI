@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel } from '@mui/material';
+import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Select, InputLabel, MenuItem, FormControl } from '@mui/material';
 import PropTypes from 'prop-types';
-import DeleteOutline from 'mdi-material-ui/DeleteOutline';
-import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { visuallyHidden } from '@mui/utils';
-import AwardsModal from 'src/components/AwardsModal/AwardsModal';
-import useAwardsData from 'src/hooks/useAwardsData';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -39,10 +35,13 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'name', label: 'Awards Name' },
-  { id: 'phone', label: 'Awards Date' },
-  { id: 'email', label: 'Employee Name' },
-  { id: '', label: '' },
+  { id: 'name', label: 'Employee Name' },
+  { id: 'date', label: 'Date' },
+  { id: 'role', label: 'Role' },
+  { id: 'in-time', label: 'In Time' },
+  { id: 'out-time', label: 'Out Time' },
+  { id: 'total-hours', label: 'Total Hours' },
+  { id: 'status', label: 'Status' },
 ];
 
 function EnhancedTableHead(props) {
@@ -87,15 +86,13 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-const Awards = () => {
-  const { awardsData, editAwardId, open, setOpen, scroll, handleClickOpen, handleClose } = useAwardsData();
-
+const RoleWiseAttendance = () => {
   // for table 
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [awards, setAwards] = useState([]);
+  const [roleAttendance, setRoleAttendance] = useState([]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -113,22 +110,20 @@ const Awards = () => {
   };
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - awards.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - roleAttendance.length) : 0;
 
-  const visibleRows = stableSort(awards, getComparator(order, orderBy)).slice(
+  const visibleRows = stableSort(roleAttendance, getComparator(order, orderBy)).slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
   return (
     <>
-      <AwardsModal editAwardId={editAwardId} awardsData={awardsData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
-
       <Card sx={{ mt: 3 }}>
         <Box sx={{ width: '100%' }}>
           <TableContainer>
             <Table
-              sx={{ minWidth: 700 }}
+              sx={{ minWidth: 900 }}
               aria-labelledby="tableTitle"
             >
               <EnhancedTableHead
@@ -146,14 +141,14 @@ const Awards = () => {
                       key={row.id}
                       sx={{ cursor: 'pointer' }}
                     >
-                      <TableCell align="left">{row.awards_name}</TableCell>
-                      <TableCell align="left">{row.awards_email}</TableCell>
-                      <TableCell align="left">{row.phone_no}</TableCell>
-                      <TableCell align="left">{row.cv}</TableCell>
-                      <TableCell align="center">
-                        <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
-                        <DeleteOutline onClick={() => deleteEmployee(row.id)} />
-                      </TableCell>
+                      <TableCell align="left">{row.employee_name}</TableCell>
+                      <TableCell align="left">{row.date}</TableCell>
+                      <TableCell align="left">{row.role}</TableCell>
+                      <TableCell align="left">{row.in_time}</TableCell>
+                      <TableCell align="left">{row.out_time}</TableCell>
+                      <TableCell align="left">{row.total_hours}</TableCell>
+                      {/* present,absent,late */}
+                      <TableCell align="left">{row.status}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -168,7 +163,7 @@ const Awards = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={awards.length}
+            count={roleAttendance.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -180,4 +175,4 @@ const Awards = () => {
   )
 }
 
-export default Awards;
+export default RoleWiseAttendance;

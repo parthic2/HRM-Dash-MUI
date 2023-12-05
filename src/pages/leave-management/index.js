@@ -4,7 +4,7 @@ import { TabList, TabPanel, TabContext } from '@mui/lab'
 import { styled } from '@mui/material/styles'
 import MuiTab from '@mui/material/Tab'
 import ListStatus from 'mdi-material-ui/ListStatus'
-import WalletOutline from 'mdi-material-ui/WalletOutline'
+import ScaleBalance from 'mdi-material-ui/ScaleBalance'
 import ApplicationEditOutline from 'mdi-material-ui/ApplicationEditOutline'
 import LeaveRequest from 'src/views/leave/LeaveRequest';
 import LeaveBalance from 'src/views/leave/LeaveBalance';
@@ -58,7 +58,7 @@ const LeaveManagement = () => {
               value='leave-balance'
               label={
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <WalletOutline />
+                  <ScaleBalance/>
                   <TabName>Leave Balance</TabName>
                 </Box>
               }

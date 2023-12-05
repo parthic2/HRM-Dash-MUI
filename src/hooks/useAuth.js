@@ -28,10 +28,34 @@ const useAuth = () => {
     setValues({ ...values, role: event.target.value });
   };
 
+  const handleEmployeeLogin = () => {
+    if (!values.email || !values.password) {
+      console.error("Email and password are required for employee login");
+
+      return;
+    }
+
+    const employeeDetails = {
+      email: values.email,
+      password: values.password,
+      roles: "Employee"
+    };
+
+    localStorage.setItem("employee-details", JSON.stringify(employeeDetails));
+
+    router.push('/');
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { email, password, role } = values;
+
+    if (role === 'Employee') {
+      handleEmployeeLogin();
+
+      return;
+    }
 
     try {
       const numericRole =

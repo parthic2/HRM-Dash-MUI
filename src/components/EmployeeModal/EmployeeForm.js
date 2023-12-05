@@ -58,7 +58,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="user_name"
                   value={formData.user_name}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                 />
                 {errors.user_name && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.user_name}</Typography>}
               </Grid>
@@ -157,7 +156,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="birth_date"
                   value={formData.birth_date}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -176,7 +174,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="joining_date"
                   value={formData.joining_date}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -197,7 +194,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                     name="gender"
                     value={formData.gender}
                     onChange={handleInputChange}
-                    disabled={isInEditMode}
                   >
                     <MenuItem value='Male'>Male</MenuItem>
                     <MenuItem value='Female'>Female</MenuItem>
@@ -216,7 +212,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                     name="blood_group"
                     value={formData.blood_group}
                     onChange={handleInputChange}
-                    disabled={isInEditMode}
                   >
                     <MenuItem value='A+'>A+</MenuItem>
                     <MenuItem value='A-'>A-</MenuItem>
@@ -273,7 +268,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="salary"
                   value={formData.salary}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                 />
                 {errors.salary && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.salary}</Typography>}
               </Grid>
@@ -285,7 +279,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="holder_name"
                   value={formData.holder_name}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                 />
                 {errors.holder_name && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.holder_name}</Typography>}
               </Grid>
@@ -297,7 +290,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="account_number"
                   value={formData.account_number}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                 />
                 {errors.account_number && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.account_number}</Typography>}
               </Grid>
@@ -309,7 +301,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="bank_name"
                   value={formData.bank_name}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                 />
                 {errors.bank_name && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.bank_name}</Typography>}
               </Grid>
@@ -321,7 +312,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="bank_code"
                   value={formData.bank_code}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                 />
                 {errors.bank_code && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.bank_code}</Typography>}
               </Grid>
@@ -333,7 +323,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   name="bank_location"
                   value={formData.bank_location}
                   onChange={handleInputChange}
-                  disabled={isInEditMode}
                 />
                 {errors.bank_location && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.bank_location}</Typography>}
               </Grid>

@@ -5,9 +5,10 @@ import { TabList, TabPanel, TabContext } from '@mui/lab';
 import { styled } from '@mui/material/styles';
 import MuiTab from '@mui/material/Tab';
 import { useTimer } from 'src/@core/context/TimerContext';
-import { Box, Card } from '@mui/material';
+import { Box, Card, Select, InputLabel, MenuItem, FormControl } from '@mui/material';
 import Clock from 'mdi-material-ui/Clock';
-import ScaleBalance from 'mdi-material-ui/ScaleBalance';
+import WalletOutline from 'mdi-material-ui/WalletOutline';
+import RoleWiseAttendance from 'src/views/attendance/RoleWiseAttendance';
 
 const Attendance = () => {
   const { projectsForCurrentMonth } = useTimer();
@@ -63,11 +64,23 @@ const Attendance = () => {
               value='role-attendance'
               label={
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ScaleBalance />
-                  <TabName>Leave Balance</TabName>
+                  <WalletOutline />
+                  <TabName>Role Wise Attendance</TabName>
                 </Box>
               }
             />
+
+            <FormControl sx={{ ml: 10, mt: 3, mb: 3, minWidth: 150 }} size="small">
+              <InputLabel id="demo-select-small-label">Select Role</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-small"
+                label="Select Role"
+              >
+                <MenuItem value="HR">HR</MenuItem>
+                <MenuItem value="Employee">Employee</MenuItem>
+              </Select>
+            </FormControl>
           </TabList>
         </Card>
 
@@ -78,10 +91,9 @@ const Attendance = () => {
           </TabPanel>
         ) : ""}
         <TabPanel sx={{ p: 0 }} value='role-attendance'>
-          role-wise-attendance
+          <RoleWiseAttendance />
         </TabPanel>
       </TabContext>
-
     </>
   )
 }

@@ -3,7 +3,7 @@ import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, Tabl
 import PropTypes from 'prop-types';
 import { visuallyHidden } from '@mui/utils';
 import useLeaveReqData from 'src/hooks/useLeaveReqData';
-import LeaveRequestModal from 'src/components/LeaveModal/LeaveRequest/LeaveRequestModal';
+import LeaveRequestModal from 'src/components/LeaveRequest/LeaveRequestModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

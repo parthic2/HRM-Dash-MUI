@@ -5,7 +5,7 @@ import DeleteOutline from 'mdi-material-ui/DeleteOutline';
 import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { visuallyHidden } from '@mui/utils';
 import useLeaveTypeData from 'src/hooks/useLeaveTypeData';
-import LeaveTypeModal from 'src/components/LeaveModal/LeaveType/LeaveTypeModal';
+import LeaveTypeModal from 'src/components/LeaveType/LeaveTypeModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

@@ -6,8 +6,7 @@ import MuiTab from '@mui/material/Tab'
 import ListStatus from 'mdi-material-ui/ListStatus'
 import WalletOutline from 'mdi-material-ui/WalletOutline'
 import ApplicationEditOutline from 'mdi-material-ui/ApplicationEditOutline'
-
-// import LeaveRequest from 'src/views/leave/LeaveRequest';
+import LeaveRequest from 'src/views/leave/LeaveRequest';
 import LeaveBalance from 'src/views/leave/LeaveBalance';
 import LeaveType from 'src/views/leave/LeaveType';
 
@@ -77,7 +76,7 @@ const LeaveManagement = () => {
         </Card>
 
         <TabPanel sx={{ p: 0 }} value='leave-request'>
-          {/* <LeaveRequest /> */}
+          <LeaveRequest />
         </TabPanel>
         <TabPanel sx={{ p: 0 }} value='leave-balance'>
           <LeaveBalance />

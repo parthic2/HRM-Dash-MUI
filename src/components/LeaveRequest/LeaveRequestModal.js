@@ -3,7 +3,7 @@ import LeaveRequestForm from './LeaveRequestForm';
 
 const LeaveRequestModal = ({ leaveReqData, open, setOpen, scroll, handleClickOpen, handleClose }) => {
   const authToken = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
-  const role = authToken.role;
+  const role = authToken?.role;
 
   return (
     <>

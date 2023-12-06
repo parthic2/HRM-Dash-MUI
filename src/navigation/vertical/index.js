@@ -30,13 +30,15 @@ const navigation = () => {
       title: 'Projects',
       icon: Project,
       path: '/projects',
-      roles: ["Admin", "Employee"]
+      
+      // roles: ["Admin", "Employee"]
     },
     {
       title: 'Attendance',
       icon: Attendance,
       path: '/attendance',
-      roles: ["Admin", "HR", "Employee"]
+
+      // roles: ["Admin", "HR", "Employee"]
     },
 
     // {
@@ -49,7 +51,8 @@ const navigation = () => {
       title: 'Leave Management',
       icon: Leave,
       path: '/leave-management',
-      roles: ["Admin", "HR", "Employee"]
+
+      // roles: ["Admin", "HR", "Employee"]
     },
 
     // {
@@ -103,13 +106,15 @@ const navigation = () => {
       title: 'Announcement',
       icon: Microphone,
       path: '/announcement',
-      roles: ["Employee", "Admin", "HR"]
+
+      // roles: ["Employee", "Admin", "HR"]
     },
     {
       title: 'Awards',
       icon: TrophyAward,
       path: '/awards',
-      roles: ["Employee", "Admin", "HR"]
+
+      // roles: ["Employee", "Admin", "HR"]
     },
   ]
 }

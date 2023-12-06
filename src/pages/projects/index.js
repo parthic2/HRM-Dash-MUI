@@ -46,7 +46,7 @@ const headCells = [
   { id: 'end', label: 'End Date' },
   { id: 'status', label: 'Status' },
   { id: 'team', label: 'Team Member' },
-  { id: 'document', label: 'Gov. Document' },
+  { id: 'document', label: 'Documents' },
   { id: '', label: '' },
 ];
 

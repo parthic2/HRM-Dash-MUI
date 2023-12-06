@@ -38,22 +38,22 @@ const App = props => {
   const [, setAuthorized] = useState(false);
   const [, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Check for the presence of a token after the initial render
-    const loginToken = JSON.parse(localStorage.getItem('login-details'));
+  // useEffect(() => {
+  //   // Check for the presence of a token after the initial render
+  //   const loginToken = JSON.parse(localStorage.getItem('login-details'));
 
-    if (loginToken?.token) {
-      setAuthorized(true);
-    } else {
-      setAuthorized(false);
-      if (router.pathname !== '/pages/login') {
-        // Redirect only if not already on the sign-in page
-        router.push('/pages/login');
-      }
-    }
+  //   if (loginToken?.token) {
+  //     setAuthorized(true);
+  //   } else {
+  //     setAuthorized(false);
+  //     if (router.pathname !== '/pages/login') {
+  //       // Redirect only if not already on the sign-in page
+  //       router.push('/pages/login');
+  //     }
+  //   }
 
-    setLoading(false); // Set loading to false after the initial render
-  }, [router, router.pathname]);
+  //   setLoading(false); // Set loading to false after the initial render
+  // }, [router, router.pathname]);
 
   return (
     <>
@@ -68,13 +68,13 @@ const App = props => {
       </Head>
 
       <TimerProvider>
-      <SettingsProvider>
-        <SettingsConsumer>
-          {({ settings }) => {
-            return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
-          }}
-        </SettingsConsumer>
-      </SettingsProvider>
+        <SettingsProvider>
+          <SettingsConsumer>
+            {({ settings }) => {
+              return <ThemeComponent settings={settings}>{getLayout(<Component {...pageProps} />)}</ThemeComponent>
+            }}
+          </SettingsConsumer>
+        </SettingsProvider>
       </TimerProvider>
     </>
   )

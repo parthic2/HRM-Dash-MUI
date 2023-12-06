@@ -35,8 +35,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
+  { id: 'date', label: 'IP' },
   { id: 'date', label: 'Date' },
-  
+
   // { id: 'name', label: 'Project Name' },
   { id: 'description', label: 'Description' },
   { id: 'start', label: 'Start Time' },
@@ -90,13 +91,12 @@ EnhancedTableHead.propTypes = {
 };
 
 const AttendanceTable = ({ savedProjects }) => {
-  console.log(savedProjects);
-
   // for table 
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const ipAddress = typeof window !== 'undefined' ? localStorage.getItem('userIP') : null;
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -135,20 +135,21 @@ const AttendanceTable = ({ savedProjects }) => {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {visibleRows.map((row) => {
+              {visibleRows.map((row, index) => {
                 return (
                   <TableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={row.id}
+                    key={index}
                     sx={{ cursor: 'pointer' }}
                   >
+                    <TableCell align="left">{ipAddress}</TableCell>
                     <TableCell align="left">{row.date}</TableCell>
                     {/* <TableCell align="left">{row.projectName}</TableCell> */}
-                    <TableCell align="left">{row.description}</TableCell>
+                    <TableCell align="left">{row.description || "-"}</TableCell>
                     <TableCell align="left">{row.startTime}</TableCell>
-                    <TableCell align="left">{row.pauseTime}</TableCell>
+                    <TableCell align="left">{row.pauseTime || "-"}</TableCell>
                     <TableCell align="left">{row.stopTime}</TableCell>
                     <TableCell align="left">{row.hours} hours</TableCell>
                     <TableCell align="left">{row.minutes} minutes</TableCell>

@@ -1,48 +1,8 @@
-import { useState } from 'react'
-import { Box, Grid, Link, Alert, Select, MenuItem, TextField, Typography, InputLabel, AlertTitle, IconButton, CardContent, FormControl, Button } from '@mui/material'
-import { styled } from '@mui/material/styles'
-import Close from 'mdi-material-ui/Close'
-import Divider from '@mui/material/Divider'
-
-const ImgStyled = styled('img')(({ theme }) => ({
-  width: 120,
-  height: 120,
-  marginRight: theme.spacing(6.25),
-  borderRadius: theme.shape.borderRadius
-}))
-
-const ButtonStyled = styled(Button)(({ theme }) => ({
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    textAlign: 'center'
-  }
-}))
-
-const ResetButtonStyled = styled(Button)(({ theme }) => ({
-  marginLeft: theme.spacing(4.5),
-  [theme.breakpoints.down('sm')]: {
-    width: '100%',
-    marginLeft: 0,
-    textAlign: 'center',
-    marginTop: theme.spacing(4)
-  }
-}))
+import { Grid, Typography, CardContent, Button } from '@mui/material';
 
 const TabAccount = () => {
-  // ** State
   // const [openAlert, setOpenAlert] = useState(true)
-  const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
-
   // const [editMode, setEditMode] = useState(false); // Add editMode state
-
-  const onChange = file => {
-    const reader = new FileReader()
-    const { files } = file.target
-    if (files && files.length !== 0) {
-      reader.onload = () => setImgSrc(reader.result)
-      reader.readAsDataURL(files[0])
-    }
-  }
 
   // const handleEditClick = () => {
   //   setEditMode(true);
@@ -58,30 +18,6 @@ const TabAccount = () => {
       {/* <Button variant='contained' onClick={handleEditClick}>Edit</Button> */}
       <form>
         <Grid container spacing={7}>
-          <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <ImgStyled src={imgSrc} alt='Profile Pic' />
-              <Box>
-                <ButtonStyled component='label' variant='contained' htmlFor='account-settings-upload-image'>
-                  Upload New Photo
-                  <input
-                    hidden
-                    type='file'
-                    onChange={onChange}
-                    accept='image/png, image/jpeg'
-                    id='account-settings-upload-image'
-                  />
-                </ButtonStyled>
-                <ResetButtonStyled color='error' variant='outlined' onClick={() => setImgSrc('/images/avatars/1.png')}>
-                  Reset
-                </ResetButtonStyled>
-                <Typography variant='body2' sx={{ marginTop: 5 }}>
-                  Allowed PNG or JPEG. Max size of 800K.
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
-
           <Grid item container spacing={2} sx={{ border: "1px solid rgba(58, 53, 65, 0.12)", paddingTop: "0 !important" }} ml={7} mt={7}>
             <Grid xs={4}>
               <Typography sx={{ fontWeight: 600, py: 3 }}>ID</Typography>
@@ -130,14 +66,14 @@ const TabAccount = () => {
           </Grid> */}
 
 
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Button variant='contained' sx={{ marginRight: 3.5 }}>
               Save Changes
             </Button>
-            {/* <Button type='reset' variant='outlined' color='secondary'>
+            <Button type='reset' variant='outlined' color='secondary'>
               Reset
-            </Button> */}
-          </Grid>
+            </Button>
+          </Grid> */}
         </Grid>
       </form>
     </CardContent>

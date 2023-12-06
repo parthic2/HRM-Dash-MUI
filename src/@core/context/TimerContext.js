@@ -1,4 +1,5 @@
 // context/TimerContext.js
+import axios from 'axios';
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const TimerContext = createContext();
@@ -13,6 +14,7 @@ export function TimerProvider({ children }) {
   const [startTime, setStartTime] = useState(null);
   const [pauseTime, setPauseTime] = useState(null);
   const [stopTime, setStopTime] = useState(null);
+  const [userIP, setUserIP] = useState("");
   const SECONDS_IN_AN_HOUR = 3600;
 
   // Effect to handle timer updates
@@ -154,6 +156,24 @@ export function TimerProvider({ children }) {
     }
   });
 
+  // For getting the IP address of user PC
+  useEffect(() => {
+    // Function to fetch user's public IP address using ipify
+    const fetchUserIP = async () => {
+      try {
+        const response = await axios.get('https://api.ipify.org?format=json');
+        const ipAddress = response.data.ip;
+        setUserIP(ipAddress);
+        localStorage.setItem('userIP', ipAddress);
+      } catch (error) {
+        console.error('Error fetching IP address:', error);
+      }
+    };
+
+    // Call the function to fetch the IP address when the component mounts
+    fetchUserIP();
+  }, []);
+
   return (
     <TimerContext.Provider value={{
       isTimerRunning,
@@ -171,7 +191,8 @@ export function TimerProvider({ children }) {
       description,
       setDescription,
       setShowConfirm,
-      projectsForCurrentMonth
+      projectsForCurrentMonth,
+      userIP
     }}>
       {children}
     </TimerContext.Provider>

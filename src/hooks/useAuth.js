@@ -28,6 +28,7 @@ const useAuth = () => {
     setValues({ ...values, role: event.target.value });
   };
 
+  // Remove karvanu che employee api aave aatle
   const handleEmployeeLogin = () => {
     if (!values.email || !values.password) {
       console.error("Email and password are required for employee login");

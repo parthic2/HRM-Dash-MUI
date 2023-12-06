@@ -15,6 +15,10 @@ const Attendance = () => {
   const authToken = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
   const role = authToken?.role;
 
+  // Remove karvanu che employee api aave aatle
+  const authTokenEmp = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('employee-details')) : null;
+  const roleEmp = authTokenEmp?.roles;
+
   const Tab = styled(MuiTab)(({ theme }) => ({
     [theme.breakpoints.down('md')]: {
       minWidth: 100
@@ -34,7 +38,7 @@ const Attendance = () => {
   }))
 
   // ** State
-  const [value, setValue] = useState('role-attendance');
+  const [value, setValue] = useState('tracker');
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -47,7 +51,6 @@ const Attendance = () => {
           <TabList
             onChange={handleChange}
             aria-label='account-settings tabs'
-            sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
           >
             {role === "HR" || role === "Employee" ? (
               <Tab
@@ -60,27 +63,42 @@ const Attendance = () => {
                 }
               />
             ) : ""}
-            <Tab
-              value='role-attendance'
-              label={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <WalletOutline />
-                  <TabName>Role Wise Attendance</TabName>
-                </Box>
-              }
-            />
+            {roleEmp === "HR" || roleEmp === "Employee" ? (
+              <Tab
+                value='tracker'
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Clock />
+                    <TabName>Tracker</TabName>
+                  </Box>
+                }
+              />
+            ) : ""}
+            {!roleEmp === "Employee" ? (
+              <Tab
+                value='role-attendance'
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <WalletOutline />
+                    <TabName>Role Wise Attendance</TabName>
+                  </Box>
+                }
+              />
+            ) : ""}
 
-            <FormControl sx={{ ml: 10, mt: 3, mb: 3, minWidth: 150 }} size="small">
-              <InputLabel id="demo-select-small-label">Select Role</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                label="Select Role"
-              >
-                <MenuItem value="HR">HR</MenuItem>
-                <MenuItem value="Employee">Employee</MenuItem>
-              </Select>
-            </FormControl>
+            {!roleEmp === "Employee" ? (
+              <FormControl sx={{ ml: 10, mt: 3, mb: 3, minWidth: 150 }} size="small">
+                <InputLabel id="demo-select-small-label">Select Role</InputLabel>
+                <Select
+                  labelId="demo-select-small-label"
+                  id="demo-select-small"
+                  label="Select Role"
+                >
+                  <MenuItem value="HR">HR</MenuItem>
+                  <MenuItem value="Employee">Employee</MenuItem>
+                </Select>
+              </FormControl>
+            ) : ""}
           </TabList>
         </Card>
 
@@ -90,9 +108,17 @@ const Attendance = () => {
             <AttendanceTable savedProjects={projectsForCurrentMonth} />
           </TabPanel>
         ) : ""}
-        <TabPanel sx={{ p: 0 }} value='role-attendance'>
-          <RoleWiseAttendance />
-        </TabPanel>
+        {roleEmp === "HR" || roleEmp === "Employee" ? (
+          <TabPanel sx={{ p: 0 }} value='tracker'>
+            <Tracker />
+            <AttendanceTable savedProjects={projectsForCurrentMonth} />
+          </TabPanel>
+        ) : ""}
+        {!roleEmp === "Employee" ? (
+          <TabPanel sx={{ p: 0 }} value='role-attendance'>
+            <RoleWiseAttendance />
+          </TabPanel>
+        ) : ""}
       </TabContext>
     </>
   )

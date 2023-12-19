@@ -2,9 +2,15 @@ import { Dialog, DialogContent, DialogTitle, Typography, Button } from '@mui/mat
 import ProjectForm from './ProjectForm';
 
 const ProjectModal = ({ editProjectId, projectData, open, setOpen, scroll, handleClickOpen, handleClose }) => {
+  // Remove karvanu che employee api aave aatle
+  const authTokenEmp = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('employee-details')) : null;
+  const roleEmp = authTokenEmp?.roles;
+
   return (
     <>
-      <Button variant='contained' onClick={handleClickOpen('body')}>Add Projects</Button>
+      {roleEmp === "Employee" ? null : (
+        <Button variant='contained' onClick={handleClickOpen('body')}>Add Projects</Button>
+      )}
       <Dialog
         open={open}
         onClose={handleClose}

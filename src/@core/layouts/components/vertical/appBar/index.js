@@ -56,4 +56,4 @@ const LayoutAppBar = props => {
   )
 }
 
-export default LayoutAppBar
+export default LayoutAppBar;

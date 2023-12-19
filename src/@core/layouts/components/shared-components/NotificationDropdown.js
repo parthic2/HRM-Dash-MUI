@@ -1,23 +1,11 @@
-// ** React Imports
-import { useState, Fragment } from 'react'
-
-// ** MUI Imports
-import Box from '@mui/material/Box'
-import Chip from '@mui/material/Chip'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import { styled } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import MuiMenu from '@mui/material/Menu'
-import MuiAvatar from '@mui/material/Avatar'
-import MuiMenuItem from '@mui/material/MenuItem'
-import Typography from '@mui/material/Typography'
-
-// ** Icons Imports
-import BellOutline from 'mdi-material-ui/BellOutline'
-
-// ** Third Party Components
-import PerfectScrollbarComponent from 'react-perfect-scrollbar'
+import { useState, Fragment } from 'react';
+import { Box, Chip, Button, IconButton, useMediaQuery, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import MuiMenu from '@mui/material/Menu';
+import MuiAvatar from '@mui/material/Avatar';
+import MuiMenuItem from '@mui/material/MenuItem';
+import BellOutline from 'mdi-material-ui/BellOutline';
+import PerfectScrollbarComponent from 'react-perfect-scrollbar';
 
 // ** Styled Menu component
 const Menu = styled(MuiMenu)(({ theme }) => ({
@@ -214,4 +202,4 @@ const NotificationDropdown = () => {
   )
 }
 
-export default NotificationDropdown
+export default NotificationDropdown;

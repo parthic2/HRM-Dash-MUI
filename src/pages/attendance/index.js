@@ -38,7 +38,13 @@ const Attendance = () => {
   }))
 
   // ** State
-  const [value, setValue] = useState('tracker');
+  const [value, setValue] = useState(() => {
+    if (role === "HR" || roleEmp === "Employee") {
+      return 'tracker';
+    } else {
+      return 'role-attendance';
+    }
+  });
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -52,7 +58,7 @@ const Attendance = () => {
             onChange={handleChange}
             aria-label='account-settings tabs'
           >
-            {role === "HR" || role === "Employee" ? (
+            {role === "HR" || roleEmp === "Employee" ? (
               <Tab
                 value='tracker'
                 label={
@@ -63,18 +69,7 @@ const Attendance = () => {
                 }
               />
             ) : ""}
-            {roleEmp === "HR" || roleEmp === "Employee" ? (
-              <Tab
-                value='tracker'
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Clock />
-                    <TabName>Tracker</TabName>
-                  </Box>
-                }
-              />
-            ) : ""}
-            {!roleEmp === "Employee" ? (
+            {roleEmp === "Employee" ? null : (
               <Tab
                 value='role-attendance'
                 label={
@@ -84,9 +79,9 @@ const Attendance = () => {
                   </Box>
                 }
               />
-            ) : ""}
+            )}
 
-            {!roleEmp === "Employee" ? (
+            {roleEmp === "Employee" ? null : (
               <FormControl sx={{ ml: 10, mt: 3, mb: 3, minWidth: 150 }} size="small">
                 <InputLabel id="demo-select-small-label">Select Role</InputLabel>
                 <Select
@@ -98,27 +93,21 @@ const Attendance = () => {
                   <MenuItem value="Employee">Employee</MenuItem>
                 </Select>
               </FormControl>
-            ) : ""}
+            )}
           </TabList>
         </Card>
 
-        {role === "HR" || role === "Employee" ? (
+        {role === "HR" || roleEmp === "Employee" ? (
           <TabPanel sx={{ p: 0 }} value='tracker'>
             <Tracker />
             <AttendanceTable savedProjects={projectsForCurrentMonth} />
           </TabPanel>
         ) : ""}
-        {roleEmp === "HR" || roleEmp === "Employee" ? (
-          <TabPanel sx={{ p: 0 }} value='tracker'>
-            <Tracker />
-            <AttendanceTable savedProjects={projectsForCurrentMonth} />
-          </TabPanel>
-        ) : ""}
-        {!roleEmp === "Employee" ? (
+        {!roleEmp === "Employee" ? null : (
           <TabPanel sx={{ p: 0 }} value='role-attendance'>
             <RoleWiseAttendance />
           </TabPanel>
-        ) : ""}
+        )}
       </TabContext>
     </>
   )

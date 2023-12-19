@@ -8,6 +8,7 @@ import Layers from 'mdi-material-ui/Layers'
 import AppleKeyboardCommand from 'mdi-material-ui/AppleKeyboardCommand'
 import FormatListBulleted from 'mdi-material-ui/FormatListBulleted'
 import Microphone from 'mdi-material-ui/Microphone'
+import CalendarMonthOutline from 'mdi-material-ui/CalendarMonthOutline'
 import TrophyAward from 'mdi-material-ui/TrophyAward'
 
 const navigation = () => {
@@ -87,6 +88,12 @@ const navigation = () => {
       title: 'Job',
       icon: AppleKeyboardCommand,
       path: '/jobs',
+      roles: ["Admin", "HR"]
+    },
+    {
+      title: 'Calendar',
+      icon: CalendarMonthOutline,
+      path: '/calendar',
       roles: ["Admin", "HR"]
     },
 

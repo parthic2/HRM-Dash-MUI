@@ -109,6 +109,12 @@ const useAuth = () => {
         email: 'stackholic@gmail.com',
         password: 'Stack@123',
       });
+    } else if (values.role === "Employee") {
+      setValues({
+        ...values,
+        email: "employee@gmail.com",
+        password: "Employee@12"
+      })
     } else {
       setValues({
         ...values,

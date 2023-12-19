@@ -1,21 +1,11 @@
-// ** React Import
-import { useRef, useState } from 'react'
-
-// ** MUI Import
-import List from '@mui/material/List'
-import Box from '@mui/material/Box'
-import { styled, useTheme } from '@mui/material/styles'
-
-// ** Third Party Components
-import PerfectScrollbar from 'react-perfect-scrollbar'
-
-// ** Component Imports
-import Drawer from './Drawer'
-import VerticalNavItems from './VerticalNavItems'
-import VerticalNavHeader from './VerticalNavHeader'
-
-// ** Util Import
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+import { useRef, useState } from 'react';
+import { List, Box } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import Drawer from './Drawer';
+import VerticalNavItems from './VerticalNavItems';
+import VerticalNavHeader from './VerticalNavHeader';
+import { hexToRGBA } from 'src/@core/utils/hex-to-rgba';
 
 const StyledBoxForShadow = styled(Box)({
   top: 50,
@@ -32,23 +22,16 @@ const StyledBoxForShadow = styled(Box)({
 })
 
 const Navigation = props => {
-  // ** Props
   const {
     hidden,
     afterVerticalNavMenuContent,
     beforeVerticalNavMenuContent,
     verticalNavMenuContent: userVerticalNavMenuContent
-  } = props
-
-  // ** States
-  const [groupActive, setGroupActive] = useState([])
-  const [currentActiveGroup, setCurrentActiveGroup] = useState([])
-
-  // ** Ref
-  const shadowRef = useRef(null)
-
-  // ** Hooks
-  const theme = useTheme()
+  } = props;
+  const [groupActive, setGroupActive] = useState([]);
+  const [currentActiveGroup, setCurrentActiveGroup] = useState([]);
+  const shadowRef = useRef(null);
+  const theme = useTheme();
 
   // ** Fixes Navigation InfiniteScroll
   const handleInfiniteScroll = ref => {
@@ -97,13 +80,13 @@ const Navigation = props => {
           containerRef={ref => handleInfiniteScroll(ref)}
           {...(hidden
             ? {
-                onScroll: container => scrollMenu(container),
-                sx: { height: '100%', overflowY: 'auto', overflowX: 'hidden' }
-              }
+              onScroll: container => scrollMenu(container),
+              sx: { height: '100%', overflowY: 'auto', overflowX: 'hidden' }
+            }
             : {
-                options: { wheelPropagation: false },
-                onScrollY: container => scrollMenu(container)
-              })}
+              options: { wheelPropagation: false },
+              onScrollY: container => scrollMenu(container)
+            })}
         >
           {beforeVerticalNavMenuContent ? beforeVerticalNavMenuContent(props) : null}
           <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -128,4 +111,4 @@ const Navigation = props => {
   )
 }
 
-export default Navigation
+export default Navigation;

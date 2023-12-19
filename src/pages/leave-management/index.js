@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles'
 import MuiTab from '@mui/material/Tab'
 import ListStatus from 'mdi-material-ui/ListStatus'
 import ScaleBalance from 'mdi-material-ui/ScaleBalance'
-import ApplicationEditOutline from 'mdi-material-ui/ApplicationEditOutline'
+import ApplicationImport from 'mdi-material-ui/ApplicationImport'
 import LeaveRequest from 'src/views/leave/LeaveRequest';
 import LeaveBalance from 'src/views/leave/LeaveBalance';
 import LeaveType from 'src/views/leave/LeaveType';
@@ -29,8 +29,17 @@ const LeaveManagement = () => {
     }
   }))
 
-  // ** State
-  const [value, setValue] = useState('leave-request')
+  // Remove karvanu che employee api aave aatle
+  const authTokenEmp = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('employee-details')) : null;
+  const roleEmp = authTokenEmp?.roles;
+
+  const [value, setValue] = useState(() => {
+    if (roleEmp === "Employee") {
+      return 'leave-balance';
+    } else {
+      return 'leave-request';
+    }
+  });
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -45,45 +54,53 @@ const LeaveManagement = () => {
             aria-label='account-settings tabs'
             sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
           >
-            <Tab
-              value='leave-request'
-              label={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ApplicationEditOutline />
-                  <TabName>All Leave Request</TabName>
-                </Box>
-              }
-            />
+            {roleEmp === "Employee" ? null : (
+              <Tab
+                value='leave-request'
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <ApplicationImport />
+                    <TabName>All Leave Request</TabName>
+                  </Box>
+                }
+              />
+            )}
             <Tab
               value='leave-balance'
               label={
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ScaleBalance/>
+                  <ScaleBalance />
                   <TabName>Leave Balance</TabName>
                 </Box>
               }
             />
-            <Tab
-              value='leave-type'
-              label={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ListStatus />
-                  <TabName>Leave Type</TabName>
-                </Box>
-              }
-            />
+            {roleEmp === "Employee" ? null : (
+              <Tab
+                value='leave-type'
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <ListStatus />
+                    <TabName>Leave Type</TabName>
+                  </Box>
+                }
+              />
+            )}
           </TabList>
         </Card>
 
-        <TabPanel sx={{ p: 0 }} value='leave-request'>
-          <LeaveRequest />
-        </TabPanel>
+        {roleEmp === "Employee" ? null : (
+          <TabPanel sx={{ p: 0 }} value='leave-request'>
+            <LeaveRequest />
+          </TabPanel>
+        )}
         <TabPanel sx={{ p: 0 }} value='leave-balance'>
           <LeaveBalance />
         </TabPanel>
-        <TabPanel sx={{ p: 0 }} value='leave-type'>
-          <LeaveType />
-        </TabPanel>
+        {roleEmp === "Employee" ? null : (
+          <TabPanel sx={{ p: 0 }} value='leave-type'>
+            <LeaveType />
+          </TabPanel>
+        )}
       </TabContext>
     </>
   )

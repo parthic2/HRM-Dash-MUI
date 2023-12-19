@@ -58,4 +58,4 @@ const Shadows = mode => {
   }
 }
 
-export default Shadows
+export default Shadows;

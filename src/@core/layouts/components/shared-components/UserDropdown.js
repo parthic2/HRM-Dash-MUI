@@ -1,27 +1,12 @@
 /* eslint-disable @next/next/link-passhref */
-// ** React Imports
-import { useState, Fragment } from 'react'
-
-// ** Next Import
-import { useRouter } from 'next/router'
-
-// ** MUI Imports
-import Box from '@mui/material/Box'
-import Menu from '@mui/material/Menu'
-import Badge from '@mui/material/Badge'
-import Avatar from '@mui/material/Avatar'
-import Divider from '@mui/material/Divider'
-import MenuItem from '@mui/material/MenuItem'
-import { styled } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-
-// ** Icons Imports
-import CogOutline from 'mdi-material-ui/CogOutline'
-import LogoutVariant from 'mdi-material-ui/LogoutVariant'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
-import AccountPlus from 'mdi-material-ui/AccountPlus'
-import axios from 'axios'
-import Link from 'next/link'
+import { useState, Fragment } from 'react';
+import { useRouter } from 'next/router';
+import { Box, Menu, Badge, Avatar, Divider, MenuItem, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import LogoutVariant from 'mdi-material-ui/LogoutVariant';
+import AccountOutline from 'mdi-material-ui/AccountOutline';
+import axios from 'axios';
+import Link from 'next/link';
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -33,10 +18,7 @@ const BadgeContentSpan = styled('span')(({ theme }) => ({
 }))
 
 const UserDropdown = () => {
-  // ** States
   const [anchorEl, setAnchorEl] = useState(null)
-
-  // ** Hooks
   const router = useRouter()
 
   const handleDropdownOpen = event => {
@@ -70,6 +52,7 @@ const UserDropdown = () => {
 
       // Remove the login-details object from local storage
       localStorage.removeItem('login-details');
+      localStorage.removeItem('employee-details');
 
       // Redirect to the sign-in page
       router.push('/pages/login');
@@ -78,6 +61,11 @@ const UserDropdown = () => {
       console.error('Logout failed:', error);
     }
   };
+
+  const authToken = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
+
+  // Remove karvanu che employee api aave aatle
+  const authTokenEmp = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('employee-details')) : null;
 
   return (
     <Fragment>
@@ -99,7 +87,7 @@ const UserDropdown = () => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={() => handleDropdownClose()}
-        sx={{ '& .MuiMenu-paper': { width: 230, marginTop: 4 } }}
+        sx={{ '& .MuiMenu-paper': { width: "auto", marginTop: 4 } }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
@@ -113,9 +101,9 @@ const UserDropdown = () => {
               <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', marginLeft: 3, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 600 }}>John Doe</Typography>
+              <Typography sx={{ fontWeight: 600 }}>{authToken?.email} {authTokenEmp?.email}</Typography>
               <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }}>
-                Admin
+                {authToken?.role} {authTokenEmp?.roles}
               </Typography>
             </Box>
           </Box>
@@ -129,20 +117,6 @@ const UserDropdown = () => {
             </Box>
           </MenuItem>
         </Link>
-        {/* <MenuItem sx={{ p: 0 }} onClick={() => handleDropdownClose()}>
-          <Box sx={styles}>
-            <AccountPlus sx={{ marginRight: 2 }} />
-            Edit Profile
-          </Box>
-        </MenuItem>
-        <Divider />
-        <MenuItem sx={{ p: 0 }} onClick={() => handleDropdownClose()}>
-          <Box sx={styles}>
-            <CogOutline sx={{ marginRight: 2 }} />
-            Account Settings
-          </Box>
-        </MenuItem> */}
-        {/* <Divider /> */}
         <MenuItem sx={{ py: 2 }} onClick={handleSignOut}>
           <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />
           Logout
@@ -152,4 +126,4 @@ const UserDropdown = () => {
   )
 }
 
-export default UserDropdown
+export default UserDropdown;

@@ -12,4 +12,4 @@ const UserIcon = props => {
   return <IconTag {...iconProps} style={{ ...styles }} />
 }
 
-export default UserIcon
+export default UserIcon;

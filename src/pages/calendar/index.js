@@ -121,7 +121,7 @@ const EventCalendar = () => {
   };
 
   const onDeleteEvent = () => {
-    setEvents([...events].filter((e) => e._id !== currentEvent._id));
+    setEvents(() => [...events].filter((e) => e._id !== (currentEvent)._id));
     setEventInfoModal(false);
   };
 

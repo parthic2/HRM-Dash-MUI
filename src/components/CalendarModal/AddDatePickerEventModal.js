@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   TextField,
   Dialog,
@@ -18,16 +18,11 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 const AddDatePickerEventModal = ({
   open,
   handleClose,
+  datePickerEventFormData,
+  setDatePickerEventFormData,
   onAddEvent,
   todos,
 }) => {
-  const [datePickerEventFormData, setDatePickerEventFormData] = useState({
-    description: "",
-    start: null,
-    end: null,
-    allDay: false,
-    todoId: undefined,
-  });
 
   const { description, start, end, allDay } = datePickerEventFormData;
 
@@ -98,7 +93,7 @@ const AddDatePickerEventModal = ({
                 onChange={(newValue) =>
                   setDatePickerEventFormData((prevState) => ({
                     ...prevState,
-                    start: new Date(newValue),
+                    start: newValue ? new Date(newValue) : null,
                   }))
                 }
                 renderInput={(params) => <TextField {...params} />}
@@ -122,7 +117,7 @@ const AddDatePickerEventModal = ({
               onChange={(newValue) =>
                 setDatePickerEventFormData((prevState) => ({
                   ...prevState,
-                  end: new Date(newValue),
+                  end: newValue ? new Date(newValue) : null,
                 }))
               }
               renderInput={(params) => <TextField {...params} />}

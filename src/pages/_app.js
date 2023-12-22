@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
-import Head from 'next/head'
-import { Router, useRouter } from 'next/router'
-import NProgress from 'nprogress'
-import themeConfig from 'src/configs/themeConfig'
-import UserLayout from 'src/layouts/UserLayout'
-import ThemeComponent from 'src/@core/theme/ThemeComponent'
-import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsContext'
-import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
-import 'react-perfect-scrollbar/dist/css/styles.css'
-import '../../styles/globals.css'
-import { TimerProvider } from 'src/@core/context/TimerContext'
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import { Router, useRouter } from 'next/router';
+import NProgress from 'nprogress';
+import themeConfig from 'src/configs/themeConfig';
+import UserLayout from 'src/layouts/UserLayout';
+import ThemeComponent from 'src/@core/theme/ThemeComponent';
+import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsContext';
+import { createEmotionCache } from 'src/@core/utils/create-emotion-cache';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import '../../styles/globals.css';
+import { TimerProvider } from 'src/@core/context/TimerContext';
 
 const clientSideEmotionCache = createEmotionCache()
 

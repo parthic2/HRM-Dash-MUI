@@ -6,6 +6,7 @@ import DeleteOutline from 'mdi-material-ui/DeleteOutline';
 import Pen from 'mdi-material-ui/Pen';
 import { visuallyHidden } from '@mui/utils';
 import EmployeeModal from 'src/components/EmployeeModal/EmployeeModal';
+import { motion } from "framer-motion";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -184,104 +185,111 @@ const Employee = () => {
     <>
       <EmployeeModal editEmployeeId={editEmployeeId} employeeData={employeeData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
 
-      <Card sx={{ mt: 3 }}>
-        <Box sx={{ width: '100%' }}>
-          <TableContainer>
-            <Table
-              sx={{ minWidth: 3000 }}
-              aria-labelledby="tableTitle"
-            >
-              <EnhancedTableHead
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
-              />
-              <TableBody>
-                {visibleRows.map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.id}
-                      sx={{ cursor: 'pointer' }}
-                    >
-                      <TableCell align="left">{row.user_name}</TableCell>
-                      <TableCell align="left">
-                        {editingEmployeeId === row.id ? (
-                          <EmployeeDesignationEditor
-                            employee={row}
-                            onSave={(updatedDesignation) => {
-                              updateEmployeeDesignation(row.id, updatedDesignation);
-                              setEditingEmployeeId(null);
-                            }}
-                            onCancel={() => setEditingEmployeeId(null)}
-                          />
-                        ) : (
-                          <>
-                            {row.designation}
-                            <Pen
-                              sx={{ fontSize: '15px', ml: 2 }}
-                              onClick={() => setEditingEmployeeId(row.id)}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        exist={{ opacity: 0, y: 15 }}
+        transition={{ delay: 0.25 }}
+      >
+        <Card sx={{ mt: 3 }}>
+          <Box sx={{ width: '100%' }}>
+            <TableContainer>
+              <Table
+                sx={{ minWidth: 3000 }}
+                aria-labelledby="tableTitle"
+              >
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                />
+                <TableBody>
+                  {visibleRows.map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.id}
+                        sx={{ cursor: 'pointer' }}
+                      >
+                        <TableCell align="left">{row.user_name}</TableCell>
+                        <TableCell align="left">
+                          {editingEmployeeId === row.id ? (
+                            <EmployeeDesignationEditor
+                              employee={row}
+                              onSave={(updatedDesignation) => {
+                                updateEmployeeDesignation(row.id, updatedDesignation);
+                                setEditingEmployeeId(null);
+                              }}
+                              onCancel={() => setEditingEmployeeId(null)}
                             />
-                          </>
-                        )}
-                      </TableCell>
-                      <TableCell align="left">{row.email}</TableCell>
-                      <TableCell align="left">{row.address}</TableCell>
-                      <TableCell align="left">{row.phone_no}</TableCell>
-                      <TableCell align="left">{row.alternative_phone || "-"}</TableCell>
-                      <TableCell align="left">{row.birth_date}</TableCell>
-                      <TableCell align="left">{row.joining_date}</TableCell>
-                      <TableCell align="left">{row.blood_group}</TableCell>
-                      <TableCell align="left">{row.role}</TableCell>
-                      <TableCell align="left">
-                        <Chip
-                          label={row.status}
-                          color={statusObj[row.status]}
-                          sx={{
-                            height: 24,
-                            fontSize: '0.75rem',
-                            textTransform: 'capitalize',
-                            '& .MuiChip-label': { fontWeight: 500 }
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell align="left">-</TableCell>
-                      <TableCell align="left">-</TableCell>
-                      <TableCell align="left">-</TableCell>
-                      <TableCell align="left">-</TableCell>
-                      <TableCell align="left">-</TableCell>
-                      <TableCell align="left">-</TableCell>
-                      <TableCell align="left">
-                        <img src={row.gov_doc} alt="Government Document" width={40} height={40} />
-                      </TableCell>
-                      <TableCell align="center">
-                        {/* <PencilOutline onClick={() => handleEditButtonClick(row.id)} /> */}
-                        <DeleteOutline onClick={() => deleteEmployee(row.id)} />
-                      </TableCell>
+                          ) : (
+                            <>
+                              {row.designation}
+                              <Pen
+                                sx={{ fontSize: '15px', ml: 2 }}
+                                onClick={() => setEditingEmployeeId(row.id)}
+                              />
+                            </>
+                          )}
+                        </TableCell>
+                        <TableCell align="left">{row.email}</TableCell>
+                        <TableCell align="left">{row.address}</TableCell>
+                        <TableCell align="left">{row.phone_no}</TableCell>
+                        <TableCell align="left">{row.alternative_phone || "-"}</TableCell>
+                        <TableCell align="left">{row.birth_date}</TableCell>
+                        <TableCell align="left">{row.joining_date}</TableCell>
+                        <TableCell align="left">{row.blood_group}</TableCell>
+                        <TableCell align="left">{row.role}</TableCell>
+                        <TableCell align="left">
+                          <Chip
+                            label={row.status}
+                            color={statusObj[row.status]}
+                            sx={{
+                              height: 24,
+                              fontSize: '0.75rem',
+                              textTransform: 'capitalize',
+                              '& .MuiChip-label': { fontWeight: 500 }
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell align="left">-</TableCell>
+                        <TableCell align="left">-</TableCell>
+                        <TableCell align="left">-</TableCell>
+                        <TableCell align="left">-</TableCell>
+                        <TableCell align="left">-</TableCell>
+                        <TableCell align="left">-</TableCell>
+                        <TableCell align="left">
+                          <img src={row.gov_doc} alt="Government Document" width={40} height={40} />
+                        </TableCell>
+                        <TableCell align="center">
+                          {/* <PencilOutline onClick={() => handleEditButtonClick(row.id)} /> */}
+                          <DeleteOutline onClick={() => deleteEmployee(row.id)} />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={headCells.length} />
                     </TableRow>
-                  );
-                })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={headCells.length} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={employeeData.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Box>
-      </Card>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={employeeData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Box>
+        </Card>
+      </motion.div>
     </>
   )
 }

@@ -9,6 +9,7 @@ import { Box, Card, Select, InputLabel, MenuItem, FormControl } from '@mui/mater
 import Clock from 'mdi-material-ui/Clock';
 import WalletOutline from 'mdi-material-ui/WalletOutline';
 import RoleWiseAttendance from 'src/views/attendance/RoleWiseAttendance';
+import { motion } from "framer-motion";
 
 const Attendance = () => {
   const { projectsForCurrentMonth } = useTimer();
@@ -53,49 +54,61 @@ const Attendance = () => {
   return (
     <>
       <TabContext value={value}>
-        <Card>
-          <TabList
-            onChange={handleChange}
-            aria-label='account-settings tabs'
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exist={{ opacity: 0, y: 15 }}
+          transition={{ delay: 0.25 }}
+        >
+          <Card
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exist={{ opacity: 0, y: 15 }}
+            transition={{ delay: 0.25 }}
           >
-            {role === "HR" || roleEmp === "Employee" ? (
-              <Tab
-                value='tracker'
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Clock />
-                    <TabName>Tracker</TabName>
-                  </Box>
-                }
-              />
-            ) : ""}
-            {roleEmp === "Employee" ? null : (
-              <Tab
-                value='role-attendance'
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <WalletOutline />
-                    <TabName>Role Wise Attendance</TabName>
-                  </Box>
-                }
-              />
-            )}
+            <TabList
+              onChange={handleChange}
+              aria-label='account-settings tabs'
+            >
+              {role === "HR" || roleEmp === "Employee" ? (
+                <Tab
+                  value='tracker'
+                  label={
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Clock />
+                      <TabName>Tracker</TabName>
+                    </Box>
+                  }
+                />
+              ) : ""}
+              {roleEmp === "Employee" ? null : (
+                <Tab
+                  value='role-attendance'
+                  label={
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <WalletOutline />
+                      <TabName>Role Wise Attendance</TabName>
+                    </Box>
+                  }
+                />
+              )}
 
-            {roleEmp === "Employee" ? null : (
-              <FormControl sx={{ ml: 10, mt: 3, mb: 3, minWidth: 150 }} size="small">
-                <InputLabel id="demo-select-small-label">Select Role</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-small"
-                  label="Select Role"
-                >
-                  <MenuItem value="HR">HR</MenuItem>
-                  <MenuItem value="Employee">Employee</MenuItem>
-                </Select>
-              </FormControl>
-            )}
-          </TabList>
-        </Card>
+              {roleEmp === "Employee" ? null : (
+                <FormControl sx={{ ml: 10, mt: 3, mb: 3, minWidth: 150 }} size="small">
+                  <InputLabel id="demo-select-small-label">Select Role</InputLabel>
+                  <Select
+                    labelId="demo-select-small-label"
+                    id="demo-select-small"
+                    label="Select Role"
+                  >
+                    <MenuItem value="HR">HR</MenuItem>
+                    <MenuItem value="Employee">Employee</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            </TabList>
+          </Card>
+        </motion.div>
 
         {role === "HR" || roleEmp === "Employee" ? (
           <TabPanel sx={{ p: 0 }} value='tracker'>

@@ -9,6 +9,7 @@ import ApplicationImport from 'mdi-material-ui/ApplicationImport'
 import LeaveRequest from 'src/views/leave/LeaveRequest';
 import LeaveBalance from 'src/views/leave/LeaveBalance';
 import LeaveType from 'src/views/leave/LeaveType';
+import { motion } from "framer-motion";
 
 const LeaveManagement = () => {
   const Tab = styled(MuiTab)(({ theme }) => ({
@@ -48,45 +49,52 @@ const LeaveManagement = () => {
   return (
     <>
       <TabContext value={value}>
-        <Card>
-          <TabList
-            onChange={handleChange}
-            aria-label='account-settings tabs'
-            sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
-          >
-            {roleEmp === "Employee" ? null : (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exist={{ opacity: 0, y: 15 }}
+          transition={{ delay: 0.25 }}
+        >
+          <Card>
+            <TabList
+              onChange={handleChange}
+              aria-label='account-settings tabs'
+              sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
+            >
+              {roleEmp === "Employee" ? null : (
+                <Tab
+                  value='leave-request'
+                  label={
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <ApplicationImport />
+                      <TabName>All Leave Request</TabName>
+                    </Box>
+                  }
+                />
+              )}
               <Tab
-                value='leave-request'
+                value='leave-balance'
                 label={
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <ApplicationImport />
-                    <TabName>All Leave Request</TabName>
+                    <ScaleBalance />
+                    <TabName>Leave Balance</TabName>
                   </Box>
                 }
               />
-            )}
-            <Tab
-              value='leave-balance'
-              label={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ScaleBalance />
-                  <TabName>Leave Balance</TabName>
-                </Box>
-              }
-            />
-            {roleEmp === "Employee" ? null : (
-              <Tab
-                value='leave-type'
-                label={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <ListStatus />
-                    <TabName>Leave Type</TabName>
-                  </Box>
-                }
-              />
-            )}
-          </TabList>
-        </Card>
+              {roleEmp === "Employee" ? null : (
+                <Tab
+                  value='leave-type'
+                  label={
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <ListStatus />
+                      <TabName>Leave Type</TabName>
+                    </Box>
+                  }
+                />
+              )}
+            </TabList>
+          </Card>
+        </motion.div>
 
         {roleEmp === "Employee" ? null : (
           <TabPanel sx={{ p: 0 }} value='leave-request'>

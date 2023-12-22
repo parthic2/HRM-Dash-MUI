@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { visuallyHidden } from '@mui/utils';
 import useLeaveReqData from 'src/hooks/useLeaveReqData';
 import LeaveRequestModal from 'src/components/LeaveRequest/LeaveRequestModal';
+import { motion } from "framer-motion";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -124,42 +125,48 @@ const LeaveRequest = () => {
     <>
       <LeaveRequestModal leaveReqData={leaveReqData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
 
-      <Card sx={{ mt: 3 }}>
-        <Box sx={{ width: '100%' }}>
-          <TableContainer>
-            <Table
-              sx={{ minWidth: 1100 }}
-              aria-labelledby="tableTitle"
-            >
-              <EnhancedTableHead
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
-              />
-              <TableBody>
-                <TableRow
-                  hover
-                  role="checkbox"
-                  tabIndex={-1}
-                  sx={{ cursor: 'pointer' }}
-                >
-                  <TableCell align="left">8-9-2023</TableCell>
-                  <TableCell align="left">family leave</TableCell>
-                  <TableCell align="left">10-9-2023</TableCell>
-                  <TableCell align="left">11-9-2023</TableCell>
-                  <TableCell align="left">full day</TableCell>
-                  <TableCell align="left">family leave</TableCell>
-                  <TableCell align="left">
-                    <Button size='small' variant="contained" color="success" sx={{ color: "#FFF !important" }}>
-                      Approved
-                    </Button>
-                    <Button size='small' variant="contained" color="error" sx={{ ml: 2, color: "#FFF !important" }}>
-                      Reject
-                    </Button>
-                  </TableCell>
-                </TableRow>
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        exist={{ opacity: 0, y: 15 }}
+        transition={{ delay: 0.25 }}
+      >
+        <Card sx={{ mt: 3 }}>
+          <Box sx={{ width: '100%' }}>
+            <TableContainer>
+              <Table
+                sx={{ minWidth: 1100 }}
+                aria-labelledby="tableTitle"
+              >
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                />
+                <TableBody>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    sx={{ cursor: 'pointer' }}
+                  >
+                    <TableCell align="left">8-9-2023</TableCell>
+                    <TableCell align="left">family leave</TableCell>
+                    <TableCell align="left">10-9-2023</TableCell>
+                    <TableCell align="left">11-9-2023</TableCell>
+                    <TableCell align="left">full day</TableCell>
+                    <TableCell align="left">family leave</TableCell>
+                    <TableCell align="left">
+                      <Button size='small' variant="contained" color="success" sx={{ color: "#FFF !important" }}>
+                        Approved
+                      </Button>
+                      <Button size='small' variant="contained" color="error" sx={{ ml: 2, color: "#FFF !important" }}>
+                        Reject
+                      </Button>
+                    </TableCell>
+                  </TableRow>
 
-                {/* {visibleRows.map((row) => {
+                  {/* {visibleRows.map((row) => {
                   return (
                     <TableRow
                       hover
@@ -185,25 +192,26 @@ const LeaveRequest = () => {
                     </TableRow>
                   );
                 })} */}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={headCells.length} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={leaveReqData.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Box>
-      </Card>
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={headCells.length} />
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={leaveReqData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Box>
+        </Card>
+      </motion.div>
     </>
   )
 }

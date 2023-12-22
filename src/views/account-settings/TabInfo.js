@@ -3,6 +3,7 @@ import { Grid, Radio, Button, TextField, FormLabel, RadioGroup, CardContent, For
 import { styled } from '@mui/material/styles';
 import DatePicker from 'react-datepicker';
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
+import { motion } from "framer-motion";
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField inputRef={ref} label='Birth Date' fullWidth {...props} />
@@ -74,7 +75,12 @@ const TabInfo = () => {
 
   return (
     <CardContent>
-      <form>
+      <motion.form
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        exist={{ opacity: 0, y: 15 }}
+        transition={{ delay: 0.40 }}
+      >
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <BoxStyled>
@@ -217,7 +223,7 @@ const TabInfo = () => {
             </Button>
           </Grid>
         </Grid>
-      </form>
+      </motion.form>
     </CardContent>
   )
 }

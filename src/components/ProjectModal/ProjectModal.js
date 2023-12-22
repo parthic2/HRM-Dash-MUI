@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, Typography, Button } from '@mui/material';
 import ProjectForm from './ProjectForm';
+import { motion } from "framer-motion";
 
 const ProjectModal = ({ editProjectId, projectData, open, setOpen, scroll, handleClickOpen, handleClose }) => {
   // Remove karvanu che employee api aave aatle
@@ -9,7 +10,20 @@ const ProjectModal = ({ editProjectId, projectData, open, setOpen, scroll, handl
   return (
     <>
       {roleEmp === "Employee" ? null : (
-        <Button variant='contained' onClick={handleClickOpen('body')}>Add Projects</Button>
+        <Button
+          component={motion.div}
+          whileHover={{
+            scale: 0.9,
+            transition: { duration: 0.4 }
+          }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exist={{ opacity: 0, y: 15 }}
+          transition={{ delay: 0.25 }}
+          variant='contained'
+          onClick={handleClickOpen('body')}>
+          Add Projects
+        </Button>
       )}
       <Dialog
         open={open}

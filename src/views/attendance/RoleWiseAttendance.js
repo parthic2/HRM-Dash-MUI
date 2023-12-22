@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Select, InputLabel, MenuItem, FormControl } from '@mui/material';
+import { Card, Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel } from '@mui/material';
 import PropTypes from 'prop-types';
 import { visuallyHidden } from '@mui/utils';
+import { motion } from "framer-motion";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -118,7 +119,12 @@ const RoleWiseAttendance = () => {
   );
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      exist={{ opacity: 0, y: 15 }}
+      transition={{ delay: 0.25 }}
+    >
       <Card sx={{ mt: 3 }}>
         <Box sx={{ width: '100%' }}>
           <TableContainer>
@@ -171,7 +177,7 @@ const RoleWiseAttendance = () => {
           />
         </Box>
       </Card>
-    </>
+    </motion.div>
   )
 }
 

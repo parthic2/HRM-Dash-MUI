@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, Typography, Button } from '@mui/material';
 import AnnouncementForm from './AnnouncementForm';
+import { motion } from "framer-motion";
 
 const AnnouncementModal = ({ editAnnoId, announcementData, open, setOpen, scroll, handleClickOpen, handleClose }) => {
   // Remove karvanu che employee api aave aatle
@@ -9,7 +10,21 @@ const AnnouncementModal = ({ editAnnoId, announcementData, open, setOpen, scroll
   return (
     <>
       {roleEmp === "Employee" ? null : (
-        <Button variant='contained' onClick={handleClickOpen('body')}>Add Announcements</Button>
+        <Button
+          component={motion.div}
+          whileHover={{
+            scale: 0.9,
+            transition: { duration: 0.4 }
+          }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exist={{ opacity: 0, y: 15 }}
+          transition={{ delay: 0.25 }}
+          variant='contained'
+          onClick={handleClickOpen('body')}
+        >
+          Add Announcements
+        </Button>
       )}
       <Dialog
         open={open}

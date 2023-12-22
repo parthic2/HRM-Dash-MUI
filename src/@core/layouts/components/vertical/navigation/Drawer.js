@@ -1,6 +1,7 @@
 // ** MUI Imports
 import { styled, useTheme } from '@mui/material/styles'
 import MuiSwipeableDrawer from '@mui/material/SwipeableDrawer'
+import { motion } from "framer-motion";
 
 const SwipeableDrawer = styled(MuiSwipeableDrawer)({
   overflowX: 'hidden',
@@ -44,22 +45,34 @@ const Drawer = props => {
     onClose: () => null
   }
 
+  const variants = {
+    hidden: { opacity: 0, x: -200, y: 0 },
+    enter: { opacity: 1, x: 0, y: 0 },
+  }
+
   return (
-    <SwipeableDrawer
-      className='layout-vertical-nav'
-      variant={hidden ? 'temporary' : 'permanent'}
-      {...(hidden ? { ...MobileDrawerProps } : { ...DesktopDrawerProps })}
-      PaperProps={{ sx: { width: navWidth } }}
-      sx={{
-        width: navWidth,
-        '& .MuiDrawer-paper': {
-          // borderRight: 0,
-          backgroundColor: theme.palette.background.default
-        }
-      }}
+    <motion.main
+      variants={variants}
+      initial="hidden"
+      animate="enter"
+      transition={{ type: "linear" }}
     >
-      {children}
-    </SwipeableDrawer>
+      <SwipeableDrawer
+        className='layout-vertical-nav'
+        variant={hidden ? 'temporary' : 'permanent'}
+        {...(hidden ? { ...MobileDrawerProps } : { ...DesktopDrawerProps })}
+        PaperProps={{ sx: { width: navWidth } }}
+        sx={{
+          width: navWidth,
+          '& .MuiDrawer-paper': {
+            // borderRight: 0,
+            backgroundColor: theme.palette.background.default
+          }
+        }}
+      >
+        {children}
+      </SwipeableDrawer>
+    </motion.main>
   )
 }
 

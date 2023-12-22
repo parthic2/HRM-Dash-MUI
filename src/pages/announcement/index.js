@@ -6,6 +6,7 @@ import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { visuallyHidden } from '@mui/utils';
 import useAnnouncementData from 'src/hooks/useAnnouncementData';
 import AnnouncementModal from 'src/components/AnnouncementModal/AnnouncementModal';
+import { motion } from "framer-motion";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -124,60 +125,67 @@ const Announcement = () => {
     <>
       <AnnouncementModal editAnnoId={editAnnoId} announcementData={announcementData} open={open} setOpen={setOpen} scroll={scroll} handleClickOpen={handleClickOpen} handleClose={handleClose} />
 
-      <Card sx={{ mt: 3 }}>
-        <Box sx={{ width: '100%' }}>
-          <TableContainer>
-            <Table
-              sx={{ minWidth: 1000 }}
-              aria-labelledby="tableTitle"
-            >
-              <EnhancedTableHead
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
-              />
-              <TableBody>
-                {visibleRows.map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.id}
-                      sx={{ cursor: 'pointer' }}
-                    >
-                      <TableCell align="left">{row.anno_title}</TableCell>
-                      <TableCell align="left">{row.anno_detail}</TableCell>
-                      <TableCell align="left">{row.department}</TableCell>
-                      <TableCell align="left">
-                        <img src={row.doc} alt="Government Document" width={40} height={40} />
-                      </TableCell>
-                      <TableCell align="center">
-                        <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
-                        <DeleteOutline onClick={() => deleteEmployee(row.id)} />
-                      </TableCell>
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        exist={{ opacity: 0, y: 15 }}
+        transition={{ delay: 0.25 }}
+      >
+        <Card sx={{ mt: 3 }}>
+          <Box sx={{ width: '100%' }}>
+            <TableContainer>
+              <Table
+                sx={{ minWidth: 1000 }}
+                aria-labelledby="tableTitle"
+              >
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                />
+                <TableBody>
+                  {visibleRows.map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.id}
+                        sx={{ cursor: 'pointer' }}
+                      >
+                        <TableCell align="left">{row.anno_title}</TableCell>
+                        <TableCell align="left">{row.anno_detail}</TableCell>
+                        <TableCell align="left">{row.department}</TableCell>
+                        <TableCell align="left">
+                          <img src={row.doc} alt="Government Document" width={40} height={40} />
+                        </TableCell>
+                        <TableCell align="center">
+                          <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
+                          <DeleteOutline onClick={() => deleteEmployee(row.id)} />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                  {emptyRows > 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell colSpan={headCells.length} />
                     </TableRow>
-                  );
-                })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={headCells.length} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={announcementData.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Box>
-      </Card>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={announcementData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Box>
+        </Card>
+      </motion.div>
     </>
   )
 }

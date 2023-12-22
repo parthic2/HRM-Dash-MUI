@@ -2,6 +2,7 @@
 import { styled, useTheme } from '@mui/material/styles'
 import MuiAppBar from '@mui/material/AppBar'
 import MuiToolbar from '@mui/material/Toolbar'
+import { motion } from "framer-motion";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   transition: 'none',
@@ -38,21 +39,27 @@ const LayoutAppBar = props => {
   const { contentWidth } = settings
 
   return (
-    <AppBar elevation={0} className='layout-navbar' position='static'
-    sx={{ borderBottom: "1px solid rgba(58, 53, 65, 0.12)" }}
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.5 }}
     >
-      {/* sx={{ backgroundColor: theme.palette.background.paper }} */}
-      <Toolbar
-        className='navbar-content-container'
-        sx={{
-          ...(contentWidth === 'boxed' && {
-            '@media (min-width:1440px)': { maxWidth: `calc(1440px - ${theme.spacing(6)} * 2)` }
-          })
-        }}
+      <AppBar elevation={0} className='layout-navbar' position='static'
+        sx={{ borderBottom: "1px solid rgba(58, 53, 65, 0.12)" }}
       >
-        {(userVerticalAppBarContent && userVerticalAppBarContent(props)) || null}
-      </Toolbar>
-    </AppBar>
+        {/* sx={{ backgroundColor: theme.palette.background.paper }} */}
+        <Toolbar
+          className='navbar-content-container'
+          sx={{
+            ...(contentWidth === 'boxed' && {
+              '@media (min-width:1440px)': { maxWidth: `calc(1440px - ${theme.spacing(6)} * 2)` }
+            })
+          }}
+        >
+          {(userVerticalAppBarContent && userVerticalAppBarContent(props)) || null}
+        </Toolbar>
+      </AppBar>
+    </motion.div>
   )
 }
 

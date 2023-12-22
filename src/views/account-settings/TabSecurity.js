@@ -4,6 +4,7 @@ import { Box, Grid, Button, Divider, InputLabel, IconButton, CardContent, FormCo
 // ** Icons Imports
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+import { motion } from "framer-motion";
 
 const TabSecurity = () => {
   // ** States
@@ -56,7 +57,12 @@ const TabSecurity = () => {
   }
 
   return (
-    <form>
+    <motion.form
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      exist={{ opacity: 0, y: 15 }}
+      transition={{ delay: 0.25 }}
+    >
       <CardContent sx={{ paddingBottom: 0 }}>
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6}>
@@ -197,7 +203,7 @@ const TabSecurity = () => {
           </Button>
         </Box>
       </CardContent>
-    </form>
+    </motion.form>
   )
 }
 

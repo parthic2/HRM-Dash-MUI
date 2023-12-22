@@ -7,6 +7,7 @@ import FormatListBulletedTriangle from 'mdi-material-ui/FormatListBulletedTriang
 import ApplicationEditOutline from 'mdi-material-ui/ApplicationEditOutline'
 import JobRequirement from 'src/views/jobs/JobRequirement'
 import ApplicantList from 'src/views/jobs/ApplicantList'
+import { motion } from "framer-motion"
 
 const Tab = styled(MuiTab)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
@@ -37,32 +38,39 @@ const Jobs = () => {
   return (
     <>
       <TabContext value={value}>
-        <Card>
-          <TabList
-            onChange={handleChange}
-            aria-label='account-settings tabs'
-            sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
-          >
-            <Tab
-              value='requirement'
-              label={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ApplicationEditOutline />
-                  <TabName>Requirement</TabName>
-                </Box>
-              }
-            />
-            <Tab
-              value='applicant'
-              label={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <FormatListBulletedTriangle />
-                  <TabName>Applicant List</TabName>
-                </Box>
-              }
-            />
-          </TabList>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exist={{ opacity: 0, y: 15 }}
+          transition={{ delay: 0.25 }}
+        >
+          <Card>
+            <TabList
+              onChange={handleChange}
+              aria-label='account-settings tabs'
+              sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
+            >
+              <Tab
+                value='requirement'
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <ApplicationEditOutline />
+                    <TabName>Requirement</TabName>
+                  </Box>
+                }
+              />
+              <Tab
+                value='applicant'
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <FormatListBulletedTriangle />
+                    <TabName>Applicant List</TabName>
+                  </Box>
+                }
+              />
+            </TabList>
+          </Card>
+        </motion.div>
 
         <TabPanel sx={{ p: 0 }} value='requirement'>
           <JobRequirement />

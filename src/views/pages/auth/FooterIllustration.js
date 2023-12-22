@@ -1,9 +1,6 @@
-// ** React Imports
-import { Fragment } from 'react'
-
-// ** MUI Components
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { styled, useTheme } from '@mui/material/styles'
+import { Fragment } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { styled, useTheme } from '@mui/material/styles';
 
 // Styled Components
 const MaskImg = styled('img')(() => ({
@@ -26,14 +23,9 @@ const Tree2Img = styled('img')(() => ({
 }))
 
 const FooterIllustrationsV1 = props => {
-  // ** Props
-  const { image1, image2 } = props
-
-  // ** Hook
-  const theme = useTheme()
-
-  // ** Vars
-  const hidden = useMediaQuery(theme.breakpoints.down('md'))
+  const { image1, image2 } = props;
+  const theme = useTheme();
+  const hidden = useMediaQuery(theme.breakpoints.down('md'));
   if (!hidden) {
     return (
       <Fragment>
@@ -47,4 +39,4 @@ const FooterIllustrationsV1 = props => {
   }
 }
 
-export default FooterIllustrationsV1
+export default FooterIllustrationsV1;

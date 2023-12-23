@@ -1,6 +1,6 @@
 // ** Custom Menu Components
-import VerticalNavLink from './VerticalNavLink'
-import VerticalNavSectionTitle from './VerticalNavSectionTitle'
+import VerticalNavLink from './VerticalNavLink';
+import VerticalNavSectionTitle from './VerticalNavSectionTitle';
 
 const getUserRole = () => {
   const userString = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
@@ -40,4 +40,4 @@ const VerticalNavItems = props => {
   return <>{RenderMenuItems}</>
 }
 
-export default VerticalNavItems
+export default VerticalNavItems;

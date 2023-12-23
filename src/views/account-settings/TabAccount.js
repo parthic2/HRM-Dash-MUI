@@ -80,4 +80,4 @@ const TabAccount = () => {
   )
 }
 
-export default TabAccount
+export default TabAccount;

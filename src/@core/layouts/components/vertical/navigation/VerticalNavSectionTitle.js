@@ -1,8 +1,8 @@
 // ** MUI Imports
-import Divider from '@mui/material/Divider'
-import { styled, useTheme } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-import MuiListSubheader from '@mui/material/ListSubheader'
+import Divider from '@mui/material/Divider';
+import { styled, useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import MuiListSubheader from '@mui/material/ListSubheader';
 
 // ** Styled Components
 const ListSubheader = styled(props => <MuiListSubheader component='li' {...props} />)(({ theme }) => ({
@@ -60,4 +60,4 @@ const VerticalNavSectionTitle = props => {
   )
 }
 
-export default VerticalNavSectionTitle
+export default VerticalNavSectionTitle;

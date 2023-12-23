@@ -1,6 +1,6 @@
 // ** MUI Imports
-import { styled, useTheme } from '@mui/material/styles'
-import MuiSwipeableDrawer from '@mui/material/SwipeableDrawer'
+import { styled, useTheme } from '@mui/material/styles';
+import MuiSwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { motion } from "framer-motion";
 
 const SwipeableDrawer = styled(MuiSwipeableDrawer)({
@@ -76,4 +76,4 @@ const Drawer = props => {
   )
 }
 
-export default Drawer
+export default Drawer;

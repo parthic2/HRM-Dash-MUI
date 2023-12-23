@@ -1,8 +1,8 @@
-import IconButton from '@mui/material/IconButton'
+import IconButton from '@mui/material/IconButton';
 
 // ** Icons Imports
-import WeatherNight from 'mdi-material-ui/WeatherNight'
-import WeatherSunny from 'mdi-material-ui/WeatherSunny'
+import WeatherNight from 'mdi-material-ui/WeatherNight';
+import WeatherSunny from 'mdi-material-ui/WeatherSunny';
 
 const ModeToggler = props => {
   // ** Props
@@ -27,4 +27,4 @@ const ModeToggler = props => {
   )
 }
 
-export default ModeToggler
+export default ModeToggler;

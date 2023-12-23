@@ -1,17 +1,8 @@
-// ** Next Import
-import Link from 'next/link'
-
-// ** MUI Components
-import Button from '@mui/material/Button'
-import { styled } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-
-// ** Layout Import
-import BlankLayout from 'src/@core/layouts/BlankLayout'
-
-// ** Demo Imports
-import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations'
+import Link from 'next/link';
+import {Button,Typography,Box} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import BlankLayout from 'src/@core/layouts/BlankLayout';
+import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations';
 
 // ** Styled Components
 const BoxWrapper = styled(Box)(({ theme }) => ({
@@ -58,4 +49,4 @@ const Error401 = () => {
 }
 Error401.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
-export default Error401
+export default Error401;

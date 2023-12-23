@@ -111,4 +111,4 @@ const WeeklyOverview = () => {
   )
 }
 
-export default WeeklyOverview
+export default WeeklyOverview;

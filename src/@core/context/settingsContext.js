@@ -1,8 +1,8 @@
 // ** React Imports
-import { createContext, useState } from 'react'
+import { createContext, useState } from 'react';
 
 // ** ThemeConfig Import
-import themeConfig from 'src/configs/themeConfig'
+import themeConfig from 'src/configs/themeConfig';
 
 const initialSettings = {
   themeColor: 'primary',
@@ -27,4 +27,4 @@ export const SettingsProvider = ({ children }) => {
   return <SettingsContext.Provider value={{ settings, saveSettings }}>{children}</SettingsContext.Provider>
 }
 
-export const SettingsConsumer = SettingsContext.Consumer
+export const SettingsConsumer = SettingsContext.Consumer;

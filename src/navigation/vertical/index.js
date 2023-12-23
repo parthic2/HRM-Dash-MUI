@@ -1,15 +1,15 @@
 // ** Icon imports
-import HomeOutline from 'mdi-material-ui/HomeOutline'
-import Account from 'mdi-material-ui/Account'
-import Project from 'mdi-material-ui/Briefcase'
-import Attendance from 'mdi-material-ui/Calendar'
-import Leave from 'mdi-material-ui/Clipboard'
-import Layers from 'mdi-material-ui/Layers'
-import AppleKeyboardCommand from 'mdi-material-ui/AppleKeyboardCommand'
-import FormatListBulleted from 'mdi-material-ui/FormatListBulleted'
-import Microphone from 'mdi-material-ui/Microphone'
-import CalendarMonthOutline from 'mdi-material-ui/CalendarMonthOutline'
-import TrophyAward from 'mdi-material-ui/TrophyAward'
+import HomeOutline from 'mdi-material-ui/HomeOutline';
+import Account from 'mdi-material-ui/Account';
+import Project from 'mdi-material-ui/Briefcase';
+import Attendance from 'mdi-material-ui/Calendar';
+import Leave from 'mdi-material-ui/Clipboard';
+import Layers from 'mdi-material-ui/Layers';
+import AppleKeyboardCommand from 'mdi-material-ui/AppleKeyboardCommand';
+import FormatListBulleted from 'mdi-material-ui/FormatListBulleted';
+import Microphone from 'mdi-material-ui/Microphone';
+import CalendarMonthOutline from 'mdi-material-ui/CalendarMonthOutline';
+import TrophyAward from 'mdi-material-ui/TrophyAward';
 
 const navigation = () => {
   return [

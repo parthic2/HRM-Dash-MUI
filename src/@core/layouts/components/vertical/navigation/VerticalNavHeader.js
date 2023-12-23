@@ -1,13 +1,7 @@
-// ** Next Import
-import Link from 'next/link'
-
-// ** MUI Imports
-import Box from '@mui/material/Box'
-import { styled, useTheme } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-
-// ** Configs
-import themeConfig from 'src/configs/themeConfig'
+import Link from 'next/link';
+import { Box, Typography } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
+import themeConfig from 'src/configs/themeConfig';
 
 // ** Styled Components
 const MenuHeaderWrapper = styled(Box)(({ theme }) => ({
@@ -57,4 +51,4 @@ const VerticalNavHeader = props => {
   )
 }
 
-export default VerticalNavHeader
+export default VerticalNavHeader;

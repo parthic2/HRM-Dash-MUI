@@ -55,4 +55,4 @@ const Trophy = () => {
   )
 }
 
-export default Trophy
+export default Trophy;

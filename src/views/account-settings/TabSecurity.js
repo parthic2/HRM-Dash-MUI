@@ -1,9 +1,7 @@
-import { useState } from 'react'
-import { Box, Grid, Button, Divider, InputLabel, IconButton, CardContent, FormControl, OutlinedInput, InputAdornment } from '@mui/material'
-
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+import { useState } from 'react';
+import { Box, Grid, Button, Divider, InputLabel, IconButton, CardContent, FormControl, OutlinedInput, InputAdornment } from '@mui/material';
+import EyeOutline from 'mdi-material-ui/EyeOutline';
+import EyeOffOutline from 'mdi-material-ui/EyeOffOutline';
 import { motion } from "framer-motion";
 
 const TabSecurity = () => {
@@ -207,4 +205,4 @@ const TabSecurity = () => {
   )
 }
 
-export default TabSecurity
+export default TabSecurity;

@@ -1,6 +1,6 @@
 // ** MUI Imports
-import { styled } from '@mui/material/styles'
-import Box from '@mui/material/Box'
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 
 // Styled component for Blank Layout component
 const BlankLayoutWrapper = styled(Box)(({ theme }) => ({
@@ -34,4 +34,4 @@ const BlankLayout = ({ children }) => {
   )
 }
 
-export default BlankLayout
+export default BlankLayout;

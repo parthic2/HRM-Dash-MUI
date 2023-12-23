@@ -1,7 +1,7 @@
 // ** MUI Imports
-import { styled, useTheme } from '@mui/material/styles'
-import MuiAppBar from '@mui/material/AppBar'
-import MuiToolbar from '@mui/material/Toolbar'
+import { styled, useTheme } from '@mui/material/styles';
+import MuiAppBar from '@mui/material/AppBar';
+import MuiToolbar from '@mui/material/Toolbar';
 import { motion } from "framer-motion";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({

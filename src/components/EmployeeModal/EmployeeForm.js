@@ -29,8 +29,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
     setOpen(false);
   };
 
-  const isInEditMode = !!editEmployeeId;
-
   const descriptionElementRef = useRef(null);
 
   useEffect(() => {
@@ -102,16 +100,6 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   onChange={handleInputChange}
                 />
                 {errors.email && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.email}</Typography>}
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label='Address'
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -259,6 +247,18 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
                   </Select>
                 </FormControl>
                 {errors.status && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.status}</Typography>}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  multiline
+                  rows={2}
+                  fullWidth
+                  label='Address'
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField

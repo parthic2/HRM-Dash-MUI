@@ -89,6 +89,8 @@ const JobForm = ({ handleClose, editJobId, setOpen, jobData }) => {
               <Grid item xs={12} sm={12}>
                 <TextField
                   fullWidth
+                  multiline
+                  rows={4}
                   label='Job Description'
                   id="description"
                   name="description"

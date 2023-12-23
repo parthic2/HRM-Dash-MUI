@@ -40,6 +40,17 @@ const LeaveRequestForm = ({ handleClose, setOpen }) => {
         <form onSubmit={handleFormSubmit} autoComplete="off">
           <CardContent>
             <Grid container spacing={5}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  fullWidth
+                  label='Leave Type'
+                  id="leave_type"
+                  name="leave_type"
+                  value={formData.leave_type}
+                  onChange={handleInputChange}
+                />
+                {errors.leave_type && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.leave_type}</Typography>}
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
@@ -79,17 +90,6 @@ const LeaveRequestForm = ({ handleClose, setOpen }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Leave Type'
-                  id="leave_type"
-                  name="leave_type"
-                  value={formData.leave_type}
-                  onChange={handleInputChange}
-                />
-                {errors.leave_type && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.leave_type}</Typography>}
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
                   type="date"
                   label='Start Date'
                   id="start_date"
@@ -123,9 +123,11 @@ const LeaveRequestForm = ({ handleClose, setOpen }) => {
                 />
                 {errors.end_date && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.end_date}</Typography>}
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   fullWidth
+                  multiline
+                  rows={3}
                   label='Description'
                   id="description"
                   name="description"

@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select, TextField, Button, Dialog, DialogActions, DialogContent, Slide } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, TextField, Button, Dialog, DialogActions, DialogContent, Slide, DialogTitle, Typography } from '@mui/material';
 import { forwardRef } from 'react';
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -18,6 +18,9 @@ const ConfirmationModal = ({ showConfirm, setShowConfirm, onSaveProject, onCance
       <DialogContent>
         {!isTimerRunning && (
           <>
+            <DialogTitle id="scroll-dialog-title" sx={{ padding: "0 !important", mb: 5 }}>
+              <Typography variant='h6' fontWeight={600}>Project Details</Typography>
+            </DialogTitle>
             <FormControl fullWidth>
               <InputLabel>Project Name</InputLabel>
               <Select
@@ -37,6 +40,8 @@ const ConfirmationModal = ({ showConfirm, setShowConfirm, onSaveProject, onCance
             <TextField
               sx={{ mt: 5 }}
               fullWidth
+              multiline
+              rows={4}
               label='Description'
               id="description"
               name="description"

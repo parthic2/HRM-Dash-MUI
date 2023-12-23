@@ -41,8 +41,9 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'name', label: 'Awards Name' },
-  { id: 'phone', label: 'Awards Date' },
-  { id: 'email', label: 'Employee Name' },
+  { id: 'details', label: 'Awards Details' },
+  { id: 'employee', label: 'Employee' },
+  { id: 'reward', label: 'Reward' },
   { id: '', label: '' },
 ];
 
@@ -154,9 +155,9 @@ const Awards = () => {
                         sx={{ cursor: 'pointer' }}
                       >
                         <TableCell align="left">{row.awards_name}</TableCell>
-                        <TableCell align="left">{row.awards_email}</TableCell>
-                        <TableCell align="left">{row.phone_no}</TableCell>
-                        <TableCell align="left">{row.cv}</TableCell>
+                        <TableCell align="left">{row.awards_details}</TableCell>
+                        <TableCell align="left">{row.employee}</TableCell>
+                        <TableCell align="left">{row.reward}</TableCell>
                         <TableCell align="center">
                           <PencilOutline onClick={() => handleEditButtonClick(row.id)} />
                           <DeleteOutline onClick={() => deleteEmployee(row.id)} />

@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select, TextField, Button, Dialog, DialogActions, DialogContent, Slide, DialogTitle, Typography } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, TextField, Button, Dialog, DialogContent, Slide, DialogTitle, Typography } from '@mui/material';
 import { forwardRef } from 'react';
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -6,6 +6,9 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const ConfirmationModal = ({ showConfirm, setShowConfirm, onSaveProject, onCancelConfirm, projectName, setProjectName, description, handleChange, setDescription, isTimerRunning }) => {
+
+  const authToken = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
+  const role = authToken?.role;
 
   return (
     <Dialog
@@ -21,24 +24,25 @@ const ConfirmationModal = ({ showConfirm, setShowConfirm, onSaveProject, onCance
             <DialogTitle id="scroll-dialog-title" sx={{ padding: "0 !important", mb: 5 }}>
               <Typography variant='h6' fontWeight={600}>Project Details</Typography>
             </DialogTitle>
-            <FormControl fullWidth>
-              <InputLabel>Project Name</InputLabel>
-              <Select
-                label='Project Name'
-                defaultValue=''
-                labelId='form-layouts-separator-select-label'
-                id="name"
-                name="name"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-              >
-                <MenuItem value='Abc'>Abc</MenuItem>
-                <MenuItem value='HRM'>HRM Dashboard</MenuItem>
-                <MenuItem value='furniture'>Furniture</MenuItem>
-              </Select>
-            </FormControl>
+            {role === "HR" ? "" :
+              <FormControl fullWidth sx={{ mb: 5 }}>
+                <InputLabel>Project Name</InputLabel>
+                <Select
+                  label='Project Name'
+                  defaultValue=''
+                  labelId='form-layouts-separator-select-label'
+                  id="name"
+                  name="name"
+                  value={projectName}
+                  onChange={(e) => setProjectName(e.target.value)}
+                >
+                  <MenuItem value='Abc'>Abc</MenuItem>
+                  <MenuItem value='HRM'>HRM Dashboard</MenuItem>
+                  <MenuItem value='furniture'>Furniture</MenuItem>
+                </Select>
+              </FormControl>
+            }
             <TextField
-              sx={{ mt: 5 }}
               fullWidth
               multiline
               rows={4}

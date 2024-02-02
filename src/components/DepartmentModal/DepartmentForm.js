@@ -1,8 +1,8 @@
-import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions } from '@mui/material';
+import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions, FormControl, InputLabel, Select, MenuItem, DialogActions } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import DepartmentFormLogic from './DepartmentFormLogic';
 
-const DepartmentForm = ({ handleClose, editDepartId, setOpen, departmentData }) => {
+const DepartmentForm = ({ handleClose, editDepartId, setOpen, departmentData, addDepartments }) => {
   const { formData, handleInputChange, errors, validateForm, setFormData, initialFormValue } = DepartmentFormLogic(departmentData, editDepartId);
 
   const handleFormSubmit = (event) => {
@@ -12,11 +12,8 @@ const DepartmentForm = ({ handleClose, editDepartId, setOpen, departmentData }) 
       return; // If the form is not valid, don't submit
     }
 
-    // if (editEmployeeId) {
-    //   editEmployee({ ...formData, id: editEmployeeId });
-    // } else {
-    //   addEmployee(formData);
-    // }
+    addDepartments(formData);
+
     setFormData(initialFormValue);
     setOpen(false);
   };
@@ -42,7 +39,7 @@ const DepartmentForm = ({ handleClose, editDepartId, setOpen, departmentData }) 
         <form onSubmit={handleFormSubmit} autoComplete="off">
           <CardContent>
             <Grid container spacing={5}>
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label='Department Name'
@@ -94,6 +91,24 @@ const DepartmentForm = ({ handleClose, editDepartId, setOpen, departmentData }) 
                 {errors.start_date && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.start_date}</Typography>}
               </Grid>
               <Grid item xs={12} sm={6}>
+                <FormControl fullWidth>
+                  <InputLabel>Status</InputLabel>
+                  <Select
+                    label='Status'
+                    defaultValue=''
+                    labelId='form-layouts-separator-select-label'
+                    id="status"
+                    name="status"
+                    value={formData.status}
+                    onChange={handleInputChange}
+                  >
+                    <MenuItem value='Active'>Active</MenuItem>
+                    <MenuItem value='Inactive'>Inactive</MenuItem>
+                  </Select>
+                </FormControl>
+                {errors.status && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.status}</Typography>}
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
                   label='Team Members'
@@ -107,20 +122,20 @@ const DepartmentForm = ({ handleClose, editDepartId, setOpen, departmentData }) 
             </Grid>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
-          <CardActions>
-            {isInEditMode ? (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Update
-              </Button>
-            ) : (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Save
-              </Button>
-            )}
+          <DialogActions>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
-          </CardActions>
+            {isInEditMode ? (
+              <Button size='large' type='submit' variant='contained'>
+                Update
+              </Button>
+            ) : (
+              <Button size='large' type='submit' variant='contained'>
+                Save
+              </Button>
+            )}
+          </DialogActions>
         </form>
       </DialogContentText>
     </>

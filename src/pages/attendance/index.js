@@ -4,15 +4,13 @@ import AttendanceTable from 'src/components/Attendance/AttendanceTable';
 import { TabList, TabPanel, TabContext } from '@mui/lab';
 import { styled } from '@mui/material/styles';
 import MuiTab from '@mui/material/Tab';
-import { useTimer } from 'src/@core/context/TimerContext';
-import { Box, Card, Select, InputLabel, MenuItem, FormControl } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import Clock from 'mdi-material-ui/Clock';
 import WalletOutline from 'mdi-material-ui/WalletOutline';
 import RoleWiseAttendance from 'src/views/attendance/RoleWiseAttendance';
 import { motion } from "framer-motion";
 
 const Attendance = () => {
-  const { projectsForCurrentMonth } = useTimer();
   const authToken = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
   const role = authToken?.role;
 
@@ -74,7 +72,7 @@ const Attendance = () => {
                 <Tab
                   value='tracker'
                   label={
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}>
                       <Clock />
                       <TabName>Tracker</TabName>
                     </Box>
@@ -85,26 +83,12 @@ const Attendance = () => {
                 <Tab
                   value='role-attendance'
                   label={
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}>
                       <WalletOutline />
                       <TabName>Role Wise Attendance</TabName>
                     </Box>
                   }
                 />
-              )}
-
-              {roleEmp === "Employee" ? null : (
-                <FormControl sx={{ ml: 10, mt: 3, mb: 3, minWidth: 150 }} size="small">
-                  <InputLabel id="demo-select-small-label">Select Role</InputLabel>
-                  <Select
-                    labelId="demo-select-small-label"
-                    id="demo-select-small"
-                    label="Select Role"
-                  >
-                    <MenuItem value="HR">HR</MenuItem>
-                    <MenuItem value="Employee">Employee</MenuItem>
-                  </Select>
-                </FormControl>
               )}
             </TabList>
           </Card>
@@ -113,9 +97,10 @@ const Attendance = () => {
         {role === "HR" || roleEmp === "Employee" ? (
           <TabPanel sx={{ p: 0 }} value='tracker'>
             <Tracker />
-            <AttendanceTable savedProjects={projectsForCurrentMonth} />
+            <AttendanceTable />
           </TabPanel>
         ) : ""}
+
         {!roleEmp === "Employee" ? null : (
           <TabPanel sx={{ p: 0 }} value='role-attendance'>
             <RoleWiseAttendance />

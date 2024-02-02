@@ -2,10 +2,10 @@ import JobForm from './JobForm';
 import { Box, Dialog, DialogContent, DialogTitle, Typography, Button } from '@mui/material';
 import { motion } from "framer-motion";
 
-const JobModal = ({ editJobId, jobData, open, setOpen, scroll, handleClickOpen, handleClose }) => {
+const JobModal = ({ editJobId, jobData, open, setOpen, scroll, handleClickOpen, handleClose, addJobs, editJobs }) => {
   return (
     <>
-      <Box sx={{ mt: 2, textAlign: "end" }}>
+      <Box sx={{ my: 3, textAlign: "end" }}>
         <Button
           component={motion.div}
           whileHover={{
@@ -35,7 +35,7 @@ const JobModal = ({ editJobId, jobData, open, setOpen, scroll, handleClickOpen, 
           </Typography>
         </DialogTitle>
         <DialogContent dividers={scroll === 'body'}>
-          <JobForm handleClose={handleClose} editJobId={editJobId} jobData={jobData} setOpen={setOpen} />
+          <JobForm handleClose={handleClose} editJobId={editJobId} jobData={jobData} setOpen={setOpen} addJobs={addJobs} editJobs={editJobs} />
         </DialogContent>
       </Dialog>
     </>

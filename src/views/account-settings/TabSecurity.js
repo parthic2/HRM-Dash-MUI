@@ -54,6 +54,11 @@ const TabSecurity = () => {
     event.preventDefault()
   }
 
+  // Remove karvanu che employee api aave aatle
+  const authPasswordEmp = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('employee-details')) : null;
+
+  const authPasswordLogin = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
+
   return (
     <motion.form
       initial={{ opacity: 0, y: 15 }}
@@ -66,11 +71,11 @@ const TabSecurity = () => {
           <Grid item xs={12} sm={6}>
             <Grid container spacing={5}>
               <Grid item xs={12} sx={{ marginTop: 4.75 }}>
-                <FormControl fullWidth>
+                <FormControl fullWidth disabled>
                   <InputLabel htmlFor='account-settings-current-password'>Current Password</InputLabel>
                   <OutlinedInput
                     label='Current Password'
-                    value={values.currentPassword}
+                    value={authPasswordEmp?.roles ? authPasswordEmp?.password : authPasswordLogin.role ? authPasswordLogin?.password : ""}
                     id='account-settings-current-password'
                     type={values.showCurrentPassword ? 'text' : 'password'}
                     onChange={handleCurrentPasswordChange('currentPassword')}

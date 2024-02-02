@@ -1,6 +1,5 @@
 import { Box, Button, Card, Typography } from '@mui/material';
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useTimer } from 'src/@core/context/TimerContext';
 import ConfirmationModal from 'src/components/Attendance/ConfirmationModal';
 import { motion } from "framer-motion";
@@ -23,7 +22,7 @@ const Tracker = () => {
         exist={{ opacity: 0, y: 15 }}
         transition={{ delay: 0.25 }}
       >
-        <Card sx={{ width: '100%', p: 5, mt: 5 }}>
+        <Card sx={{ width: '100%', p: 3, mt: 5 }}>
           <Typography variant='h6' sx={{ textAlign: "center", fontWeight: 800 }}>{time}</Typography>
           <Typography variant='body2' color="primary" sx={{ textAlign: "center", fontWeight: 700 }}>Your IP Address: {userIP}</Typography>
           <Box sx={{ mt: 4, textAlign: "center" }} gap={3}>

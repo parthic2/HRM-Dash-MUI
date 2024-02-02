@@ -6,32 +6,44 @@ import {
   DialogContentText,
   DialogTitle,
   Button,
-  Box,
   Typography,
+  Divider,
 } from "@mui/material";
 
-const EventInfoModal = ({ open, handleClose, onDeleteEvent, currentEvent }) => {
+const EventInfoModal = ({ open, handleClose, onDeleteEvent, currentEvent, onEditEvent }) => {
   const onClose = () => {
     handleClose();
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Event Info</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      aria-labelledby="scroll-dialog-title"
+      aria-describedby="scroll-dialog-description"
+    >
+      <DialogTitle id="scroll-dialog-title">
+        <Typography variant='h6' fontWeight={600}>Event Information</Typography>
+      </DialogTitle>
+      <Divider sx={{ margin: 0 }} />
       <DialogContent>
-        <DialogContentText>
-          <Typography sx={{ fontSize: 14, marginTop: 3 }} color="text.secondary" gutterBottom>
-            {currentEvent && currentEvent.description}
-          </Typography>
+        <DialogContentText
+          id="scroll-dialog-description"
+          tabIndex={-1}
+        >
+          <span style={{ fontWeight: 600, textTransform: "capitalize" }}>Description:</span> {currentEvent && currentEvent.description}
         </DialogContentText>
-        <Box component="form"></Box>
       </DialogContent>
+      <Divider sx={{ margin: 0 }} />
       <DialogActions>
-        <Button color="error" onClick={onClose}>
+        <Button size='large' color='error' variant='contained' onClick={onDeleteEvent}>
+          Delete
+        </Button>
+        <Button size='large' color='secondary' variant='outlined' onClick={onClose}>
           Cancel
         </Button>
-        <Button color="info" onClick={onDeleteEvent}>
-          Delete Event
+        <Button size='large' variant='contained' onClick={() => onEditEvent(currentEvent._id)}>
+          Edit
         </Button>
       </DialogActions>
     </Dialog>

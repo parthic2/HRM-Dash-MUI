@@ -2,14 +2,18 @@ import { Box, Dialog, DialogContent, DialogTitle, Typography, Button } from '@mu
 import LeaveRequestForm from './LeaveRequestForm';
 import { motion } from "framer-motion";
 
-const LeaveRequestModal = ({ leaveReqData, open, setOpen, scroll, handleClickOpen, handleClose }) => {
+const LeaveRequestModal = ({ leaveReqData, open, setOpen, scroll, handleClickOpen, handleClose, addLeaveRequest }) => {
   const authToken = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
   const role = authToken?.role;
+
+  // Remove karvanu che employee api aave aatle
+  const authTokenEmp = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('employee-details')) : null;
+  const roleEmp = authTokenEmp?.roles;
 
   return (
     <>
       {role === "HR" ? (
-        <Box sx={{ mt: 2, textAlign: "end" }}>
+        <Box sx={{ my: 3, textAlign: "end" }}>
           <Button
             component={motion.div}
             whileHover={{
@@ -27,6 +31,27 @@ const LeaveRequestModal = ({ leaveReqData, open, setOpen, scroll, handleClickOpe
           </Button>
         </Box>
       ) : ""}
+
+      {roleEmp === "Employee" && (
+        <Box sx={{ my: 3, textAlign: "end" }}>
+          <Button
+            component={motion.div}
+            whileHover={{
+              scale: 0.9,
+              transition: { duration: 0.4 }
+            }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exist={{ opacity: 0, y: 15 }}
+            transition={{ delay: 0.25 }}
+            variant='contained'
+            onClick={handleClickOpen('body')}
+          >
+            Apply for Leave
+          </Button>
+        </Box>
+      )}
+
       <Dialog
         open={open}
         onClose={handleClose}
@@ -40,7 +65,7 @@ const LeaveRequestModal = ({ leaveReqData, open, setOpen, scroll, handleClickOpe
           </Typography>
         </DialogTitle>
         <DialogContent dividers={scroll === 'body'}>
-          <LeaveRequestForm handleClose={handleClose} leaveReqData={leaveReqData} setOpen={setOpen} />
+          <LeaveRequestForm handleClose={handleClose} leaveReqData={leaveReqData} setOpen={setOpen} addLeaveRequest={addLeaveRequest} />
         </DialogContent>
       </Dialog>
     </>

@@ -1,8 +1,8 @@
-import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions, FormControl, InputLabel, Select, MenuItem, DialogActions } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import AwardsFormLogic from './AwardsFormLogic';
 
-const AwardsForm = ({ handleClose, editAwardId, awardsData, setOpen }) => {
+const AwardsForm = ({ handleClose, editAwardId, awardsData, setOpen, addAwards, editAwards }) => {
   const { formData, handleInputChange, errors, validateForm, setFormData, initialFormValue } = AwardsFormLogic(awardsData, editAwardId);
 
   const handleFormSubmit = (event) => {
@@ -12,9 +12,17 @@ const AwardsForm = ({ handleClose, editAwardId, awardsData, setOpen }) => {
       return;
     }
 
+    if (editAwardId) {
+      editAwards({ ...formData, id: editAwardId });
+    } else {
+      addAwards(formData);
+    }
+
     setFormData(initialFormValue);
     setOpen(false);
   };
+
+  const isInEditMode = !!editAwardId;
 
   const descriptionElementRef = useRef(null);
 
@@ -92,14 +100,20 @@ const AwardsForm = ({ handleClose, editAwardId, awardsData, setOpen }) => {
             </Grid>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
-          <CardActions>
-            <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-              Save
-            </Button>
+          <DialogActions>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
-          </CardActions>
+            {isInEditMode ? (
+              <Button size='large' type='submit' variant='contained'>
+                Update
+              </Button>
+            ) : (
+              <Button size='large' type='submit' variant='contained'>
+                Save
+              </Button>
+            )}
+          </DialogActions>
         </form>
       </DialogContentText>
     </>

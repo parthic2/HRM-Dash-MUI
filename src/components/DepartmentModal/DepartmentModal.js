@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogTitle, Typography, Button } from '@mui/mat
 import DepartmentForm from './DepartmentForm';
 import { motion } from "framer-motion";
 
-const DepartmentModal = ({ editDepartId, departmentData, open, setOpen, scroll, handleClickOpen, handleClose }) => {
+const DepartmentModal = ({ editDepartId, departmentData, open, setOpen, scroll, handleClickOpen, handleClose, addDepartments }) => {
   return (
     <>
       <Button
@@ -33,7 +33,7 @@ const DepartmentModal = ({ editDepartId, departmentData, open, setOpen, scroll, 
           </Typography>
         </DialogTitle>
         <DialogContent dividers={scroll === 'body'}>
-          <DepartmentForm handleClose={handleClose} editDepartId={editDepartId} departmentData={departmentData} setOpen={setOpen} />
+          <DepartmentForm handleClose={handleClose} editDepartId={editDepartId} departmentData={departmentData} setOpen={setOpen} addDepartments={addDepartments} />
         </DialogContent>
       </Dialog>
     </>

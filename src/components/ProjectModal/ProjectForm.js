@@ -1,9 +1,9 @@
-import { Button, DialogContentText, Grid, Divider, MenuItem, TextField, InputLabel, Typography, CardContent, CardActions, FormControl, Select } from '@mui/material';
+import { Button, DialogContentText, Grid, Divider, MenuItem, TextField, InputLabel, Typography, CardContent, CardActions, FormControl, Select, DialogActions } from '@mui/material';
 import { DropFiles } from 'src/@core/DropFile/DropFiles';
 import { useEffect, useRef } from 'react';
 import ProjectFormLogic from './ProjectFormLogic';
 
-const ProjectForm = ({ handleClose, editProjectId, setOpen, projectData }) => {
+const ProjectForm = ({ handleClose, editProjectId, setOpen, projectData, addProjects, editProjects }) => {
   const { formData, handleInputChange, handleImageChange, errors, validateForm, setFormData, initialFormValue } = ProjectFormLogic(projectData, editProjectId);
 
   const handleFormSubmit = (event) => {
@@ -13,11 +13,12 @@ const ProjectForm = ({ handleClose, editProjectId, setOpen, projectData }) => {
       return; // If the form is not valid, don't submit
     }
 
-    // if (editEmployeeId) {
-    //   editEmployee({ ...formData, id: editEmployeeId });
-    // } else {
-    //   addEmployee(formData);
-    // }
+    if (editProjectId) {
+      editProjects({ ...formData, id: editProjectId });
+    } else {
+      addProjects(formData);
+    }
+
     setFormData(initialFormValue);
     setOpen(false);
   };
@@ -124,8 +125,7 @@ const ProjectForm = ({ handleClose, editProjectId, setOpen, projectData }) => {
                     onChange={handleInputChange}
                   >
                     <MenuItem value='Active'>Active</MenuItem>
-                    <MenuItem value='Pending'>Pending</MenuItem>
-                    <MenuItem value='Closed'>Closed</MenuItem>
+                    <MenuItem value='Inactive'>Inactive</MenuItem>
                   </Select>
                 </FormControl>
                 {errors.status && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.status}</Typography>}
@@ -161,20 +161,20 @@ const ProjectForm = ({ handleClose, editProjectId, setOpen, projectData }) => {
             </Grid>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
-          <CardActions>
-            {isInEditMode ? (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Update
-              </Button>
-            ) : (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Save
-              </Button>
-            )}
+          <DialogActions>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
-          </CardActions>
+            {isInEditMode ? (
+              <Button size='large' type='submit' variant='contained'>
+                Update
+              </Button>
+            ) : (
+              <Button size='large' type='submit' variant='contained'>
+                Save
+              </Button>
+            )}
+          </DialogActions>
         </form>
       </DialogContentText>
     </>

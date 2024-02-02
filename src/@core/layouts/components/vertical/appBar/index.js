@@ -12,6 +12,7 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   backgroundColor: 'transparent',
   color: theme.palette.text.primary,
   minHeight: theme.mixins.toolbar.minHeight,
+  borderBottom: `1px solid ${theme.palette.action.focus}`,
   [theme.breakpoints.down('sm')]: {
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4)
@@ -44,10 +45,13 @@ const LayoutAppBar = props => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
     >
-      <AppBar elevation={0} className='layout-navbar' position='static'
-        sx={{ borderBottom: "1px solid rgba(58, 53, 65, 0.12)" }}
+      <AppBar
+        elevation={0}
+        className='layout-navbar'
+        position='static'
+        
+      // sx={{ backgroundColor: theme.palette.background.paper }}
       >
-        {/* sx={{ backgroundColor: theme.palette.background.paper }} */}
         <Toolbar
           className='navbar-content-container'
           sx={{

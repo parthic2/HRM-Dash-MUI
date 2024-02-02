@@ -5,8 +5,8 @@ import { styled } from '@mui/material/styles'
 import MuiTab from '@mui/material/Tab'
 import FormatListBulletedTriangle from 'mdi-material-ui/FormatListBulletedTriangle'
 import ApplicationEditOutline from 'mdi-material-ui/ApplicationEditOutline'
-import JobRequirement from 'src/views/jobs/JobRequirement'
-import ApplicantList from 'src/views/jobs/ApplicantList'
+import JobRequirement from 'src/views/jobs/JobReuirement/JobRequirement'
+import ApplicantList from 'src/views/jobs/ApplicantList/ApplicantList'
 import { motion } from "framer-motion"
 
 const Tab = styled(MuiTab)(({ theme }) => ({
@@ -53,7 +53,7 @@ const Jobs = () => {
               <Tab
                 value='requirement'
                 label={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}>
                     <ApplicationEditOutline />
                     <TabName>Requirement</TabName>
                   </Box>
@@ -62,7 +62,7 @@ const Jobs = () => {
               <Tab
                 value='applicant'
                 label={
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', fontWeight: 600 }}>
                     <FormatListBulletedTriangle />
                     <TabName>Applicant List</TabName>
                   </Box>

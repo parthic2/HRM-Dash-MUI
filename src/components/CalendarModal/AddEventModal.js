@@ -1,4 +1,3 @@
-import { useState, ChangeEvent, Dispatch, MouseEvent, SyntheticEvent, SetStateAction } from "react";
 import {
   TextField,
   Dialog,
@@ -9,10 +8,25 @@ import {
   Button,
   Autocomplete,
   Box,
+  Typography,
+  Divider,
+  Grid,
 } from "@mui/material";
+import { useEffect } from "react";
 
-const AddEventModal = ({ open, handleClose, eventFormData, setEventFormData, onAddEvent, todos }) => {
+const AddEventModal = ({ open, handleClose, eventFormData, setEventFormData, onAddEvent, todos, scroll, editedEvent, editedEventData }) => {
   const { description } = eventFormData;
+
+  useEffect(() => {
+    if (editedEvent) {
+      // If there is an editedEvent, set the form data accordingly
+      setEventFormData({
+        _id: editedEvent._id,
+        description: editedEvent.description,
+        todoId: editedEvent.todoId,
+      });
+    }
+  }, [editedEvent]);
 
   const onClose = () => handleClose();
 
@@ -31,39 +45,71 @@ const AddEventModal = ({ open, handleClose, eventFormData, setEventFormData, onA
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add event</DialogTitle>
+    <Dialog
+      open={open}
+      scroll={scroll}
+      onClose={onClose}
+      aria-labelledby="scroll-dialog-title"
+      aria-describedby="scroll-dialog-description"
+    >
+      <DialogTitle id="scroll-dialog-title">
+        <Typography variant='h6' fontWeight={600}>
+          {editedEventData ? "Update Event" : "Add Event"}
+        </Typography>
+        <Typography variant='caption' fontWeight={600}>
+          To {editedEventData ? "update" : "add"} an event, please fill in the information below.
+        </Typography>
+      </DialogTitle>
+
+      <Divider sx={{ margin: 0 }} />
+
       <DialogContent>
-        <DialogContentText>To add an event, please fill in the information below.</DialogContentText>
-        <Box component="form">
-          <TextField
-            name="description"
-            value={description}
-            margin="dense"
-            id="description"
-            label="Description"
-            type="text"
-            fullWidth
-            variant="outlined"
-            onChange={onChange}
-          />
-          <Autocomplete
-            onChange={handleTodoChange}
-            disablePortal
-            id="combo-box-demo"
-            options={todos}
-            sx={{ marginTop: 4 }}
-            getOptionLabel={(option) => option.title}
-            renderInput={(params) => <TextField {...params} label="Todo" />}
-          />
-        </Box>
+        <DialogContentText
+          id="scroll-dialog-description"
+          tabIndex={-1}
+        >
+          <Box component="form" autoComplete="off">
+            <Grid container spacing={5}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  name="description"
+                  value={description}
+                  margin="dense"
+                  id="description"
+                  label="Description"
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  onChange={onChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <Autocomplete
+                  onChange={handleTodoChange}
+                  disablePortal
+                  id="combo-box-demo"
+                  options={todos}
+                  getOptionLabel={(option) => option.title}
+                  renderInput={(params) => <TextField {...params} label="Todo" />}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </DialogContentText>
       </DialogContent>
+      <Divider sx={{ margin: 0 }} />
       <DialogActions>
-        <Button color="error" onClick={onClose}>
+        <Button size='large' color='secondary' variant='outlined' onClick={onClose}>
           Cancel
         </Button>
-        <Button disabled={description === ""} color="success" onClick={onAddEvent}>
-          Add
+        <Button
+          size='large'
+          type='submit'
+          variant='contained'
+          disabled={description === ""}
+          onClick={onAddEvent}
+        >
+          {editedEventData ? "Update" : "Save"}
         </Button>
       </DialogActions>
     </Dialog>

@@ -45,3 +45,8 @@ code[class*='language-'] {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(58, 53, 65, 0.12);
 }
+
+/* calender css */
+.rbc-event {
+  border-radius: 0 !important;
+}

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const AwardsFormLogic = () => {
+const AwardsFormLogic = (awardsData, editAwardId) => {
   const initialFormValue = {
     awards_name: "",
     awards_details: "",
@@ -62,6 +62,18 @@ const AwardsFormLogic = () => {
       [name]: error,
     });
   };
+
+  useEffect(() => {
+    const selectedAwards = awardsData.find((award) => award.id === editAwardId);
+
+    if (selectedAwards) {
+      setFormData(selectedAwards);
+    } else {
+      setFormData({
+        ...initialFormValue
+      });
+    }
+  }, [awardsData, editAwardId]);
 
   return {
     handleInputChange,

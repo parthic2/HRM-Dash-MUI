@@ -6,7 +6,8 @@ const DepartmentFormLogic = (departmentData, editDepartId) => {
     depart_head: "",
     depart_email: "",
     start_date: "",
-    team_member: ""
+    team_member: "",
+    status: ""
   }
 
   const [formData, setFormData] = useState(initialFormValue);
@@ -45,6 +46,11 @@ const DepartmentFormLogic = (departmentData, editDepartId) => {
           return "Team member is required";
         } else if (!/^[0-9]+$/.test(value)) {
           return "Team member should contain only number";
+        }
+        break;
+      case "status":
+        if (value.trim() === "") {
+          return "Status is required";
         }
         break;
     }

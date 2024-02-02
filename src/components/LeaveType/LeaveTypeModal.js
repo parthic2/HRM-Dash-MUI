@@ -2,10 +2,10 @@ import { Box, Dialog, DialogContent, DialogTitle, Typography, Button } from '@mu
 import LeaveTypeForm from './LeaveTypeForm';
 import { motion } from "framer-motion";
 
-const LeaveTypeModal = ({ leaveTypeData, editLeaveTypeId, open, setOpen, scroll, handleClickOpen, handleClose }) => {
+const LeaveTypeModal = ({ leaveTypeData, editLeaveTypeId, open, setOpen, scroll, handleClickOpen, handleClose, addLeaveType, editLeaveType }) => {
   return (
     <>
-      <Box sx={{ mt: 2, textAlign: "end" }}>
+      <Box sx={{ mt: 3, textAlign: "end" }}>
         <Button
           component={motion.div}
           whileHover={{
@@ -35,7 +35,7 @@ const LeaveTypeModal = ({ leaveTypeData, editLeaveTypeId, open, setOpen, scroll,
           </Typography>
         </DialogTitle>
         <DialogContent dividers={scroll === 'body'}>
-          <LeaveTypeForm handleClose={handleClose} editLeaveTypeId={editLeaveTypeId} leaveTypeData={leaveTypeData} setOpen={setOpen} />
+          <LeaveTypeForm handleClose={handleClose} editLeaveTypeId={editLeaveTypeId} leaveTypeData={leaveTypeData} setOpen={setOpen} addLeaveType={addLeaveType} editLeaveType={editLeaveType} />
         </DialogContent>
       </Dialog>
     </>

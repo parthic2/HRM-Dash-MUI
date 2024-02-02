@@ -101,9 +101,9 @@ const LoginPage = () => {
                   value={values.role}
                   onChange={handleRadioChange}
                 >
-                  <FormControlLabel value='Admin' control={<Radio />} label='Admin' />
-                  <FormControlLabel value='HR' control={<Radio />} label='HR' />
                   <FormControlLabel value='Employee' control={<Radio />} label='Employee' />
+                  <FormControlLabel value='HR' control={<Radio />} label='HR' />
+                  <FormControlLabel value='Admin' control={<Radio />} label='Admin' />
                 </RadioGroup>
               </FormControl>
               <Button fullWidth size='large' variant='contained' sx={{ marginTop: 7 }} onClick={handleSubmit}>

@@ -1,9 +1,9 @@
-import { Button, DialogContentText, Grid, Divider, MenuItem, TextField, InputLabel, Typography, CardContent, CardActions, FormControl, Select } from '@mui/material';
+import { Button, DialogContentText, Grid, Divider, MenuItem, TextField, InputLabel, Typography, CardContent, CardActions, FormControl, Select, DialogActions } from '@mui/material';
 import { DropFiles } from 'src/@core/DropFile/DropFiles';
 import { useEffect, useRef } from 'react';
 import AnnouncementFormLogic from './AnnouncementFormLogic';
 
-const AnnouncementForm = ({ handleClose, editAnnoId, announcementData, setOpen }) => {
+const AnnouncementForm = ({ handleClose, editAnnoId, announcementData, setOpen, addAnnouncement, editAnnouncement }) => {
   const { formData, handleImageChange, handleInputChange, errors, validateForm, setFormData, initialFormValue } = AnnouncementFormLogic(announcementData, editAnnoId);
 
   const handleFormSubmit = (event) => {
@@ -13,11 +13,12 @@ const AnnouncementForm = ({ handleClose, editAnnoId, announcementData, setOpen }
       return; // If the form is not valid, don't submit
     }
 
-    // if (editEmployeeId) {
-    //   editEmployee({ ...formData, id: editEmployeeId });
-    // } else {
-    //   addEmployee(formData);
-    // }
+    if (editAnnoId) {
+      editAnnouncement({ ...formData, id: editAnnoId });
+    } else {
+      addAnnouncement(formData);
+    }
+
     setFormData(initialFormValue);
     setOpen(false);
   };
@@ -77,9 +78,9 @@ const AnnouncementForm = ({ handleClose, editAnnoId, announcementData, setOpen }
                     value={formData.department}
                     onChange={handleInputChange}
                   >
-                    <MenuItem value='Front'>Front end</MenuItem>
-                    <MenuItem value='Back'>Back end</MenuItem>
-                    <MenuItem value='Full'>Full stack</MenuItem>
+                    <MenuItem value='Front end'>Front end</MenuItem>
+                    <MenuItem value='Back end'>Back end</MenuItem>
+                    <MenuItem value='Full stack'>Full stack</MenuItem>
                   </Select>
                 </FormControl>
                 {errors.department && <Typography sx={{ color: "#FF4433", fontSize: "13px", fontWeight: "lighter", pt: 1 }}>{errors.department}</Typography>}
@@ -104,20 +105,20 @@ const AnnouncementForm = ({ handleClose, editAnnoId, announcementData, setOpen }
             </Grid>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
-          <CardActions>
-            {isInEditMode ? (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Update
-              </Button>
-            ) : (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Save
-              </Button>
-            )}
+          <DialogActions>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
-          </CardActions>
+            {isInEditMode ? (
+              <Button size='large' type='submit' variant='contained'>
+                Update
+              </Button>
+            ) : (
+              <Button size='large' type='submit' variant='contained'>
+                Save
+              </Button>
+            )}
+          </DialogActions>
         </form>
       </DialogContentText>
     </>

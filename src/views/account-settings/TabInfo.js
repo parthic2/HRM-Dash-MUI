@@ -128,10 +128,10 @@ const TabInfo = () => {
             />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField fullWidth type='number' label='Employee ID' defaultValue='10' />
+            <TextField fullWidth type="number" label='Employee ID' defaultValue='10' disabled />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField fullWidth label='Name' defaultValue='stack' />
+            <TextField fullWidth label='Name' defaultValue='stack' disabled />
           </Grid>
           <Grid item xs={12} sm={3}>
             <DatePickerWrapper>
@@ -147,22 +147,22 @@ const TabInfo = () => {
             </DatePickerWrapper>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField fullWidth type='email' label='Email' defaultValue='stack@stack.com' />
+            <TextField fullWidth type='email' label='Email' defaultValue='stack@stack.com' disabled />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField fullWidth label='Phone No' defaultValue='9878905434' />
+            <TextField fullWidth label='Phone No' defaultValue='9878905434' disabled />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField fullWidth label='Address' defaultValue='surat' />
+            <TextField fullWidth label='Address' defaultValue='surat' disabled />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField fullWidth label='Department' defaultValue='Development' />
+            <TextField fullWidth label='Department' defaultValue='Development' disabled />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField fullWidth label='Designation' defaultValue='Front end Developer' />
+            <TextField fullWidth label='Designation' defaultValue='Front end Developer' disabled />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <TextField fullWidth label='Salary' defaultValue='10000' />
+            <TextField fullWidth label='Salary' defaultValue='10000' disabled />
           </Grid>
           <Grid item xs={12} sm={3}>
             <DatePickerWrapper>
@@ -178,7 +178,7 @@ const TabInfo = () => {
             </DatePickerWrapper>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl>
+            <FormControl disabled>
               <FormLabel sx={{ fontSize: '0.875rem' }}>Gender</FormLabel>
               <RadioGroup row defaultValue='male' aria-label='gender' name='account-settings-info-radio'>
                 <FormControlLabel value='male' label='Male' control={<Radio />} />
@@ -200,28 +200,28 @@ const TabInfo = () => {
             <TypographyHeaderText noWrap>Bank Detail</TypographyHeaderText>
           </Divider>
           <Grid item xs={12} sm={4}>
-            <TextField fullWidth label='Account Holder Name' defaultValue='stack' />
+            <TextField fullWidth label='Account Holder Name' defaultValue='stack' disabled />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <TextField fullWidth label='Account Number' defaultValue='1090909728762' />
+            <TextField fullWidth label='Account Number' defaultValue='1090909728762' disabled />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <TextField fullWidth label='Bank Name' defaultValue='SBI' />
+            <TextField fullWidth label='Bank Name' defaultValue='SBI' disabled />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <TextField fullWidth label='Bank Identifier Code (IFSC Code)' defaultValue='5050' />
+            <TextField fullWidth label='Bank Identifier Code (IFSC Code)' defaultValue='5050' disabled />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <TextField fullWidth label='Branch Location' defaultValue='surat' />
+            <TextField fullWidth label='Branch Location' defaultValue='surat' disabled />
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Button variant='contained' sx={{ marginRight: 3.5 }}>
               Save Changes
             </Button>
             <Button type='reset' variant='outlined' color='secondary' onClick={() => setDate(null)}>
               Reset
             </Button>
-          </Grid>
+          </Grid> */}
         </Grid>
       </motion.form>
     </CardContent>

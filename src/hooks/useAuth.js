@@ -44,7 +44,7 @@ const useAuth = () => {
 
     localStorage.setItem("employee-details", JSON.stringify(employeeDetails));
 
-    router.push('/');
+    router.push('/account-settings');
   }
 
   const handleSubmit = async (e) => {

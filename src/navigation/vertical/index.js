@@ -1,42 +1,44 @@
 // ** Icon imports
-import HomeOutline from 'mdi-material-ui/HomeOutline';
-import Account from 'mdi-material-ui/Account';
-import Project from 'mdi-material-ui/Briefcase';
-import Attendance from 'mdi-material-ui/Calendar';
-import Leave from 'mdi-material-ui/Clipboard';
-import Layers from 'mdi-material-ui/Layers';
-import AppleKeyboardCommand from 'mdi-material-ui/AppleKeyboardCommand';
-import FormatListBulleted from 'mdi-material-ui/FormatListBulleted';
-import Microphone from 'mdi-material-ui/Microphone';
-import CalendarMonthOutline from 'mdi-material-ui/CalendarMonthOutline';
-import TrophyAward from 'mdi-material-ui/TrophyAward';
+import DashboardIcon from "mdi-material-ui/HomeAccount";
+import EmployeeIcon from "mdi-material-ui/AccountGroup";
+import CalendarIcon from "mdi-material-ui/CalendarCheck";
+import AnnouncementIcon from "mdi-material-ui/Microphone";
+import AwardIcon from "mdi-material-ui/TrophyAward";
+import OptionIcon from "mdi-material-ui/SwapHorizontal";
+import JobIcon from "mdi-material-ui/AppleKeyboardCommand";
+import DepartmentIcon from "mdi-material-ui/LayersTriple";
+import ProjectIcon from "mdi-material-ui/HumanGreetingProximity";
+import LeaveIcon from "mdi-material-ui/ClipboardAlert";
+import AttendanceIcon from "mdi-material-ui/CalendarClock";
 
 const navigation = () => {
   return [
     {
       title: 'Dashboard',
-      icon: HomeOutline,
+      icon: DashboardIcon,
       path: '/',
+      roles: ["Admin", "HR"]
     },
     {
-      sectionTitle: 'Pages'
+      sectionTitle: 'Pages',
+      roles: ["Admin", "HR"]
     },
     {
       title: 'Employees',
-      icon: Account,
+      icon: EmployeeIcon,
       path: '/employee',
       roles: ["Admin", "HR"]
     },
     {
       title: 'Projects',
-      icon: Project,
+      icon: ProjectIcon,
       path: '/projects',
-      
+
       // roles: ["Admin", "Employee"]
     },
     {
       title: 'Attendance',
-      icon: Attendance,
+      icon: AttendanceIcon,
       path: '/attendance',
 
       // roles: ["Admin", "HR", "Employee"]
@@ -50,7 +52,7 @@ const navigation = () => {
     // },
     {
       title: 'Leave Management',
-      icon: Leave,
+      icon: LeaveIcon,
       path: '/leave-management',
 
       // roles: ["Admin", "HR", "Employee"]
@@ -69,7 +71,7 @@ const navigation = () => {
     // },
     {
       title: 'Departments',
-      icon: Layers,
+      icon: DepartmentIcon,
       path: '/departments',
       roles: ["Admin", "HR"]
     },
@@ -86,39 +88,33 @@ const navigation = () => {
     // },
     {
       title: 'Job',
-      icon: AppleKeyboardCommand,
+      icon: JobIcon,
       path: '/jobs',
       roles: ["Admin", "HR"]
     },
     {
       title: 'Calendar',
-      icon: CalendarMonthOutline,
+      icon: CalendarIcon,
       path: '/calendar',
       roles: ["Admin", "HR"]
     },
-
+    
     // {
-    //   title: 'Tracker',
-    //   icon: Clock,
-    //   path: '/tracker',
-    //   roles: ["Employee", "HR"]
+    //   title: 'Options',
+    //   icon: OptionIcon,
+    //   path: '/options',
+    //   roles: ["Admin"]
     // },
     {
-      title: 'Options',
-      icon: FormatListBulleted,
-      path: '/options',
-      roles: ["Admin"]
-    },
-    {
       title: 'Announcement',
-      icon: Microphone,
+      icon: AnnouncementIcon,
       path: '/announcement',
 
       // roles: ["Employee", "Admin", "HR"]
     },
     {
       title: 'Awards',
-      icon: TrophyAward,
+      icon: AwardIcon,
       path: '/awards',
 
       // roles: ["Employee", "Admin", "HR"]

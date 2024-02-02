@@ -9,6 +9,8 @@ export function TimerProvider({ children }) {
   const [timeElapsedInSeconds, setTimeElapsedInSeconds] = useState(0);
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
+  const [roleWiseData, setRoleWiseData] = useState("");
+  const [empRoleWiseData, setEmpRoleWiseData] = useState(""); // Remove karavnu che
   const [savedProjects, setSavedProjects] = useState([]); // To store saved project data
   const [showConfirm, setShowConfirm] = useState(false); // State to control the confirmation popup
   const [startTime, setStartTime] = useState(null);
@@ -16,6 +18,14 @@ export function TimerProvider({ children }) {
   const [stopTime, setStopTime] = useState(null);
   const [userIP, setUserIP] = useState("");
   const SECONDS_IN_AN_HOUR = 3600;
+
+  // Fetch data for login credential which role are login
+  const authToken = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('login-details')) : null;
+  const role = authToken?.role;
+
+  // Remove karvanu che employee api aave aatle
+  const authTokenEmp = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('employee-details')) : null;
+  const roleEmp = authTokenEmp?.roles;
 
   // Effect to handle timer updates
   useEffect(() => {
@@ -68,8 +78,10 @@ export function TimerProvider({ children }) {
     } else {
       setIsTimerRunning(true);
       setShowConfirm(false);
-      setStartTime(new Date());
     }
+    setStartTime(new Date());
+    setRoleWiseData(role);
+    setEmpRoleWiseData(roleEmp);
   };
 
   // Function to pause the timer
@@ -98,6 +110,7 @@ export function TimerProvider({ children }) {
       const newProject = {
         projectName: projectName,
         description: description,
+        role: role === "HR" ? roleWiseData : empRoleWiseData,
         startTime: startTime.toLocaleTimeString(),
         pauseTime: pauseTime ? pauseTime.toLocaleTimeString() : "",
         stopTime: stopTime.toLocaleTimeString(),
@@ -192,7 +205,9 @@ export function TimerProvider({ children }) {
       setDescription,
       setShowConfirm,
       projectsForCurrentMonth,
-      userIP
+      userIP,
+      role,
+      roleEmp
     }}>
       {children}
     </TimerContext.Provider>

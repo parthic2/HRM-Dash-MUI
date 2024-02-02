@@ -1,8 +1,8 @@
-import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions, MenuItem, InputLabel, FormControl, Select } from '@mui/material';
+import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions, MenuItem, InputLabel, FormControl, Select, DialogActions } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import LeaveRequestFormLogic from './LeaveRequestFormLogic';
 
-const LeaveRequestForm = ({ handleClose, setOpen }) => {
+const LeaveRequestForm = ({ handleClose, setOpen, addLeaveRequest }) => {
   const { formData, handleInputChange, errors, validateForm, setFormData, initialFormValue } = LeaveRequestFormLogic();
 
   const handleFormSubmit = (event) => {
@@ -12,11 +12,8 @@ const LeaveRequestForm = ({ handleClose, setOpen }) => {
       return; // If the form is not valid, don't submit
     }
 
-    // if (editEmployeeId) {
-    //   editEmployee({ ...formData, id: editEmployeeId });
-    // } else {
-    //   addEmployee(formData);
-    // }
+    addLeaveRequest(formData);
+
     setFormData(initialFormValue);
     setOpen(false);
   };
@@ -139,14 +136,14 @@ const LeaveRequestForm = ({ handleClose, setOpen }) => {
             </Grid>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
-          <CardActions>
-            <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-              Save
-            </Button>
+          <DialogActions>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
-          </CardActions>
+            <Button size='large' type='submit' variant='contained'>
+              Save
+            </Button>
+          </DialogActions>
         </form>
       </DialogContentText>
     </>

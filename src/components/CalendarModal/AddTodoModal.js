@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogActions,
@@ -13,36 +13,85 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  Typography,
 } from "@mui/material";
 import DeleteOutline from 'mdi-material-ui/DeleteOutline';
+import PencilOutline from 'mdi-material-ui/PencilOutline';
 import { HexColorPicker } from "react-colorful";
 
 const AddTodoModal = ({ open, handleClose, todos, setTodos, generateId }) => {
   const [color, setColor] = useState("#b32aa9");
   const [title, setTitle] = useState("");
+  const [editingTodo, setEditingTodo] = useState(null);
+
+  useEffect(() => {
+    // Load todos from localStorage when component mounts
+    const storedTodos = JSON.parse(localStorage.getItem("calenderTodoList")) || [];
+    setTodos(storedTodos);
+  }, []);
+
+  useEffect(() => {
+    // Save todos to localStorage whenever the todos state changes
+    localStorage.setItem("calenderTodoList", JSON.stringify(todos));
+  }, [todos]);
 
   const onAddTodo = () => {
-    setTitle("");
-    setTodos([
-      ...todos,
-      {
-        _id: generateId(),
-        color,
-        title,
-      },
-    ]);
+    if (editingTodo) {
+      // If editingTodo is set, update the existing todo
+      const updatedTodos = todos.map((todo) => todo._id === editingTodo._id ? { ...todo, title, color } : todo);
+      setTodos(updatedTodos);
+      setEditingTodo(null);
+    } else {
+      // If not editing, add a new todos
+      setTitle("");
+      setTodos([
+        ...todos,
+        {
+          _id: generateId(),
+          color,
+          title,
+        },
+      ]);
+    }
   };
+
+  const onEditTodo = (_id) => {
+    const todoToEdit = todos.find((todo) => todo._id === _id);
+    if (todoToEdit) {
+      setEditingTodo(todoToEdit);
+      setTitle(todoToEdit.title);
+      setColor(todoToEdit.color);
+    }
+  }
 
   const onDeleteTodo = (_id) => setTodos(todos.filter((todo) => todo._id !== _id));
 
-  const onClose = () => handleClose();
+  const onClose = () => {
+    setEditingTodo("");
+    setTitle("");
+    setColor("");
+    handleClose();
+  };
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add todo</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      aria-labelledby="scroll-dialog-title"
+      aria-describedby="scroll-dialog-description"
+    >
+      <DialogTitle id="scroll-dialog-title">
+        <Typography variant='h6' fontWeight={600}>Add Todos</Typography>
+        <Typography variant='caption' fontWeight={600}>
+          Create todos to add to your Calendar.
+        </Typography>
+      </DialogTitle>
+      <Divider sx={{ margin: 0 }} />
       <DialogContent>
-        <DialogContentText>Create todos to add to your Calendar.</DialogContentText>
-        <Box>
+        <DialogContentText
+          id="scroll-dialog-description"
+          tabIndex={-1}
+        >
           <TextField
             name="title"
             autoFocus
@@ -60,8 +109,11 @@ const AddTodoModal = ({ open, handleClose, todos, setTodos, generateId }) => {
             value={title}
           />
           <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-            <HexColorPicker color={color} onChange={setColor} />
-            <Box sx={{ height: 80, width: 80, borderRadius: 1 }} className="value" style={{ backgroundColor: color }}></Box>
+            <HexColorPicker color={color} onChange={setColor} style={{ width: 270, height: 200 }} />
+            <Box
+              sx={{ height: 50, width: 50, borderRadius: 0.9, ml: 3, backgroundColor: color }}
+              className="value"
+            ></Box>
           </Box>
           <Box>
             <List sx={{ marginTop: 3 }}>
@@ -69,36 +121,42 @@ const AddTodoModal = ({ open, handleClose, todos, setTodos, generateId }) => {
                 <ListItem
                   key={todo.title}
                   secondaryAction={
-                    <IconButton onClick={() => onDeleteTodo(todo._id)} color="error" edge="end">
-                      <DeleteOutline />
-                    </IconButton>
+                    <>
+                      <IconButton onClick={() => onEditTodo(todo._id)} edge="end" color="default">
+                        <PencilOutline />
+                      </IconButton>
+                      <IconButton onClick={() => onDeleteTodo(todo._id)} color="error" edge="end">
+                        <DeleteOutline />
+                      </IconButton>
+                    </>
                   }
                 >
                   <Box
-                    sx={{ height: 40, width: 40, borderRadius: 1, marginRight: 1 }}
+                    sx={{ height: 20, width: 20, borderRadius: 0.4, marginRight: 2 }}
                     className="value"
                     style={{ backgroundColor: todo.color }}
                   ></Box>
-                  <ListItemText primary={todo.title} />
+                  <ListItemText primary={todo.title} sx={{ textTransform: "capitalize" }} />
                 </ListItem>
               ))}
             </List>
           </Box>
-        </Box>
+        </DialogContentText>
       </DialogContent>
-      <Divider />
-      <DialogActions sx={{ marginTop: 2 }}>
-        <Button sx={{ marginRight: 2 }} variant="contained" color="error" onClick={onClose}>
+      <Divider sx={{ margin: 0 }} />
+      <DialogActions>
+        <Button size='large' color='secondary' variant='outlined' onClick={onClose}>
           Cancel
         </Button>
         <Button
-          onClick={() => onAddTodo()}
+          size='large'
+          type='submit'
+          sx={{ mr: 2 }}
+          variant='contained'
           disabled={title === "" || color === ""}
-          sx={{ marginRight: 2 }}
-          variant="contained"
-          color="success"
+          onClick={() => onAddTodo()}
         >
-          Add
+          {editingTodo ? "Update" : "Save"}
         </Button>
       </DialogActions>
     </Dialog>

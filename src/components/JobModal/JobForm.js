@@ -1,8 +1,8 @@
-import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions } from '@mui/material';
+import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions, DialogActions } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import JobFormLogic from './JobFormLogic';
 
-const JobForm = ({ handleClose, editJobId, setOpen, jobData }) => {
+const JobForm = ({ handleClose, editJobId, setOpen, jobData, addJobs, editJobs }) => {
   const { formData, handleInputChange, errors, validateForm, setFormData, initialFormValue } = JobFormLogic(jobData, editJobId);
 
   const handleFormSubmit = (event) => {
@@ -12,11 +12,12 @@ const JobForm = ({ handleClose, editJobId, setOpen, jobData }) => {
       return; // If the form is not valid, don't submit
     }
 
-    // if (editEmployeeId) {
-    //   editEmployee({ ...formData, id: editEmployeeId });
-    // } else {
-    //   addEmployee(formData);
-    // }
+    if (editJobId) {
+      editJobs({ ...formData, id: editJobId });
+    } else {
+      addJobs(formData);
+    }
+
     setFormData(initialFormValue);
     setOpen(false);
   };
@@ -102,20 +103,20 @@ const JobForm = ({ handleClose, editJobId, setOpen, jobData }) => {
             </Grid>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
-          <CardActions>
-            {isInEditMode ? (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Update
-              </Button>
-            ) : (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Save
-              </Button>
-            )}
+          <DialogActions>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
-          </CardActions>
+            {isInEditMode ? (
+              <Button size='large' type='submit' variant='contained'>
+                Update
+              </Button>
+            ) : (
+              <Button size='large' type='submit' variant='contained'>
+                Save
+              </Button>
+            )}
+          </DialogActions>
         </form>
       </DialogContentText>
     </>

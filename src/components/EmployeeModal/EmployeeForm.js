@@ -1,4 +1,4 @@
-import { Button, DialogContentText, Grid, Divider, MenuItem, TextField, InputLabel, IconButton, Typography, CardContent, CardActions, FormControl, OutlinedInput, InputAdornment, Select } from '@mui/material';
+import { Button, DialogContentText, Grid, Divider, MenuItem, TextField, InputLabel, IconButton, Typography, CardContent, CardActions, FormControl, OutlinedInput, InputAdornment, Select, DialogActions } from '@mui/material';
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 import { DropFiles } from 'src/@core/DropFile/DropFiles';
@@ -9,7 +9,7 @@ import EmployeeModalLogic from './EmployeeFormLogic';
 const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) => {
   const { formData, handleInputChange, handleImageChange, errors, validateForm, setFormData, initialFormValue } = EmployeeModalLogic(employeeData, editEmployeeId);
 
-  const { addEmployee, editEmployee, updateEmployeeDesignation } = useEmployeeData();
+  const { addEmployee, updateEmployeeDesignation } = useEmployeeData();
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -347,14 +347,14 @@ const EmployeeForm = ({ handleClose, editEmployeeId, setOpen, employeeData }) =>
             </Grid>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
-          <CardActions>
-            <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-              Save
-            </Button>
+          <DialogActions>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
-          </CardActions>
+            <Button size='large' type='submit' variant='contained'>
+              Save
+            </Button>
+          </DialogActions>
         </form>
       </DialogContentText>
     </>

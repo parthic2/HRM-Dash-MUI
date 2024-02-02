@@ -69,7 +69,7 @@ const Navigation = props => {
       <StyledBoxForShadow
         ref={shadowRef}
         sx={{
-          background: `linear-gradient(${theme.palette.background.default} 40%,${hexToRGBA(
+          background: `linear-gradient(${theme.palette.background.paper} 10%,${hexToRGBA(
             theme.palette.background.default,
             0.1
           )} 95%,${hexToRGBA(theme.palette.background.default, 0.05)})`
@@ -77,7 +77,7 @@ const Navigation = props => {
       />
       <Box sx={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
         <ScrollWrapper
-          containerRef={ref => handleInfiniteScroll(ref)}
+          ref={ref => handleInfiniteScroll(ref)}
           {...(hidden
             ? {
               onScroll: container => scrollMenu(container),

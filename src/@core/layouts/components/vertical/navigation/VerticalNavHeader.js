@@ -7,7 +7,7 @@ import themeConfig from 'src/configs/themeConfig';
 const MenuHeaderWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   paddingRight: theme.spacing(4.5),
   transition: 'padding .25s ease-in-out',
   minHeight: theme.mixins.toolbar.minHeight
@@ -41,7 +41,7 @@ const VerticalNavHeader = props => {
       ) : (
         <Link href='/' passHref>
           <StyledLink>
-            <HeaderTitle variant='h6' sx={{ ml: 3 }}>
+            <HeaderTitle variant='h6'>
               {themeConfig.templateName}
             </HeaderTitle>
           </StyledLink>

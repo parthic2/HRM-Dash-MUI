@@ -1,8 +1,8 @@
-import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Button, DialogContentText, Grid, Divider, TextField, Typography, CardContent, CardActions, FormControl, InputLabel, Select, MenuItem, DialogActions } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import LeaveTypeFormLogic from './LeaveTypeFormLogic';
 
-const LeaveTypeForm = ({ handleClose, leaveTypeData, editLeaveTypeId, setOpen }) => {
+const LeaveTypeForm = ({ handleClose, leaveTypeData, editLeaveTypeId, setOpen, addLeaveType, editLeaveType }) => {
   const { formData, handleInputChange, errors, validateForm, setFormData, initialFormValue } = LeaveTypeFormLogic(leaveTypeData, editLeaveTypeId);
 
   const handleFormSubmit = (event) => {
@@ -12,11 +12,12 @@ const LeaveTypeForm = ({ handleClose, leaveTypeData, editLeaveTypeId, setOpen })
       return; // If the form is not valid, don't submit
     }
 
-    // if (editEmployeeId) {
-    //   editEmployee({ ...formData, id: editEmployeeId });
-    // } else {
-    //   addEmployee(formData);
-    // }
+    if (editLeaveTypeId) {
+      editLeaveType({ ...formData, id: editLeaveTypeId });
+    } else {
+      addLeaveType(formData);
+    }
+
     setFormData(initialFormValue);
     setOpen(false);
   };
@@ -66,7 +67,7 @@ const LeaveTypeForm = ({ handleClose, leaveTypeData, editLeaveTypeId, setOpen })
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
-                  <InputLabel>Status</InputLabel>
+                  <InputLabel id='form-layouts-separator-select-label'>Status</InputLabel>
                   <Select
                     label='Status'
                     defaultValue=''
@@ -75,7 +76,6 @@ const LeaveTypeForm = ({ handleClose, leaveTypeData, editLeaveTypeId, setOpen })
                     name="status"
                     value={formData.status}
                     onChange={handleInputChange}
-                    disabled={isInEditMode}
                   >
                     <MenuItem value='Active'>Active</MenuItem>
                     <MenuItem value='Inactive'>Inactive</MenuItem>
@@ -104,22 +104,22 @@ const LeaveTypeForm = ({ handleClose, leaveTypeData, editLeaveTypeId, setOpen })
             </Grid>
           </CardContent>
           <Divider sx={{ margin: 0 }} />
-          <CardActions>
-            {isInEditMode ? (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Update
-              </Button>
-            ) : (
-              <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-                Save
-              </Button>
-            )}
+          <DialogActions>
             <Button size='large' color='secondary' variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
-          </CardActions>
+            {isInEditMode ? (
+              <Button size='large' type='submit' variant='contained'>
+                Update
+              </Button>
+            ) : (
+              <Button size='large' type='submit' variant='contained'>
+                Save
+              </Button>
+            )}
+          </DialogActions>
         </form>
-      </DialogContentText >
+      </DialogContentText>
     </>
   )
 }

@@ -28,7 +28,7 @@ const localizer = dateFnsLocalizer({
 });
 
 const EventCalendar = () => {
-  const { openSlot, openDatepickerModal, openTodoModal, setOpenTodoModal, eventInfoModal, todos, setTodos, scroll, handleSelectSlot, handleSelectEvent, onAddEvent, onAddEventFromDatePicker, onDeleteEvent, onEditEvent, dayPropGetter, handleNavigate, handleClose, eventFormData, setEventFormData, currentEvent, editedEventData, handleDatePickerClose, datePickerEventFormData, setDatePickerEventFormData, events, generateId, setOpenDatepickerModal } = useCalendarData();
+  const { openSlot, openDatepickerModal, openTodoModal, setOpenTodoModal, eventInfoModal, todos, setTodos, scroll, handleSelectSlot, handleSelectEvent, onAddEvent, onAddEventFromDatePicker, onDeleteEvent, onEditEvent, dayPropGetter, handleNavigate, handleClose, eventFormData, setEventFormData, currentEvent, editedEventData, handleDatePickerClose, datePickerEventFormData, setDatePickerEventFormData, events, generateId, setOpenDatepickerModal, setEventInfoModal } = useCalendarData();
 
   return (
     <Box

@@ -187,7 +187,8 @@ const useCalendarData = () => {
         setDatePickerEventFormData,
         events,
         generateId,
-        setOpenDatepickerModal
+        setOpenDatepickerModal,
+        setEventInfoModal
     }
 }
 
